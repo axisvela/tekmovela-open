@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.test-run.v1alpha1.schema.json",
+  "title": "TEKMOVELA TestRun v1alpha1",
+  "description": "A single execution of a Scenario on a frozen HarnessVersion against a SUT. TestRun links to TraceEnvelope and EvaluationResult and is the unit that becomes evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "scenario_ref",
+    "harness_version_ref",
+    "sut_ref",
+    "status"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "TestRun" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "scenario_ref": { "type": "string", "minLength": 1 },
+    "harness_version_ref": { "type": "string", "minLength": 1 },
+    "sut_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the capability/agent/runtime under test (e.g. PRAXOVELA CapabilityVersion)."
+    },
+    "environment_digest": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "interrupted", "passed", "failed", "inconclusive"]
+    },
+    "trace_envelope_ref": { "type": "string" },
+    "evaluation_result_ref": { "type": "string" },
+    "started_at": { "type": "string", "format": "date-time" },
+    "finished_at": { "type": "string", "format": "date-time" }
+  }
+}

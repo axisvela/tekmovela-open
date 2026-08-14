@@ -1,0 +1,27 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "VerificationContract",
+  "id": "checkout.atomicity",
+  "version": "v1",
+  "acceptance_criterion_refs": [
+    {
+      "kind": "AcceptanceCriterion",
+      "id": "checkout.atomicity",
+      "version": "v1",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "harness_requirement": "each checkout MUST be observed under concurrent double-spend probes and the effect ledger MUST remain atomic",
+  "required_harness_components": ["runner", "adapter", "oracle", "reporter"],
+  "evidence_schema_ref": {
+    "kind": "EvidenceBundle",
+    "id": "evidence.bundle",
+    "version": "v1",
+    "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "coverage_model": {
+    "requirement_coverage": true,
+    "failure_mode_coverage": true
+  },
+  "lifecycle": "published"
+}

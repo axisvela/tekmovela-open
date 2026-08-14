@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "GateDecision",
+  "id": "gate.2026-08-14.checkout",
+  "gate": "G2_test",
+  "decision": "maybe",
+  "release_candidate_ref": "release.checkout.2026-08-14",
+  "policy_version": "release-policy/v3"
+}

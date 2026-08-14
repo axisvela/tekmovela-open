@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.test-control-loop.v1alpha1.schema.json",
+  "title": "TEKMOVELA TestControlLoop v1alpha1",
+  "description": "A closed-loop test controller with Observe/Evaluate/Act/Constrain/Interrupt/Terminate semantics. Interruptions never lose evidence. Mirrors ATLAS closed-loop testing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "state", "budget"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "TestControlLoop" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["observe", "evaluate", "act", "constrain", "interrupted", "terminated"]
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_steps"],
+      "properties": {
+        "max_steps": { "type": "integer", "minimum": 1 },
+        "max_duration_seconds": { "type": "integer", "minimum": 1 },
+        "allowed_actions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "interrupt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requested": { "type": "boolean" },
+        "reason": {
+          "type": "string",
+          "enum": ["human", "policy", "system"]
+        },
+        "evidence_preserved": { "type": "boolean" }
+      }
+    },
+    "termination_reason": {
+      "type": "string",
+      "enum": ["accepted", "budget_exhausted", "unrecoverable", "policy_stop", "interrupted"]
+    },
+    "ownership_transfer_ref": { "type": "string" }
+  }
+}

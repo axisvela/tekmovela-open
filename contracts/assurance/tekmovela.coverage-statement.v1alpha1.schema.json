@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.coverage-statement.v1alpha1.schema.json",
+  "title": "TEKMOVELA CoverageStatement v1alpha1",
+  "description": "A statement of requirement, harness, and assurance coverage with explicit exclusions and known coverage debt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "subject_ref", "covered_criteria", "coverage_debt_refs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "CoverageStatement" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "subject_ref": { "type": "string", "minLength": 1 },
+    "covered_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "excluded_criteria": { "type": "array", "items": { "type": "string" } },
+    "coverage_debt_refs": { "type": "array", "items": { "type": "string" } },
+    "environment_scope": { "type": "string" }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "HarnessVersion",
+  "id": "checkout.double_spend",
+  "version": "v1",
+  "verification_contract_ref": {
+    "kind": "VerificationContract",
+    "id": "checkout.atomicity",
+    "version": "v1",
+    "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "component_lock": {
+    "runner": { "kind": "HarnessComponent", "id": "runner.deterministic", "version": "v1", "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111" },
+    "adapter": { "kind": "HarnessComponent", "id": "adapter.praxovela", "version": "v1", "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222" },
+    "oracle": { "kind": "HarnessComponent", "id": "oracle.effect-ledger", "version": "v1", "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333" },
+    "reporter": { "kind": "HarnessComponent", "id": "reporter.evidence-bundle", "version": "v1", "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444" }
+  },
+  "environment_contract": {
+    "seed": "seed-2026-08",
+    "model_versions": ["noetivela/critic-1"],
+    "world_ref": "peiravela://worlds/double-spend/v3"
+  },
+  "determinism_profile": {
+    "mode": "deterministic"
+  },
+  "isolation_profile": {
+    "tenant_isolation": true,
+    "data_isolation": true,
+    "world_state_isolation": true
+  },
+  "coverage_model": {
+    "requirements": ["checkout.atomicity"],
+    "failure_modes": ["double_spend"]
+  },
+  "evidence_schema": "tekmovela.evidence-bundle.v1alpha1.schema.json",
+  "lifecycle": "published"
+}

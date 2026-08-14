@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tekmovela"
+version = "0.1.0"
+description = "TEKMOVELA Open Python SDK: harness authoring, fixtures, oracles, local runner, evidence emitter."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+
+[tool.setuptools.packages.find]
+include = ["tekmovela*"]

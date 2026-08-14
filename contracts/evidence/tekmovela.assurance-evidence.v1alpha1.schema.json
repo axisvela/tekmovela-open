@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.assurance-evidence.v1alpha1.schema.json",
+  "title": "TEKMOVELA AssuranceEvidence v1alpha1",
+  "description": "An append-only, digest-verifiable evidence record bound to a claim. Only records bound to versions, sources, digests, scope, and claims become AssuranceEvidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "claim_ref",
+    "source",
+    "digest",
+    "recorded_at",
+    "status"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "AssuranceEvidence" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "claim_ref": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["test_run", "simulation", "security", "aar", "human_review", "benchmark", "anomaly"]
+        },
+        "ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "tenant_id": { "type": "string" },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "superseded", "expired", "revoked", "stale"]
+    }
+  }
+}

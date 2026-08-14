@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.verification-contract.v1alpha1.schema.json",
+  "title": "TEKMOVELA VerificationContract v1alpha1",
+  "description": "The contract that binds an AcceptanceCriterion to a harness requirement. Published versions are immutable; evidence, harnesses, and gates bind to the version digest. Mirrors VESTA-P0.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "version",
+    "acceptance_criterion_refs",
+    "harness_requirement",
+    "required_harness_components",
+    "evidence_schema_ref"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "VerificationContract" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+$",
+      "description": "Immutable published version. Create a new version for behavioral changes."
+    },
+    "acceptance_criterion_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/reference" },
+      "minItems": 1,
+      "description": "Every contract must trace to at least one AcceptanceCriterion."
+    },
+    "constraint_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/reference" }
+    },
+    "harness_requirement": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The claim about what a satisfactory harness must be able to observe and prove."
+    },
+    "required_harness_components": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["runner", "adapter", "oracle", "reporter"]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "evidence_schema_ref": { "$ref": "#/$defs/reference" },
+    "coverage_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requirement_coverage": { "type": "boolean" },
+        "failure_mode_coverage": { "type": "boolean" },
+        "state_space_coverage": { "type": "boolean" }
+      }
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["draft", "published", "superseded", "revoked"],
+      "default": "draft"
+    }
+  },
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "version", "digest"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "EvidenceBundle",
+  "id": "run.2026-08-14.02.evidence",
+  "run_ref": "run.2026-08-14.02",
+  "verification_contract_ref": "checkout.atomicity@v1",
+  "harness_version_ref": "checkout.double-spend@v1",
+  "bundle_digest": "md5:deadbeef",
+  "items": []
+}

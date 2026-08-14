@@ -1,0 +1,12 @@
+{
+  "name": "tekmovela-open-contracts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:contracts": "node scripts/validate-contract-fixtures.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.attestation.v1alpha1.schema.json",
+  "title": "TEKMOVELA Attestation v1alpha1",
+  "description": "A signed, scoped, expiring attestation. It proves the claim within the specified versions, contracts, harnesses, environments, and evidence scope only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "claim_ref",
+    "scope",
+    "issued_at",
+    "expires_at",
+    "signature"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "Attestation" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "claim_ref": { "type": "string", "minLength": 1 },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["versions", "environment", "intent_scope"],
+      "properties": {
+        "versions": { "type": "object", "additionalProperties": true },
+        "environment": { "type": "string" },
+        "intent_scope": { "type": "string" },
+        "evidence_refs": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "status": {
+      "type": "string",
+      "enum": ["valid", "expired", "superseded", "revoked"]
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    }
+  }
+}

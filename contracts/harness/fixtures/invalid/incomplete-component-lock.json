@@ -1,0 +1,20 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "HarnessVersion",
+  "id": "checkout.double-spend",
+  "version": "v1",
+  "verification_contract_ref": {
+    "kind": "VerificationContract",
+    "id": "checkout.atomicity",
+    "version": "v1",
+    "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "component_lock": {
+    "runner": { "kind": "HarnessComponent", "id": "runner.deterministic", "version": "v1", "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111" }
+  },
+  "determinism_profile": {
+    "mode": "deterministic"
+  },
+  "isolation_profile": {},
+  "evidence_schema": "tekmovela.evidence-bundle.v1alpha1.schema.json"
+}

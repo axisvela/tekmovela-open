@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "AcceptanceCriterion",
+  "id": "checkout.atomicity",
+  "source_ref": "iris://requirements/checkout/AC-42",
+  "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "goal_ref": "checkout.reliability",
+  "testable": true,
+  "specification_maturity": "frozen"
+}

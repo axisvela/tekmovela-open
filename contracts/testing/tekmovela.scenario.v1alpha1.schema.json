@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.scenario.v1alpha1.schema.json",
+  "title": "TEKMOVELA Scenario v1alpha1",
+  "description": "A test scenario bound to a VerificationContract and HarnessVersion. Scenarios are the executable unit of the Agentic Test Lab.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "verification_contract_ref", "seed"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "Scenario" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "verification_contract_ref": { "type": "string", "minLength": 1 },
+    "harness_version_ref": { "type": "string", "minLength": 1 },
+    "seed": { "type": "string", "minLength": 1 },
+    "focus": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  }
+}

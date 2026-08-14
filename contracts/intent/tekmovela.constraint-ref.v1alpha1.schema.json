@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.constraint-ref.v1alpha1.schema.json",
+  "title": "TEKMOVELA ConstraintRef v1alpha1",
+  "description": "An immutable reference to a constraint (safety, security, resource, regulatory) sourced from IRIS or an external requirements system.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "source_ref", "digest", "constraint_type"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "ConstraintRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "constraint_type": {
+      "type": "string",
+      "enum": ["safety", "security", "resource", "regulatory", "behavioral"]
+    }
+  }
+}

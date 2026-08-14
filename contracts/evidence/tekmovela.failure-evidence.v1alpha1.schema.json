@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.failure-evidence.v1alpha1.schema.json",
+  "title": "TEKMOVELA StructuredFailureEvidence v1alpha1",
+  "description": "Failure evidence collected against a FailureEvidenceProfile. The generic core carries symptom and trace context; domain profiles (e.g. ui-repair) extend the evidence shape.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "profile", "symptom", "trace_slice_ref"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "FailureEvidence" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "profile": {
+      "type": "string",
+      "description": "FailureEvidenceProfile, e.g. 'ui-repair/v1' (screenshot + DOM + alert) or 'generic/v1'."
+    },
+    "symptom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["alert", "exception", "unexpected_effect"]
+        },
+        "message": { "type": "string" }
+      }
+    },
+    "trace_slice_ref": { "type": "string", "minLength": 1 },
+    "profile_evidence": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Profile-specific evidence. For ui-repair/v1: screenshot_ref, dom_ref, alert_ref."
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Missing evidence is itself evidence."
+    },
+    "causal_attribution_ref": { "type": "string" },
+    "decision_explanation_ref": { "type": "string" }
+  }
+}

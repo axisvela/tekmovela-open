@@ -1,0 +1,12 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "ReverificationRequest",
+  "id": "reverify.2026-08-14.checkout",
+  "trigger": {
+    "kind": "anomaly"
+  },
+  "affected_scope": {
+    "verification_contract_refs": ["checkout.atomicity@v1"]
+  },
+  "status": "reverifying"
+}

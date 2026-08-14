@@ -1,0 +1,27 @@
+# Binaries
+*.exe
+*.test
+*.out
+
+# Go workspace
+go.work.sum
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build artifacts
+dist/
+bin/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env.local

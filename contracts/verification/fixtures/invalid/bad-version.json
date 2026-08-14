@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "VerificationContract",
+  "id": "checkout.atomicity",
+  "version": "not-semver",
+  "acceptance_criterion_refs": [
+    {
+      "kind": "AcceptanceCriterion",
+      "id": "checkout.atomicity",
+      "version": "v1",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "harness_requirement": "must be observed",
+  "required_harness_components": ["runner", "adapter", "oracle", "reporter"],
+  "evidence_schema_ref": {
+    "kind": "EvidenceBundle",
+    "id": "evidence.bundle",
+    "version": "v1",
+    "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  }
+}

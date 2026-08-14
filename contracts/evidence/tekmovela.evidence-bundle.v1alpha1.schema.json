@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.evidence-bundle.v1alpha1.schema.json",
+  "title": "TEKMOVELA EvidenceBundle v1alpha1",
+  "description": "A portable, digest-verifiable bundle of evidence from a run. Raw telemetry becomes evidence only when bound to versions, sources, digests, scope, and claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "run_ref",
+    "verification_contract_ref",
+    "harness_version_ref",
+    "bundle_digest",
+    "items"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "EvidenceBundle" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "run_ref": { "type": "string", "minLength": 1 },
+    "verification_contract_ref": { "type": "string", "minLength": 1 },
+    "harness_version_ref": { "type": "string", "minLength": 1 },
+    "environment_digest": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intent_ref": { "type": "string" },
+        "capability_ref": { "type": "string" },
+        "time_window": { "type": "string" }
+      }
+    },
+    "bundle_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "uri", "digest"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["trace", "effect", "failure", "attribution", "explanation", "authority", "missing"]
+          },
+          "uri": { "type": "string", "minLength": 1 },
+          "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "note": { "type": "string" }
+        }
+      },
+      "minItems": 1
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    }
+  }
+}

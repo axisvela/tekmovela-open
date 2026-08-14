@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.requirement-trace-link.v1alpha1.schema.json",
+  "title": "TEKMOVELA RequirementTraceLink v1alpha1",
+  "description": "A trace link from an AcceptanceCriterion or Constraint through to the VerificationContract that proves it. Every high-risk test and gate must trace through a RequirementTraceLink.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "criterion_ref", "verification_contract_ref"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "RequirementTraceLink" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "criterion_ref": {
+      "$ref": "#/$defs/reference"
+    },
+    "constraint_ref": {
+      "$ref": "#/$defs/reference"
+    },
+    "verification_contract_ref": {
+      "$ref": "#/$defs/reference"
+    },
+    "link_type": {
+      "type": "string",
+      "enum": ["acceptance", "constraint", "derives"]
+    }
+  },
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "version", "digest"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

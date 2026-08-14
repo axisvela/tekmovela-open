@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.anomaly-signal.v1alpha1.schema.json",
+  "title": "TEKMOVELA AnomalySignal v1alpha1",
+  "description": "A production behavioral signal (bound violation, drift, anomaly) that triggers triage, post-hoc diagnosis, and targeted re-verification. Signals do not judge truth; they trigger verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "signal_type", "subject_ref", "detected_at"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "AnomalySignal" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "signal_type": {
+      "type": "string",
+      "enum": ["bound_violation", "drift", "unexpected_effect", "authority_deviation"]
+    },
+    "subject_ref": { "type": "string", "minLength": 1 },
+    "behavioral_bound_ref": { "type": "string" },
+    "trace_envelope_ref": { "type": "string" },
+    "detected_at": { "type": "string", "format": "date-time" },
+    "evidence_ref": { "type": "string" },
+    "reverification_request_ref": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["new", "triaged", "reverifying", "resolved", "dismissed"]
+    }
+  }
+}

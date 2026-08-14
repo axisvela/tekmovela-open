@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.acceptance-criterion.v1alpha1.schema.json",
+  "title": "TEKMOVELA AcceptanceCriterion v1alpha1",
+  "description": "An externally sourced AcceptanceCriterion reference with a digest and a testability assertion. TEKMOVELA records the immutable reference and digest; it does not own the source requirements lifecycle.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "source_ref",
+    "digest",
+    "testable"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "AcceptanceCriterion" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$",
+      "description": "Dotted hierarchical identifier matching AxisRobo reference naming."
+    },
+    "source_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the authoritative criterion in the IRIS/external requirements system."
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "SHA-256 digest of the source criterion content as recorded by TEKMOVELA."
+    },
+    "goal_ref": {
+      "type": "string",
+      "description": "Optional goal or intent reference this criterion serves."
+    },
+    "testable": {
+      "type": "boolean",
+      "description": "Testability assertion. A non-testable criterion is a Requirement Gate blocker."
+    },
+    "specification_maturity": {
+      "type": "string",
+      "enum": ["draft", "agreed", "frozen"],
+      "description": "IRIS NLR -> SIS -> AEI maturity as recorded, not rewritten, by TEKMOVELA."
+    }
+  }
+}
