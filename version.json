@@ -1,8 +1,8 @@
 {
   "product": "tekmovela",
   "edition": "open",
-  "version": "0.9.0",
-  "core": "0.9.0",
+  "version": "0.10.0",
+  "core": "0.10.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/axisrobo/tekmovela-open"
 }
