@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "TestBudget",
+  "id": "budget.checkout.release",
+  "version": "v1",
+  "runs": -1
+}

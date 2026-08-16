@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.incident-ref.v1alpha1.schema.json",
+  "title": "TEKMOVELA IncidentRef v1alpha1",
+  "description": "A reference to an external incident or issue record that triggered failure evidence, regression candidates, or coverage debt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "source_ref", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "IncidentRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "source_kind": {
+      "type": "string",
+      "enum": ["incident", "issue", "red_team", "support", "other"]
+    },
+    "linked_at": { "type": "string", "format": "date-time" }
+  }
+}

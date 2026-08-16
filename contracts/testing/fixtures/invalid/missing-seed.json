@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "Scenario",
+  "id": "scenario.no_seed",
+  "version": "v1",
+  "verification_contract_ref": "checkout.atomicity"
+}

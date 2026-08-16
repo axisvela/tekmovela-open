@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "ConstraintRef",
+  "id": "checkout.ledger.safety",
+  "source_ref": "iris://requirements/checkout/constraints/ledger-safety",
+  "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "constraint_type": "safety"
+}

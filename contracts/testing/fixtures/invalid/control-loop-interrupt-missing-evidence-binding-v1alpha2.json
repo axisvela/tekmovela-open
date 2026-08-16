@@ -1,0 +1,1 @@
+{"api_version":"tekmovela.io/v1alpha2","kind":"TestControlLoop","id":"checkout.payment.recovery","run_ref":"run@v1","policy_ref":"policy@v1","state":"interrupted","budget":{"max_steps":1},"action_records":[],"evidence_refs":[],"interrupt":{"requested":true,"reason":"policy","requested_by_ref":"operator@v1","checkpoint_ref":"checkpoint@v1","evidence_preserved":true}}

@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "OwnershipTransferRecord",
+  "id": "otp.checkout.runner",
+  "from_owner": "agent.qa.runner.v1",
+  "to_owner": "principal.qa.lead",
+  "scope": "checkout.double_spend regression",
+  "state": "unknown_state",
+  "evidence_refs": []
+}

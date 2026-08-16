@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "OracleProfile",
+  "id": "oracle.effect_ledger",
+  "version": "v1",
+  "evaluator_kind": "property",
+  "deterministic": true,
+  "required_properties": ["atomic_effects"]
+}

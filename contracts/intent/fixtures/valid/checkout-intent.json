@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "IntentSpecRef",
+  "id": "checkout.intent",
+  "source_ref": "iris://intents/checkout",
+  "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "goal_ref": "checkout.reliability",
+  "specification_maturity": "frozen"
+}

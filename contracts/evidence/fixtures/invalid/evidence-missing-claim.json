@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "AssuranceEvidence",
+  "id": "ev.checkout.atomicity.001",
+  "source": {
+    "kind": "test_run",
+    "ref": "run.checkout.double_spend"
+  },
+  "digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "status": "accepted"
+}

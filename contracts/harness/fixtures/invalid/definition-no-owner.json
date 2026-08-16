@@ -1,0 +1,6 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "HarnessDefinition",
+  "id": "checkout.double_spend",
+  "status": "active"
+}

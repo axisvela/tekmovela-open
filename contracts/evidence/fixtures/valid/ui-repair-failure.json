@@ -1,0 +1,31 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "FailureEvidence",
+  "id": "failure.ui_modal_missing",
+  "profile": "ui-repair/v1",
+  "symptom": {
+    "type": "alert",
+    "message": "checkout modal missing after submit"
+  },
+  "trace_slice_ref": "envelope.run.checkout.modal_missing",
+  "ui_repair": {
+    "screenshot": {
+      "ref": "s3://evidence/run.001/screenshot.png",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "captured_at": "2026-08-15T10:00:00Z",
+      "redaction": "none"
+    },
+    "dom": {
+      "ref": "s3://evidence/run.001/dom.html",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "captured_at": "2026-08-15T10:00:00Z",
+      "redaction": "partial"
+    },
+    "alert": {
+      "ref": "s3://evidence/run.001/alert.json",
+      "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "captured_at": "2026-08-15T10:00:01Z",
+      "redaction": "none"
+    }
+  }
+}

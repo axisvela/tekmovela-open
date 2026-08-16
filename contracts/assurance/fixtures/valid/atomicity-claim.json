@@ -1,0 +1,14 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "AssuranceClaim",
+  "id": "claim.checkout",
+  "subject": {
+    "kind": "release_candidate",
+    "ref": "release.checkout.v2"
+  },
+  "statement": "checkout is atomic under concurrent double-spend probes",
+  "intent_scope_refs": ["checkout.reliability"],
+  "evidence_refs": ["ev.checkout.atomicity.001"],
+  "expires_at": "2026-09-15T00:00:00Z",
+  "status": "supported"
+}

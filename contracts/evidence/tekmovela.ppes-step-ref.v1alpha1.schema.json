@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.ppes-step-ref.v1alpha1.schema.json",
+  "title": "TEKMOVELA PPEStepRef v1alpha1",
+  "description": "A reference to a single PPES cognitive-state step (prompt, history/context, output space) from a LENS PPES trace perspective.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "cognitive_trace_ref", "step_index", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "PPEStepRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "cognitive_trace_ref": { "type": "string", "minLength": 1 },
+    "step_index": { "type": "integer", "minimum": 0 },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "profile_ref": { "type": "string" }
+  }
+}

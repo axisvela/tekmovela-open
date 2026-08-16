@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "TestControlLoop",
+  "id": "loop.bad",
+  "state": "observe",
+  "budget": {
+    "max_steps": 0
+  }
+}

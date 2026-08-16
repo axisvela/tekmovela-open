@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "Effect",
+  "id": "effect.debit.a001",
+  "action_ref": "action.debit.a001",
+  "resource": "ledger",
+  "state_delta": "-1",
+  "external_effect": true
+}

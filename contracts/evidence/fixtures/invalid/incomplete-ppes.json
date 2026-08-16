@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "CognitiveTrace",
+  "id": "ppes.bad",
+  "run_ref": "run.001",
+  "profile_ref": "profiles/x"
+}

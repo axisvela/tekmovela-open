@@ -1,0 +1,13 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BehavioralBound",
+  "id": "bound.checkout",
+  "version": "v1",
+  "intent_scope_ref": "checkout.reliability",
+  "bounds": {
+    "allowed_output_space": "single atomic checkout settlement per intent",
+    "forbidden_output_space": "multiple debits for one checkout",
+    "effect_constraints": "ledger MUST reconcile"
+  },
+  "status": "active"
+}

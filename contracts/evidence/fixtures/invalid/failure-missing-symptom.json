@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "FailureEvidence",
+  "id": "failure.double_spend",
+  "profile": "generic/v1",
+  "trace_slice_ref": "envelope.run.checkout.double_spend"
+}

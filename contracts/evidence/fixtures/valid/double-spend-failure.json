@@ -1,0 +1,13 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "FailureEvidence",
+  "id": "failure.double_spend",
+  "profile": "generic/v1",
+  "symptom": {
+    "type": "unexpected_effect",
+    "message": "second debit succeeded"
+  },
+  "trace_slice_ref": "envelope.run.checkout.double_spend",
+  "missing_evidence": ["authority perspective"],
+  "causal_attribution_ref": "attr.double_spend"
+}

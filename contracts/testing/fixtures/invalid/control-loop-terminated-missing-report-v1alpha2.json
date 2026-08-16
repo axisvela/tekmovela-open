@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha2",
+  "kind": "TestControlLoop",
+  "id": "checkout.payment.recovery",
+  "run_ref": "test-run.checkout.payment@v3",
+  "policy_ref": "test-policy.checkout.recovery@v2",
+  "state": "terminated",
+  "budget": {
+    "max_steps": 10
+  },
+  "action_records": [
+    {
+      "sequence": 0,
+      "action": "stop",
+      "observation_ref": "observation.checkout.payment@v3",
+      "evaluation_ref": "evaluation.checkout.payment@v3",
+      "evidence_ref": "evidence.checkout.payment.stop@v3",
+      "recorded_at": "2026-08-15T10:00:00Z"
+    }
+  ],
+  "evidence_refs": ["evidence.checkout.payment.bundle@v3"]
+}

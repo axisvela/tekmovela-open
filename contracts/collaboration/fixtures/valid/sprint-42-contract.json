@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "DevelopmentContractRef",
+  "id": "contract.sprint.s42",
+  "stack_level": "sprint",
+  "parties": ["team-qa", "team-runtime"],
+  "source_ref": "pm://sprints/42",
+  "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "status": "satisfied"
+}

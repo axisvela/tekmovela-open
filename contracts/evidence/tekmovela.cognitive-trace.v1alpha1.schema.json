@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.cognitive-trace.v1alpha1.schema.json",
+  "title": "TEKMOVELA CognitiveTrace v1alpha1",
+  "description": "A PPES cognitive-state trace perspective <P, H_t, Ω_t>: the prompt/profile, the history/context state, and the available output space. It is orthogonal to substrate event traces and must not be flattened into a universal trace schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "run_ref", "profile_ref", "context_ref", "output_space_ref", "model_ref"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "CognitiveTrace" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "run_ref": { "type": "string", "minLength": 1 },
+    "profile_ref": { "type": "string", "description": "Reference to the prompt/system profile (P)." },
+    "context_ref": { "type": "string", "description": "Reference to the history/context state H_t." },
+    "output_space_ref": { "type": "string", "description": "Reference to the available output space Ω_t." },
+    "model_ref": { "type": "string", "description": "Reference to the model that produced the step." },
+    "step_index": { "type": "integer", "minimum": 0 }
+  }
+}

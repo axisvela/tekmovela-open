@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "CIResult",
+  "id": "ci.run.missing_decision",
+  "run_ref": "run.missing_decision",
+  "exit_semantics": "pass"
+}

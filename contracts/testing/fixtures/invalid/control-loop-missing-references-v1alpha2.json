@@ -1,0 +1,19 @@
+{
+  "api_version": "tekmovela.io/v1alpha2",
+  "kind": "TestControlLoop",
+  "id": "checkout.payment.recovery",
+  "state": "act",
+  "budget": {
+    "max_steps": 10
+  },
+  "action_records": [
+    {
+      "sequence": 0,
+      "action": "retry",
+      "observation_ref": "observation.checkout.payment@v3",
+      "evaluation_ref": "evaluation.checkout.payment@v3",
+      "recorded_at": "2026-08-15T10:00:00Z"
+    }
+  ],
+  "evidence_refs": ["evidence.checkout.payment.bundle@v3"]
+}

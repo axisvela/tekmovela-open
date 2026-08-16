@@ -1,0 +1,13 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "TraceEnvelope",
+  "id": "trace.bad",
+  "run_ref": "run.001",
+  "perspectives": [
+    {
+      "perspective_type": "substrate",
+      "uri": "s3://traces/x.jsonl",
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    }
+  ]
+}

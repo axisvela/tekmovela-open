@@ -33,7 +33,18 @@
     "profile_evidence": {
       "type": "object",
       "additionalProperties": true,
-      "description": "Profile-specific evidence. For ui-repair/v1: screenshot_ref, dom_ref, alert_ref."
+      "description": "Profile-specific evidence as free-form fields. Typed profiles such as ui-repair/v1 SHOULD use the typed ui_repair shape instead."
+    },
+    "ui_repair": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Typed ui-repair/v1 evidence: screenshot, DOM, and alert artifacts. Additive optional property; absent for generic profiles.",
+      "required": ["screenshot", "dom", "alert"],
+      "properties": {
+        "screenshot": { "$ref": "#/definitions/UIRepairArtifact" },
+        "dom": { "$ref": "#/definitions/UIRepairArtifact" },
+        "alert": { "$ref": "#/definitions/UIRepairArtifact" }
+      }
     },
     "missing_evidence": {
       "type": "array",
@@ -42,5 +53,25 @@
     },
     "causal_attribution_ref": { "type": "string" },
     "decision_explanation_ref": { "type": "string" }
+  },
+  "definitions": {
+    "UIRepairArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A captured UI artifact referenced by URI and content digest. TEKMOVELA records the reference and digest; capture execution belongs to the runtime (PRAXOVELA/PEIRAVELA).",
+      "required": ["ref", "digest", "captured_at", "redaction"],
+      "properties": {
+        "ref": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "captured_at": { "type": "string", "format": "date-time" },
+        "redaction": {
+          "type": "string",
+          "enum": ["none", "partial", "full"]
+        }
+      }
+    }
   }
 }

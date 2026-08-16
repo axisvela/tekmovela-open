@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.ci-result.v1alpha1.schema.json",
+  "title": "TEKMOVELA CIResult v1alpha1",
+  "description": "The machine-readable output of `tek test --ci-output`: the run ref, the G2 gate decision, blocking reasons, sealed evidence bundle references, a failure summary, and the exit semantics a CI pipeline should apply. A CI pipeline gates on this artifact without re-parsing the human summary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "run_ref", "gate_decision", "exit_semantics"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "CIResult" },
+    "id": {
+      "type": "string",
+      "pattern": "^ci\\.[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)*$"
+    },
+    "run_ref": { "type": "string", "minLength": 1 },
+    "gate_decision": {
+      "type": "string",
+      "enum": ["pass", "conditional", "waived", "block", "reverify"]
+    },
+    "blocking_reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "failure_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "failure_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "exit_semantics": {
+      "type": "string",
+      "enum": ["pass", "block", "reverify"]
+    }
+  }
+}

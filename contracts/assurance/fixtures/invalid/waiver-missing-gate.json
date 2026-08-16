@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "Waiver",
+  "id": "waiver.checkout.v2",
+  "release_candidate_ref": "release.checkout.v2",
+  "reason": "missing gate reference",
+  "policy_version": "policy/v1",
+  "expires_at": "2026-09-15T10:00:00Z"
+}

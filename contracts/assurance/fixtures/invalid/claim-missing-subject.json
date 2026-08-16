@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "AssuranceClaim",
+  "id": "claim.checkout",
+  "statement": "checkout is atomic",
+  "intent_scope_refs": ["checkout.reliability"]
+}

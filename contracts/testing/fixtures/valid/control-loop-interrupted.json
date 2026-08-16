@@ -1,0 +1,14 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "TestControlLoop",
+  "id": "loop.interrupted",
+  "state": "interrupted",
+  "budget": {
+    "max_steps": 25
+  },
+  "interrupt": {
+    "requested": true,
+    "reason": "policy",
+    "evidence_preserved": true
+  }
+}

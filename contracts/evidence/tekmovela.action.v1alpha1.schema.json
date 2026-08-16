@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.action.v1alpha1.schema.json",
+  "title": "TEKMOVELA Action v1alpha1",
+  "description": "An action taken by an agent or workflow against a capability or tool, with its argument digest. Sources from runtime + Harmovela + ONTOVELA; TEKMOVELA normalizes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "capability_ref", "args_digest", "performed_at"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "Action" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "capability_ref": { "type": "string", "minLength": 1 },
+    "args_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "run_ref": { "type": "string" },
+    "performed_at": { "type": "string", "format": "date-time" },
+    "principal_ref": { "type": "string" }
+  }
+}

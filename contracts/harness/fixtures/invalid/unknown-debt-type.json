@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "CoverageDebt",
+  "id": "debt.checkout.concurrency",
+  "debt_type": "unknown_debt",
+  "severity": "high",
+  "impacted_ref": "verification-contract/checkout.concurrency@v1"
+}

@@ -1,6 +1,6 @@
-# TEKMOVELA Open Contracts
+# TEKMOVELA Contracts
 
-Versioned JSON Schema contracts and fixtures for the TEKMOVELA engineering assurance control plane. This directory is a **public mirror** of the authoritative contract set in the private `tekmovela` (core) repository, pinned to a released version. Published contract versions are immutable; behavioral changes create a new version in Core first.
+Versioned JSON Schema contracts and fixtures for the TEKMOVELA engineering assurance control plane. Published contract versions are immutable; behavioral changes create a new version.
 
 ## Layout
 

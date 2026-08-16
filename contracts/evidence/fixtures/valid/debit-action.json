@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "Action",
+  "id": "action.debit.a001",
+  "capability_ref": "praxovela://capabilities/checkout/v2",
+  "args_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "run_ref": "run.checkout.double_spend",
+  "performed_at": "2026-08-15T10:00:01Z",
+  "principal_ref": "aegivela://principals/checkout-svc"
+}

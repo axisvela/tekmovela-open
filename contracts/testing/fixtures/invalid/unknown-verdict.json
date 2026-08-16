@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "EvaluationResult",
+  "id": "eval.atomicity.002",
+  "run_ref": "run.failure_002",
+  "evaluator_kind": "property",
+  "verdict": "uncertain",
+  "confidence": 0.4
+}

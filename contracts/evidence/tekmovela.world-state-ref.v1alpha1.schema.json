@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.world-state-ref.v1alpha1.schema.json",
+  "title": "TEKMOVELA WorldStateRef v1alpha1",
+  "description": "A reference to a world/simulation state. The world authority lives in PEIRAVELA or ONTOVELA; TEKMOVELA records the reference and digest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "source_ref", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "WorldStateRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "authority": {
+      "type": "string",
+      "enum": ["peiravela", "ontovela", "other"]
+    }
+  }
+}

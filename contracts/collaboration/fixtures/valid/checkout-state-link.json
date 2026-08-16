@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "EngineeringStateLink",
+  "id": "state.checkout.pm",
+  "source_ref": "pm://projects/checkout",
+  "state_convergence": true,
+  "last_synced_at": "2026-08-15T10:00:00Z",
+  "state_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "sync_adapter": "pm-sync/v1",
+  "status": "synced"
+}

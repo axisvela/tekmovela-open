@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.development-contract-ref.v1alpha1.schema.json",
+  "title": "TEKMOVELA DevelopmentContractRef v1alpha1",
+  "description": "A reference to one layer of the MACD contract stack (program/sprint/task/artifact). TEKMOVELA verifies contract breach/completion evidence; it is not a PM repository.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "stack_level", "parties", "source_ref", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "DevelopmentContractRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "stack_level": {
+      "type": "string",
+      "enum": ["program", "sprint", "task", "artifact"]
+    },
+    "parties": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "verification_contract_refs": { "type": "array", "items": { "type": "string" } },
+    "status": {
+      "type": "string",
+      "enum": ["open", "satisfied", "breached", "cancelled"]
+    }
+  }
+}

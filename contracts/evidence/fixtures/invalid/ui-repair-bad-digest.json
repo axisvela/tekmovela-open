@@ -1,0 +1,31 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "FailureEvidence",
+  "id": "failure.ui_bad_digest",
+  "profile": "ui-repair/v1",
+  "symptom": {
+    "type": "alert",
+    "message": "screenshot digest is not a sha256 digest"
+  },
+  "trace_slice_ref": "envelope.run.checkout.bad_digest",
+  "ui_repair": {
+    "screenshot": {
+      "ref": "s3://evidence/run.003/screenshot.png",
+      "digest": "sha256:not-a-valid-sha256",
+      "captured_at": "2026-08-15T10:10:00Z",
+      "redaction": "none"
+    },
+    "dom": {
+      "ref": "s3://evidence/run.003/dom.html",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "captured_at": "2026-08-15T10:10:00Z",
+      "redaction": "none"
+    },
+    "alert": {
+      "ref": "s3://evidence/run.003/alert.json",
+      "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "captured_at": "2026-08-15T10:10:01Z",
+      "redaction": "none"
+    }
+  }
+}

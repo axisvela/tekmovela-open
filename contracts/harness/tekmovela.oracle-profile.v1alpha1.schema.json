@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.oracle-profile.v1alpha1.schema.json",
+  "title": "TEKMOVELA OracleProfile v1alpha1",
+  "description": "The required behavior of an Oracle component: evaluator kind, determinism, and the properties it must verify.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "evaluator_kind", "deterministic"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "OracleProfile" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "evaluator_kind": {
+      "type": "string",
+      "enum": ["exact", "rule", "property", "statistical", "llm", "human"]
+    },
+    "deterministic": { "type": "boolean" },
+    "required_properties": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "statistical_acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_runs", "min_confidence"],
+      "properties": {
+        "min_runs": { "type": "integer", "minimum": 1 },
+        "min_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

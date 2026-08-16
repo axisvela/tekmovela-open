@@ -1,0 +1,14 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "TestControlLoop",
+  "id": "loop.double_spend.c001",
+  "state": "observe",
+  "budget": {
+    "max_steps": 25,
+    "max_duration_seconds": 300,
+    "allowed_actions": ["probe", "retry", "branch", "stop"]
+  },
+  "interrupt": {
+    "requested": false
+  }
+}

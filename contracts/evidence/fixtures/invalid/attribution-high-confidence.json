@@ -1,0 +1,13 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "CausalAttribution",
+  "id": "attr.double_spend",
+  "failure_evidence_ref": "failure.double_spend",
+  "contributions": [
+    {
+      "factor": "model",
+      "direction": "causal",
+      "confidence": 1.5
+    }
+  ]
+}

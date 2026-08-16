@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "CognitiveTrace",
+  "id": "ppes.run_20260814.step_3",
+  "run_ref": "run.evidence_20260814",
+  "profile_ref": "profiles/checkout-agent/v2",
+  "context_ref": "ctx/run_20260814/h3",
+  "output_space_ref": "omega/run_20260814/step3",
+  "model_ref": "noetivela/critic-1",
+  "step_index": 3
+}

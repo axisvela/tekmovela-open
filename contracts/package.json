@@ -3,10 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:contracts": "node scripts/validate-contract-fixtures.mjs"
+    "test:contracts": "node scripts/validate-contract-fixtures.mjs",
+    "snapshot:compatibility": "node scripts/snapshot-contract-baseline.mjs",
+    "check:compatibility": "node scripts/check-contract-baseline.mjs",
+    "test:ci": "npm run test:contracts && npm run check:compatibility"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.9.0"
   }
 }

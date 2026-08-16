@@ -1,0 +1,6 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "WorldStateRef",
+  "id": "world.checkout.double_spend",
+  "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}

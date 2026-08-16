@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "Scenario",
+  "id": "scenario.double_spend.concurrent",
+  "version": "v1",
+  "verification_contract_ref": "checkout.atomicity",
+  "harness_version_ref": "checkout.double_spend@v1",
+  "seed": "seed-double-spend-concurrent",
+  "focus": "two concurrent checkouts must not both succeed",
+  "tags": ["checkout", "atomicity", "critical"]
+}

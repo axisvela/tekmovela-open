@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.assurance-case.v1alpha1.schema.json",
+  "title": "TEKMOVELA AssuranceCase v1alpha1",
+  "description": "A structured, strategy-driven assurance case: a set of claim nodes over a ReleaseCandidate, each carrying an argument, evidence, and optional counterevidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "release_candidate_ref", "strategy", "claims", "status"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "AssuranceCase" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "release_candidate_ref": { "type": "string", "minLength": 1 },
+    "strategy": { "type": "string", "minLength": 1 },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "intent_scope_refs", "evidence_refs", "argument", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+          },
+          "statement": { "type": "string", "minLength": 1 },
+          "intent_scope_refs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+            },
+            "minItems": 1
+          },
+          "counterevidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+            }
+          },
+          "argument": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "enum": ["supported", "unsupported", "open"] },
+          "expires_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "context": { "type": "object" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "status": {
+      "type": "string",
+      "enum": ["open", "supported", "unsupported", "withdrawn", "expired"]
+    }
+  }
+}

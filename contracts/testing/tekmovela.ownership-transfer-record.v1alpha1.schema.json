@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.ownership-transfer-record.v1alpha1.schema.json",
+  "title": "TEKMOVELA OwnershipTransferRecord v1alpha1",
+  "description": "A record of engineering/testing ownership transfer (ATLAS OTP profile). Used for testing-agent or SDLC ownership handoff; not production delegation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "from_owner", "to_owner", "scope", "state", "evidence_refs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "OwnershipTransferRecord" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "from_owner": { "type": "string", "minLength": 1 },
+    "to_owner": { "type": "string", "minLength": 1 },
+    "scope": { "type": "string", "minLength": 1 },
+    "state": {
+      "type": "string",
+      "enum": ["requested", "in_progress", "transferred", "cancelled"]
+    },
+    "evidence_refs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "deadline": { "type": "string", "format": "date-time" },
+    "handoff_at": { "type": "string", "format": "date-time" }
+  }
+}

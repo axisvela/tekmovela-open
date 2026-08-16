@@ -1,0 +1,13 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "HarnessDefinition",
+  "id": "checkout.double_spend",
+  "verification_contract_ref": "checkout.atomicity",
+  "owner": "team-qa",
+  "compatibility_range": {
+    "min_sut_version": "v1",
+    "max_sut_version": "v2"
+  },
+  "status": "active",
+  "pattern_ref": "semantic-oracle/v1"
+}

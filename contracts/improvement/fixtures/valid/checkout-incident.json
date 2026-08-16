@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "IncidentRef",
+  "id": "incident.checkout.a003",
+  "source_ref": "issue://incidents/checkout-003",
+  "digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "source_kind": "incident",
+  "linked_at": "2026-08-15T10:00:00Z"
+}

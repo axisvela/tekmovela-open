@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "AuthorityRef",
+  "id": "auth.debit.a001",
+  "grant_ref": "aegivela://grants/checkout-v2",
+  "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+}

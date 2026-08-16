@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "Attestation",
+  "id": "att.checkout",
+  "claim_ref": "claim.checkout",
+  "scope": {
+    "versions": {
+      "verification_contract": "checkout.atomicity@v1",
+      "harness_version": "checkout.double_spend@v1"
+    },
+    "environment": "staging-1",
+    "intent_scope": "checkout.reliability",
+    "evidence_refs": ["ev.checkout.atomicity.001"]
+  },
+  "issued_at": "2026-08-15T10:00:00Z",
+  "expires_at": "2026-09-15T10:00:00Z",
+  "status": "valid",
+  "signature": {
+    "algorithm": "ed25519",
+    "value": "base64signature"
+  }
+}

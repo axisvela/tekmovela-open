@@ -1,0 +1,15 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "TestRun",
+  "id": "run.checkout.double_spend",
+  "scenario_ref": "scenario.double_spend",
+  "harness_version_ref": "checkout.double_spend@v1",
+  "sut_ref": "praxovela://capabilities/checkout/v2",
+  "environment_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "status": "failed",
+  "trace_envelope_ref": "envelope.run.checkout.double_spend",
+  "evaluation_result_ref": "eval.run.checkout.double_spend",
+  "failure_evidence_ref": "failure.double_spend",
+  "started_at": "2026-08-15T10:00:00Z",
+  "finished_at": "2026-08-15T10:00:05Z"
+}

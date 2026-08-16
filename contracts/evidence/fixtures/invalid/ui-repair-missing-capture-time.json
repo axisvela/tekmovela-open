@@ -1,0 +1,30 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "FailureEvidence",
+  "id": "failure.ui_missing_capture",
+  "profile": "ui-repair/v1",
+  "symptom": {
+    "type": "exception",
+    "message": "dom capture time missing"
+  },
+  "trace_slice_ref": "envelope.run.checkout.missing_capture",
+  "ui_repair": {
+    "screenshot": {
+      "ref": "s3://evidence/run.004/screenshot.png",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "captured_at": "2026-08-15T10:15:00Z",
+      "redaction": "none"
+    },
+    "dom": {
+      "ref": "s3://evidence/run.004/dom.html",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "redaction": "partial"
+    },
+    "alert": {
+      "ref": "s3://evidence/run.004/alert.json",
+      "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "captured_at": "2026-08-15T10:15:01Z",
+      "redaction": "none"
+    }
+  }
+}

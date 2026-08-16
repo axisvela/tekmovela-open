@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "ContributorEvidence",
+  "id": "contrib.checkout.external",
+  "contributor_ref": "aegivela://principals/alice",
+  "artifact_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "identity_verified": true,
+  "minimal_privilege_held": true,
+  "artifact_digest_valid": true,
+  "audit_recorded": true
+}

@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "ReleaseCandidate",
+  "id": "release.checkout.v2",
+  "capability_ref": "praxovela://capabilities/checkout/v2",
+  "version": "v2",
+  "artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "intent_scope_refs": ["checkout.reliability"],
+  "gate_decisions": ["gate.checkout.v2.0", "gate.checkout.v2.1"]
+}

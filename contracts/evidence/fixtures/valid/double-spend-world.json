@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "WorldStateRef",
+  "id": "world.checkout.double_spend",
+  "source_ref": "peiravela://worlds/double-spend/v3",
+  "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "authority": "peiravela"
+}

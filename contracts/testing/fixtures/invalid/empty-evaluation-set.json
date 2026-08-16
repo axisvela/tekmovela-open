@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "EvaluationSet",
+  "id": "checkout.release_set",
+  "version": "v1",
+  "scenario_refs": [],
+  "evaluator_refs": []
+}
