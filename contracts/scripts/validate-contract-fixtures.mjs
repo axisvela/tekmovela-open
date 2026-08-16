@@ -69,6 +69,10 @@ let passed = 0;
 let failed = 0;
 const problems = [];
 
+// Track per-schema coverage so that a schema without fixtures is a hard failure.
+const coveredByValid = new Set();
+const coveredByInvalid = new Set();
+
 for (const fx of await listFixtures()) {
   const doc = JSON.parse(await readFile(fx.path, "utf8"));
   const key = `${doc.api_version}/${doc.kind}`;
@@ -78,6 +82,7 @@ for (const fx of await listFixtures()) {
   const ok = validate(doc);
   const label = `${fx.domain}/fixtures/${fx.expect}/${fx.path.split(/[\\/]/).pop()}`;
   if (fx.expect === "valid") {
+    coveredByValid.add(key);
     if (ok) {
       passed += 1;
     } else {
@@ -85,12 +90,24 @@ for (const fx of await listFixtures()) {
       problems.push(`VALID fixture failed: ${label}\n  ${JSON.stringify(validate.errors)}`);
     }
   } else {
+    coveredByInvalid.add(key);
     if (!ok) {
       passed += 1;
     } else {
       failed += 1;
       problems.push(`INVALID fixture did not fail: ${label}`);
     }
+  }
+}
+
+for (const [key, s] of schemaByKind) {
+  if (!coveredByValid.has(key)) {
+    failed += 1;
+    problems.push(`Schema ${key} (${s.file}) has no VALID fixture`);
+  }
+  if (!coveredByInvalid.has(key)) {
+    failed += 1;
+    problems.push(`Schema ${key} (${s.file}) has no INVALID fixture`);
   }
 }
 
