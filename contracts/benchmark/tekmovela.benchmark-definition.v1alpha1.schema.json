@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.benchmark-definition.v1alpha1.schema.json",
+  "title": "TEKMOVELA BenchmarkDefinition v1alpha1",
+  "description": "A frozen, versioned TEK-Bench benchmark definition: the family, the requirement/contract/harness spine it measures, the evidence schema it requires, and the acceptance criteria that make a run's score comparable. Benchmark definitions are immutable once published; only a new version supersedes one.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "version",
+    "family",
+    "requirement_refs",
+    "verification_contract_refs",
+    "harness_version_refs",
+    "evidence_schema_refs",
+    "acceptance_criteria"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "BenchmarkDefinition" },
+    "id": {
+      "type": "string",
+      "pattern": "^bench\\.[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)*$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "family": {
+      "type": "string",
+      "enum": [
+        "TEK-REQ",
+        "TEK-HARN",
+        "TEK-CTRL",
+        "TEK-SFE",
+        "TEK-TRAJ",
+        "TEK-EFFECT",
+        "TEK-ATTR",
+        "TEK-AAR",
+        "TEK-BOUND",
+        "TEK-COLLAB",
+        "TEK-AUTH",
+        "TEK-CONF"
+      ]
+    },
+    "requirement_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "verification_contract_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "harness_version_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "evidence_schema_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "statement": { "type": "string", "minLength": 1 }
+        }
+      },
+      "minItems": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["frozen", "superseded", "revoked"]
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

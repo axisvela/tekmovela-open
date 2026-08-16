@@ -1,0 +1,19 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekreq.traceability",
+  "version": "v1",
+  "family": "TEK-REQ",
+  "requirement_refs": ["ir://requirements/checkout/atomicity"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.atomicity@v1"],
+  "evidence_schema_refs": ["contracts/verification/tekmovela.verification-contract.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "trace-complete",
+      "statement": "Every acceptance criterion maps to a verification contract"
+    }
+  ],
+  "status": "frozen",
+  "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
