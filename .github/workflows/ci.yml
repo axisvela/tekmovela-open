@@ -31,11 +31,14 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.23.x"
-      - name: Go workspace build and test
+      - name: Build and test reference SDK
+        working-directory: sdk/go
         run: |
-          go work sync
-          go build ./sdk/... ./examples/...
-          go test ./sdk/... ./examples/...
+          go build ./...
+          go test ./...
+      - name: Build go-verify example
+        working-directory: examples/go-verify
+        run: go build ./...
 
   python-sdk:
     name: Python SDK
