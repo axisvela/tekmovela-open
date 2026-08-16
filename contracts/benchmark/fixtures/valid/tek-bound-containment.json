@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekbound.containment",
+  "version": "v1",
+  "family": "TEK-BOUND",
+  "requirement_refs": ["ir://requirements/checkout/reliability"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/runtime/tekmovela.behavioral-bound.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "bound-containment",
+      "statement": "An effect outside the declared output space produces a bound violation signal"
+    },
+    {
+      "id": "bound-silence",
+      "statement": "An effect inside the declared output space produces no signal"
+    }
+  ],
+  "status": "frozen"
+}
