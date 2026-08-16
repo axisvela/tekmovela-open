@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekconf.protocol",
+  "version": "v1",
+  "family": "TEK-CONF",
+  "requirement_refs": ["ir://requirements/checkout/protocol-conformance"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.trace-envelope.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "lifecycle-conformance",
+      "statement": "A run's task/state transitions follow the owning protocol's lifecycle"
+    },
+    {
+      "id": "recovery-conformance",
+      "statement": "A failed step recovers within the protocol's declared recovery semantics"
+    }
+  ],
+  "status": "frozen"
+}

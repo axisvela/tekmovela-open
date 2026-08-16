@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekattr.attribution",
+  "version": "v1",
+  "family": "TEK-ATTR",
+  "requirement_refs": ["ir://requirements/checkout/diagnosis"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.causal-attribution.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "attribution-complete",
+      "statement": "A causal attribution names the contributing factor kinds with a confidence"
+    },
+    {
+      "id": "explanation-complete",
+      "statement": "A decision explanation records knowledge basis, control constraints, and intent alignment"
+    }
+  ],
+  "status": "frozen"
+}

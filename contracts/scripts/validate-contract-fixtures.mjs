@@ -72,6 +72,7 @@ const problems = [];
 // Track per-schema coverage so that a schema without fixtures is a hard failure.
 const coveredByValid = new Set();
 const coveredByInvalid = new Set();
+const familiesWithValidFixture = new Set();
 
 for (const fx of await listFixtures()) {
   const doc = JSON.parse(await readFile(fx.path, "utf8"));
@@ -83,6 +84,9 @@ for (const fx of await listFixtures()) {
   const label = `${fx.domain}/fixtures/${fx.expect}/${fx.path.split(/[\\/]/).pop()}`;
   if (fx.expect === "valid") {
     coveredByValid.add(key);
+    if (ok && key === "tekmovela.io/v1alpha1/BenchmarkDefinition") {
+      familiesWithValidFixture.add(doc.family);
+    }
     if (ok) {
       passed += 1;
     } else {
@@ -108,6 +112,23 @@ for (const [key, s] of schemaByKind) {
   if (!coveredByInvalid.has(key)) {
     failed += 1;
     problems.push(`Schema ${key} (${s.file}) has no INVALID fixture`);
+  }
+}
+
+// TEK-Bench family coverage: every family enumerated in the BenchmarkDefinition
+// schema must have at least one valid definition fixture, so a benchmark family
+// can never silently ship without a frozen, comparable definition.
+{
+  const bench = schemaByKind.get("tekmovela.io/v1alpha1/BenchmarkDefinition");
+  if (bench) {
+    const families = bench.doc.properties?.family?.enum ?? [];
+    assert.ok(families.length >= 12, `BenchmarkDefinition family enum has ${families.length} entries, want >= 12`);
+    for (const family of families) {
+      if (!familiesWithValidFixture.has(family)) {
+        failed += 1;
+        problems.push(`Benchmark family ${family} has no VALID BenchmarkDefinition fixture`);
+      }
+    }
   }
 }
 

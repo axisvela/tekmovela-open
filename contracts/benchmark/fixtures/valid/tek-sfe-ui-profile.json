@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.teksfe.ui_repair",
+  "version": "v1",
+  "family": "TEK-SFE",
+  "requirement_refs": ["ir://requirements/checkout/failure-evidence"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.failure-evidence.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "ui-minimum",
+      "statement": "A ui-repair/v1 failure evidence records screenshot, DOM, and alert references"
+    },
+    {
+      "id": "sufficiency",
+      "statement": "Failure evidence captures the effect context and missing-evidence state"
+    }
+  ],
+  "status": "frozen"
+}

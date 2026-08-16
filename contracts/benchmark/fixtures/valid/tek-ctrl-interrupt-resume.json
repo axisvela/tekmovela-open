@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekctrl.interrupt_resume",
+  "version": "v1",
+  "family": "TEK-CTRL",
+  "requirement_refs": ["ir://requirements/checkout/interruptibility"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/testing/tekmovela.test-control-loop.v1alpha2.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "interrupt-resume",
+      "statement": "An interrupted control loop resumes from its checkpoint without losing evidence"
+    },
+    {
+      "id": "budget-conformance",
+      "statement": "The loop terminates when its run/cost budget is exhausted"
+    }
+  ],
+  "status": "frozen"
+}

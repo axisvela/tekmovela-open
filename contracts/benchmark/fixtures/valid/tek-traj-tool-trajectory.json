@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tektraj.tool_use",
+  "version": "v1",
+  "family": "TEK-TRAJ",
+  "requirement_refs": ["ir://requirements/checkout/tool-discipline"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.trace-envelope.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "tool-correctness",
+      "statement": "Each tool call selects an allowed tool with well-formed arguments"
+    },
+    {
+      "id": "trajectory-economy",
+      "statement": "The trajectory contains no unnecessary retry or redundant step"
+    }
+  ],
+  "status": "frozen"
+}

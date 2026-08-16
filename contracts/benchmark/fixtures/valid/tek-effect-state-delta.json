@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekeffect.atomicity",
+  "version": "v1",
+  "family": "TEK-EFFECT",
+  "requirement_refs": ["ir://requirements/checkout/atomicity"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.effect.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "state-delta-correct",
+      "statement": "A completed action applies exactly its declared state delta"
+    },
+    {
+      "id": "no-duplicate-effect",
+      "statement": "A retried action does not double-apply an external effect"
+    }
+  ],
+  "status": "frozen"
+}

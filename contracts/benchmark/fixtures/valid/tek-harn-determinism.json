@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1alpha1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekharn.determinism",
+  "version": "v1",
+  "family": "TEK-HARN",
+  "requirement_refs": ["ir://requirements/checkout/reproducibility"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/harness/tekmovela.harness-version.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "determinism",
+      "statement": "A repeated run under the same seed and environment produces the same outcome"
+    },
+    {
+      "id": "isolation",
+      "statement": "A run observes no tenant or world-state leakage from another run"
+    }
+  ],
+  "status": "frozen"
+}
