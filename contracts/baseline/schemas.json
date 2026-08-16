@@ -8,6 +8,7 @@
   "assurance/tekmovela.release-candidate.v1alpha1.schema.json": "d7ba6a3be8529db54820641ed3ec05a3f1dcb63a6f1afe4fb97ba375c42baba5",
   "assurance/tekmovela.waiver.v1alpha1.schema.json": "a71179e3a4a6e1aff51d96a12f0815898a4a67a53e9fda14a53037bef6722338",
   "benchmark/tekmovela.benchmark-definition.v1alpha1.schema.json": "e14f4e8c3952b3f0a93569e70f2d7a9cf018d1b98583e5ecd70f5f69f612da0c",
+  "benchmark/tekmovela.benchmark-run.v1alpha1.schema.json": "9a705e7ace3109e997e197fb7b65633c81d2467652f20bf81c6af12ea33deb42",
   "collaboration/tekmovela.contributor-evidence.v1alpha1.schema.json": "2679d9b031be26bbac8c5ca87d4867180a7f031750a230df5845e095bbfed423",
   "collaboration/tekmovela.contributor-gate-decision.v1alpha1.schema.json": "8bd742ba7e0674511f16bbf3a190e15d649fa9ab67fa0c4d2858051fcfbe4c6f",
   "collaboration/tekmovela.development-contract-ref.v1alpha1.schema.json": "3d83afa577e3a2ea1a48cfebc94cb902c7fcc3ba3a3966eb22cfd76a5d5f3d88",

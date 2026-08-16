@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.benchmark-run.v1alpha1.schema.json",
+  "title": "TEKMOVELA BenchmarkRun v1alpha1",
+  "description": "A run of a frozen BenchmarkDefinition: the immutable definition reference it was scored against, the test-run evidence that produced the score, and per-acceptance-criterion verdicts. Binding to the definition digest makes scores comparable across runs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "benchmark_definition_ref",
+    "test_run_ref",
+    "criterion_verdicts"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1alpha1" },
+    "kind": { "const": "BenchmarkRun" },
+    "id": {
+      "type": "string",
+      "pattern": "^benchrun\\.[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)*$"
+    },
+    "benchmark_definition_ref": {
+      "type": "string",
+      "pattern": "^BenchmarkDefinition:[a-z0-9.]+@v[0-9]+:sha256:[0-9a-f]{64}$"
+    },
+    "test_run_ref": { "type": "string", "minLength": 1 },
+    "criterion_verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion_id", "verdict"],
+        "properties": {
+          "criterion_id": { "type": "string", "minLength": 1 },
+          "verdict": {
+            "type": "string",
+            "enum": ["pass", "fail", "inconclusive"]
+          },
+          "message": { "type": "string" }
+        }
+      },
+      "minItems": 1
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["new", "recorded", "superseded", "revoked"]
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}
