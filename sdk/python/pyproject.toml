@@ -4,11 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tekmovela"
-version = "0.1.0"
-description = "TEKMOVELA Open Python SDK: harness authoring, fixtures, oracles, local runner, evidence emitter."
+version = "0.14.0"
+description = "TEKMOVELA Open Python SDK: harness authoring, fixtures, oracles, local runner, and evidence emitter"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+]
 
 [tool.setuptools.packages.find]
+where = ["."]
 include = ["tekmovela*"]
