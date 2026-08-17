@@ -37,4 +37,4 @@ result.bundle.verify()
 PYTHONPATH=sdk/python python -m unittest discover -s sdk/python/tests -p "test_*.py"
 ```
 
-Version `0.14.0`, in lockstep with the `tekmovela` core release.
+Version `0.15.0`, in lockstep with the `tekmovela` core release.
