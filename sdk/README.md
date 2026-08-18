@@ -4,7 +4,7 @@ Public SDK references for consuming TEKMOVELA. All SDKs validate against the mir
 
 | SDK | Module | Status |
 |---|---|---|
-| Go | [`go/`](go/) | Implemented: `reference` package (digest/reference rules) |
+| Go | [`go/`](go/) | Implemented: contracts, evidence bundle, harness authoring, local runner |
 | Python | [`python/`](python/) | Implemented: contracts, evidence bundle, harness authoring, local deterministic runner |
 | TypeScript | [`typescript/`](typescript/) | Implemented: contracts, evidence, harness, UI-SFE capture, trace |
 
@@ -15,7 +15,7 @@ cd go
 go test ./...
 ```
 
-The `reference` package implements the `{kind, id, version, digest}` reference and `sha256:<hex>` digest rules shared by all TEKMOVELA contracts.
+See [`go/README.md`](go/README.md) for module documentation and usage.
 
 ## Python
 
