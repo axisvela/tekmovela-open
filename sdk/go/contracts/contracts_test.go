@@ -45,6 +45,40 @@ func TestNewReferenceValidates(t *testing.T) {
 	}
 }
 
+func TestCanonicalJSONNoHTMLEscaping(t *testing.T) {
+	got, err := CanonicalJSON(map[string]any{"x": "<a>&"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	const want = `{"x":"<a>&"}`
+	if string(got) != want {
+		t.Fatalf("canonical json %q != %q", got, want)
+	}
+}
+
+func TestGoldenDigestHTMLEscaping(t *testing.T) {
+	d, err := ComputeDigest(map[string]any{"x": "<a>&"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	const want = "sha256:bf934ce4dc8b33603214f2ff9f2270929a467392495e2b2b3cda082d2f2b990a"
+	if d != want {
+		t.Fatalf("digest %q != golden %q", d, want)
+	}
+}
+
+func TestReferenceValidate(t *testing.T) {
+	ref := Reference{Kind: "VerificationContract", ID: "vc.1", Version: "v1", Digest: "sha256:" + repeatHex('c', 64)}
+	if err := ref.Validate(); err != nil {
+		t.Fatal(err)
+	}
+	bad := ref
+	bad.Digest = "nope"
+	if err := bad.Validate(); err == nil {
+		t.Fatal("invalid digest must fail validation")
+	}
+}
+
 func repeatHex(c byte, n int) string {
 	out := make([]byte, n)
 	for i := range out {

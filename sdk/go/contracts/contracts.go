@@ -10,6 +10,7 @@
 package contracts
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -28,6 +29,14 @@ type Reference struct {
 	ID      string `json:"id"`
 	Version string `json:"version"`
 	Digest  string `json:"digest"`
+}
+
+// Validate reports whether the reference's digest is well-formed.
+func (r Reference) Validate() error {
+	if _, err := ParseDigest(r.Digest); err != nil {
+		return fmt.Errorf("reference %s/%s@%s: %w", r.Kind, r.ID, r.Version, err)
+	}
+	return nil
 }
 
 // ParseDigest validates a digest of the form sha256:<64 hex>.
@@ -50,11 +59,19 @@ func NewReference(kind, id, version, digest string) (Reference, error) {
 	return Reference{Kind: kind, ID: id, Version: version, Digest: d}, nil
 }
 
-// CanonicalJSON marshals v with Go's json.Marshal, which sorts map keys
-// alphabetically and emits compact separators — matching Python's
-// sort_keys=True and the TS key-sort.
+// CanonicalJSON marshals v with Go's json.Marshal behavior, which sorts map
+// keys alphabetically and emits compact separators — matching Python's
+// sort_keys=True and the TS key-sort. HTML escaping is disabled so `<`, `>`,
+// and `&` are emitted raw, matching Python (ensure_ascii=False) and TS
+// (JSON.stringify) so digests stay cross-SDK identical.
 func CanonicalJSON(v any) ([]byte, error) {
-	return json.Marshal(v)
+	var buf bytes.Buffer
+	enc := json.NewEncoder(&buf)
+	enc.SetEscapeHTML(false)
+	if err := enc.Encode(v); err != nil {
+		return nil, err
+	}
+	return bytes.TrimSuffix(buf.Bytes(), []byte("\n")), nil
 }
 
 // ComputeDigest returns sha256:<hex> over the canonical JSON of v.
