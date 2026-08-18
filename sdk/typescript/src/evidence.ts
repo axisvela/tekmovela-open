@@ -70,10 +70,14 @@ export class EvidenceBundle {
       run_ref: this.runRef,
       verification_contract_ref: this.verificationContractRef,
       harness_version_ref: this.harnessVersionRef,
-      environment_digest: this.environmentDigest,
+      environment_digest: this.environmentDigest ?? null,
       scope: this.scope,
       items: this.items.map((i) => ({ kind: i.kind, uri: i.uri, digest: i.digest, ...(i.note ? { note: i.note } : {}) })),
     };
+  }
+
+  toJSON(): Record<string, unknown> {
+    return { ...this.body(), bundle_digest: this.bundleDigest ?? null };
   }
 
   digest(): string {
