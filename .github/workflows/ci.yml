@@ -68,3 +68,25 @@ jobs:
           npm ci
           npm test
           npm run test:types
+
+  sdk-parity:
+    name: Cross-SDK digest parity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: sdk/typescript/package-lock.json
+      - name: Build TypeScript SDK
+        working-directory: sdk/typescript
+        run: npm ci && npm run build
+      - name: Run cross-SDK parity check
+        run: bash sdk/cross-sdk-parity.sh
