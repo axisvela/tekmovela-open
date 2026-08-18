@@ -17,7 +17,7 @@ export interface UICapture {
 }
 
 export interface StaticUICaptureInit {
-  screenshot: Buffer;
+  screenshot: Uint8Array;
   dom: string;
   alert: string;
 }

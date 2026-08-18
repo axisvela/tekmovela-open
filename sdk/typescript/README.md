@@ -15,7 +15,7 @@ emission. Apache-2.0, version-locked to the `tekmovela` core release.
 ## Usage
 
 ```ts
-import { LocalRunner } from "@axisrobo/tekmovela";
+import { LocalRunner, Reference } from "@axisrobo/tekmovela";
 
 const runner = new LocalRunner(runtime);
 const result = await runner.execute(
@@ -24,6 +24,20 @@ const result = await runner.execute(
   "run.e0001"
 );
 result.bundle.verify();
+
+const version = new HarnessVersion({
+  id: "checkout.double_spend",
+  version: "v1",
+  verificationContractRef: new Reference("VerificationContract", "checkout.atomicity", "v1", "sha256:" + "a".repeat(64)),
+  componentLock: {
+    runner: { kind: "HarnessComponent", id: "runner.deterministic", version: "v1", digest: "sha256:" + "c".repeat(64) },
+    adapter: { kind: "HarnessComponent", id: "adapter.praxovela", version: "v1", digest: "sha256:" + "d".repeat(64) },
+    oracle: { kind: "HarnessComponent", id: "oracle.effect_ledger", version: "v1", digest: "sha256:" + "e".repeat(64) },
+    reporter: { kind: "HarnessComponent", id: "reporter.evidence", version: "v1", digest: "sha256:" + "f".repeat(64) },
+  },
+  evidenceSchema: "tekmovela.evidence-bundle.v1alpha1.schema.json",
+});
+version.publish();
 ```
 
 ## Build and test
@@ -34,4 +48,5 @@ npm test
 npm run build
 ```
 
-Requires Node >= 23.6 (native TypeScript type-stripping). Version `0.15.0`, in lockstep with the `tekmovela` core release.
+The published `dist/` runs on Node >= 18. Running `npm test` against the
+TypeScript sources needs Node >= 23.6 (native type-stripping). Version `0.15.0`, in lockstep with the `tekmovela` core release.

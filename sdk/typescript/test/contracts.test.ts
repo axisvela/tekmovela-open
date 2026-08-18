@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseDigest, digestOf, canonicalJSON, Reference, API_VERSION } from "../src/contracts.ts";
+import { parseDigest, digestOf, canonicalJSON, Reference, API_VERSION, digestFromBytes } from "../src/contracts.ts";
 
 test("API_VERSION is tekmovela.io/v1alpha1", () => {
   assert.equal(API_VERSION, "tekmovela.io/v1alpha1");
@@ -40,4 +40,10 @@ test("Reference validates kind/id/version/digest", () => {
   assert.equal(ref.kind, "EvidenceBundle");
   assert.throws(() => new Reference("", "b.1", "v1", "sha256:" + "b".repeat(64)));
   assert.throws(() => new Reference("EvidenceBundle", "b.1", "v1", "nope"));
+});
+
+test("digestFromBytes accepts Uint8Array and matches a Buffer input", () => {
+  const bytes = new Uint8Array([1, 2, 3, 4]);
+  assert.match(digestFromBytes(bytes), /^sha256:[0-9a-f]{64}$/);
+  assert.equal(digestFromBytes(bytes), digestFromBytes(Buffer.from([1, 2, 3, 4])));
 });

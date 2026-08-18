@@ -41,7 +41,7 @@ export function digestOf(value: unknown): string {
   return "sha256:" + createHash("sha256").update(canonicalJSON(value)).digest("hex");
 }
 
-export function digestFromBytes(data: Buffer): string {
+export function digestFromBytes(data: Uint8Array): string {
   return "sha256:" + createHash("sha256").update(data).digest("hex");
 }
 

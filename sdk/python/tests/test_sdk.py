@@ -14,6 +14,7 @@ from tekmovela.runner import LocalRunner, Scenario
 
 DIGEST = "sha256:" + "a" * 64
 GOLDEN_DIGEST = "sha256:43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
+GOLDEN_HARNESS_VERSION_DIGEST = "sha256:c20430a95d5d42570cdd2434bf25ac9bbc3a846d9e6ffa1307a8ade5164b0557"
 
 
 class ContractTests(unittest.TestCase):
@@ -72,26 +73,61 @@ class EvidenceTests(unittest.TestCase):
 
 
 class HarnessTests(unittest.TestCase):
-    def test_publish_digest(self):
-        hv = HarnessVersion(
+    def _sample(self, seed=None):
+        return HarnessVersion(
             id="checkout.double_spend",
             version="v1",
-            verification_contract_ref="checkout.atomicity",
+            verification_contract_ref=Reference("VerificationContract", "checkout.atomicity", "v1", DIGEST),
             component_lock={
-                "runner": component("runner", "runner.deterministic", "v1", DIGEST),
-                "adapter": component("adapter", "adapter.praxovela", "v1", DIGEST),
-                "oracle": component("oracle", "oracle.effect_ledger", "v1", DIGEST),
-                "reporter": component("reporter", "reporter.evidence", "v1", DIGEST),
+                "runner": component("runner", "runner.deterministic", "v1", "sha256:" + "c" * 64),
+                "adapter": component("adapter", "adapter.praxovela", "v1", "sha256:" + "d" * 64),
+                "oracle": component("oracle", "oracle.effect_ledger", "v1", "sha256:" + "e" * 64),
+                "reporter": component("reporter", "reporter.evidence", "v1", "sha256:" + "f" * 64),
             },
             evidence_schema="tekmovela.evidence-bundle.v1alpha1.schema.json",
+            seed=seed,
         )
+
+    def test_publish_digest(self):
+        hv = self._sample()
         hv.publish()
         self.assertTrue(hv.digest)
+
+    def test_golden_digest_matches_typescript_sdk(self):
+        hv = self._sample()
+        hv.publish()
+        self.assertEqual(hv.digest, GOLDEN_HARNESS_VERSION_DIGEST)
+
+    def test_body_emits_reference_object_and_isolation_profile(self):
+        hv = self._sample()
+        body = hv._body()
+        self.assertEqual(body["verification_contract_ref"], {
+            "kind": "VerificationContract",
+            "id": "checkout.atomicity",
+            "version": "v1",
+            "digest": DIGEST,
+        })
+        self.assertEqual(body["isolation_profile"], {})
+        self.assertNotIn("environment_contract", body)
+
+    def test_body_emits_environment_contract_seed_when_set(self):
+        hv = self._sample(seed="s1")
+        self.assertEqual(hv._body()["environment_contract"], {"seed": "s1"})
+
+    def test_rejects_malformed_verification_contract_ref(self):
+        with self.assertRaises(ContractError):
+            HarnessVersion(
+                id="x", version="v1",
+                verification_contract_ref={"kind": "VerificationContract", "id": "c", "version": "v1", "digest": "nope"},
+                component_lock={"runner": component("runner", "r", "v1", DIGEST)},
+                evidence_schema="s",
+            )
 
     def test_incomplete_lock(self):
         with self.assertRaises(ContractError):
             HarnessVersion(
-                id="x", version="v1", verification_contract_ref="c",
+                id="x", version="v1",
+                verification_contract_ref=Reference("VerificationContract", "c", "v1", DIGEST),
                 component_lock={"runner": component("runner", "r", "v1", DIGEST)},
                 evidence_schema="s",
             )

@@ -5,7 +5,7 @@ import { StaticUICapture, UiRepairFailureEvidence } from "../src/ui-sfe.ts";
 
 test("static ui capture returns schema-shaped artifacts", async () => {
   const cap = new StaticUICapture({
-    screenshot: Buffer.from("png-bytes"),
+    screenshot: new Uint8Array([112, 110, 103, 45, 98, 121, 116, 101, 115]),
     dom: "data:html",
     alert: "something went wrong",
   });
@@ -21,7 +21,7 @@ test("static ui capture returns schema-shaped artifacts", async () => {
 
 test("ui repair failure evidence emits the ui_repair schema shape", async () => {
   const cap = new StaticUICapture({
-    screenshot: Buffer.from("s"),
+    screenshot: new Uint8Array([115]),
     dom: "<html>",
     alert: "failure",
   });

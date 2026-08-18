@@ -62,10 +62,17 @@ export interface ComponentRef {
   digest: string;
 }
 
+export interface ReferenceLike {
+  kind: string;
+  id: string;
+  version: string;
+  digest: string;
+}
+
 export interface HarnessVersionInit {
   id: string;
   version: string;
-  verificationContractRef: string;
+  verificationContractRef: ReferenceLike;
   componentLock: Record<ComponentKind, ComponentRef>;
   evidenceSchema: string;
   determinismMode?: DeterminismMode;
@@ -75,7 +82,7 @@ export interface HarnessVersionInit {
 export class HarnessVersion {
   id: string;
   version: string;
-  verificationContractRef: string;
+  verificationContractRef: ReferenceLike;
   componentLock: Record<ComponentKind, ComponentRef>;
   evidenceSchema: string;
   determinismMode: DeterminismMode;
@@ -85,7 +92,11 @@ export class HarnessVersion {
   constructor(init: HarnessVersionInit) {
     this.id = init.id;
     this.version = init.version;
-    this.verificationContractRef = init.verificationContractRef;
+    this.verificationContractRef = { ...init.verificationContractRef };
+    if (!this.verificationContractRef.kind || !this.verificationContractRef.id || !this.verificationContractRef.version) {
+      throw new ContractError("verification_contract_ref kind, id, and version are required");
+    }
+    parseDigest(this.verificationContractRef.digest);
     this.componentLock = init.componentLock;
     this.evidenceSchema = init.evidenceSchema;
     this.determinismMode = init.determinismMode ?? "deterministic";
@@ -106,7 +117,7 @@ export class HarnessVersion {
   }
 
   body(): Record<string, unknown> {
-    return {
+    const body: Record<string, unknown> = {
       api_version: API_VERSION,
       kind: "HarnessVersion",
       id: this.id,
@@ -117,6 +128,10 @@ export class HarnessVersion {
       determinism_profile: { mode: this.determinismMode },
       isolation_profile: {},
     };
+    if (this.seed !== undefined) {
+      body.environment_contract = { seed: this.seed };
+    }
+    return body;
   }
 
   canonicalDigest(): string {
