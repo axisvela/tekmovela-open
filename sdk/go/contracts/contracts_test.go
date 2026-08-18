@@ -67,6 +67,18 @@ func TestGoldenDigestHTMLEscaping(t *testing.T) {
 	}
 }
 
+func TestReferenceDigestParity(t *testing.T) {
+	ref := Reference{Kind: "VerificationContract", ID: "checkout.atomicity", Version: "v1", Digest: "sha256:" + repeatHex('a', 64)}
+	d, err := ComputeDigest(ref)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const want = "sha256:380bc7efb07a479b54b2290c4f9f17cd7606c258d33754ae2a142add52a97438"
+	if d != want {
+		t.Fatalf("digest %q != golden %q", d, want)
+	}
+}
+
 func TestReferenceValidate(t *testing.T) {
 	ref := Reference{Kind: "VerificationContract", ID: "vc.1", Version: "v1", Digest: "sha256:" + repeatHex('c', 64)}
 	if err := ref.Validate(); err != nil {

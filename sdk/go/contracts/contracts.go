@@ -1,12 +1,17 @@
 // Package contracts provides canonical-JSON digest helpers and validated
 // references for TEKMOVELA SDK consumers. Digests are sha256:<hex> over
-// canonical JSON (map keys sorted, compact separators), matching the Python and
-// TypeScript SDKs so evidence sealed in one SDK verifies in the others.
+// canonical JSON, matching the Python and TypeScript SDKs so evidence sealed in
+// one SDK verifies in the others.
 //
-// Digestable-input contract: values are JSON strings, integers, booleans,
-// null, arrays, or objects. Floating-point values are not canonicalized and
-// must not appear in digestible documents (Go formats 1.0 as "1", Python as
-// "1.0").
+// Canonical JSON emits map keys sorted alphabetically with compact separators
+// and HTML escaping disabled, so `<`, `>`, and `&` are written raw (matching
+// Python sort_keys=True/ensure_ascii=False and the TS key-sort). References
+// marshal in canonical sorted-key order (digest,id,kind,version) so
+// ComputeDigest of a bare Reference matches the other SDKs.
+//
+// Digestible-input contract: values are JSON strings, integers, booleans, null,
+// arrays, or objects. Floating-point values are not canonicalized and must not
+// appear in digestible documents (Go formats 1.0 as "1", Python as "1.0").
 package contracts
 
 import (
@@ -29,6 +34,17 @@ type Reference struct {
 	ID      string `json:"id"`
 	Version string `json:"version"`
 	Digest  string `json:"digest"`
+}
+
+// MarshalJSON emits the reference with canonical sorted keys so ComputeDigest
+// of a bare Reference matches the Python/TS canonical form.
+func (r Reference) MarshalJSON() ([]byte, error) {
+	return json.Marshal(map[string]any{
+		"digest":  r.Digest,
+		"id":      r.ID,
+		"kind":    r.Kind,
+		"version": r.Version,
+	})
 }
 
 // Validate reports whether the reference's digest is well-formed.
