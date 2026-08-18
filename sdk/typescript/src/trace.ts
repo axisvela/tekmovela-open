@@ -1,4 +1,4 @@
-import { ContractError, parseDigest, API_VERSION } from "./contracts.ts";
+import { parseDigest, API_VERSION } from "./contracts.ts";
 
 export const TracePerspective = {
   Execution: "execution",
