@@ -1,20 +1,34 @@
 import { ContractError, digestOf, digestFromBytes, API_VERSION } from "./contracts.ts";
 
-export interface ArtifactRef {
-  uri: string;
+export const REDACTION_STATES = ["none", "partial", "full"] as const;
+export type RedactionState = (typeof REDACTION_STATES)[number];
+
+export interface UiArtifact {
+  ref: string;
   digest: string;
+  capturedAt: string;
+  redaction: RedactionState;
 }
 
 export interface UICapture {
-  captureScreenshot(): Promise<ArtifactRef>;
-  captureDOM(): Promise<ArtifactRef>;
-  captureAlert(message: string): Promise<ArtifactRef>;
+  captureScreenshot(): Promise<UiArtifact>;
+  captureDOM(): Promise<UiArtifact>;
+  captureAlert(message: string): Promise<UiArtifact>;
 }
 
 export interface StaticUICaptureInit {
   screenshot: Buffer;
   dom: string;
   alert: string;
+}
+
+function newArtifact(ref: string, digest: string): UiArtifact {
+  return {
+    ref,
+    digest,
+    capturedAt: new Date().toISOString(),
+    redaction: "none",
+  };
 }
 
 /**
@@ -29,38 +43,38 @@ export class StaticUICapture implements UICapture {
     this.init = init;
   }
 
-  async captureScreenshot(): Promise<ArtifactRef> {
-    return { uri: "static://screenshot", digest: digestFromBytes(this.init.screenshot) };
+  async captureScreenshot(): Promise<UiArtifact> {
+    return newArtifact("static://screenshot", digestFromBytes(this.init.screenshot));
   }
 
-  async captureDOM(): Promise<ArtifactRef> {
-    return { uri: "static://dom", digest: digestOf(this.init.dom) };
+  async captureDOM(): Promise<UiArtifact> {
+    return newArtifact("static://dom", digestOf(this.init.dom));
   }
 
-  async captureAlert(message: string): Promise<ArtifactRef> {
-    return { uri: "static://alert", digest: digestOf(message) };
+  async captureAlert(message: string): Promise<UiArtifact> {
+    return newArtifact("static://alert", digestOf(message));
   }
 }
 
 export class UiRepairFailureEvidence {
   id: string;
   traceSliceRef: string;
-  screenshotRef: ArtifactRef;
-  domRef: ArtifactRef;
-  alertRef: ArtifactRef;
+  screenshot: UiArtifact;
+  dom: UiArtifact;
+  alert: UiArtifact;
 
   constructor(
     id: string,
     traceSliceRef: string,
-    screenshotRef: ArtifactRef,
-    domRef: ArtifactRef,
-    alertRef: ArtifactRef
+    screenshot: UiArtifact,
+    dom: UiArtifact,
+    alert: UiArtifact
   ) {
     this.id = id;
     this.traceSliceRef = traceSliceRef;
-    this.screenshotRef = screenshotRef;
-    this.domRef = domRef;
-    this.alertRef = alertRef;
+    this.screenshot = screenshot;
+    this.dom = dom;
+    this.alert = alert;
   }
 
   static async capture(cap: UICapture, id: string, traceSliceRef: string): Promise<UiRepairFailureEvidence> {
@@ -73,6 +87,10 @@ export class UiRepairFailureEvidence {
     return new UiRepairFailureEvidence(id, traceSliceRef, screenshot, dom, alert);
   }
 
+  toArtifact(a: UiArtifact): Record<string, string> {
+    return { ref: a.ref, digest: a.digest, captured_at: a.capturedAt, redaction: a.redaction };
+  }
+
   body(): Record<string, unknown> {
     return {
       api_version: API_VERSION,
@@ -81,9 +99,11 @@ export class UiRepairFailureEvidence {
       profile: "ui-repair/v1",
       symptom: { type: "alert", message: "ui failure observed" },
       trace_slice_ref: this.traceSliceRef,
-      screenshot_ref: this.screenshotRef,
-      dom_ref: this.domRef,
-      alert_ref: this.alertRef,
+      ui_repair: {
+        screenshot: this.toArtifact(this.screenshot),
+        dom: this.toArtifact(this.dom),
+        alert: this.toArtifact(this.alert),
+      },
     };
   }
 
