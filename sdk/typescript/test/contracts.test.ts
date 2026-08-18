@@ -22,6 +22,10 @@ test("digestOf is stable across key order", () => {
   assert.equal(a, b);
 });
 
+test("digestOf matches the shared golden digest", () => {
+  assert.equal(digestOf({ a: 1, b: 2 }), "sha256:43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777");
+});
+
 test("digestOf is sha256 prefixed", () => {
   assert.match(digestOf({ id: "x" }), /^sha256:[0-9a-f]{64}$/);
 });

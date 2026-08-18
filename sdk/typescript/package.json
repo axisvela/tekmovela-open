@@ -3,6 +3,9 @@
   "version": "0.15.0",
   "description": "TEKMOVELA Open TypeScript SDK: Web/Node agent harness, UI SFE capture, trace adapter.",
   "license": "Apache-2.0",
+  "engines": {
+    "node": ">=23.6"
+  },
   "files": [
     "dist"
   ],
