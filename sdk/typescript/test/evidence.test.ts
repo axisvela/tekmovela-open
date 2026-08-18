@@ -4,7 +4,7 @@ import { EvidenceBundle, ItemKind } from "../src/evidence.ts";
 
 test("bundle seals and verifies", () => {
   const b = new EvidenceBundle({
-    id: "bundle.1",
+    id: "bundle.e0001",
     runRef: "run.1",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -17,7 +17,7 @@ test("bundle seals and verifies", () => {
 
 test("bundle rejects tampering", () => {
   const b = new EvidenceBundle({
-    id: "bundle.2",
+    id: "bundle.e0002",
     runRef: "run.2",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -30,7 +30,7 @@ test("bundle rejects tampering", () => {
 
 test("bundle cannot seal with no items", () => {
   const b = new EvidenceBundle({
-    id: "bundle.3",
+    id: "bundle.e0003",
     runRef: "run.3",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -40,7 +40,7 @@ test("bundle cannot seal with no items", () => {
 
 test("missing evidence is evidence", () => {
   const b = new EvidenceBundle({
-    id: "bundle.4",
+    id: "bundle.e0004",
     runRef: "run.4",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -52,7 +52,7 @@ test("missing evidence is evidence", () => {
 
 test("addItem validates digest", () => {
   const b = new EvidenceBundle({
-    id: "bundle.5",
+    id: "bundle.e0005",
     runRef: "run.5",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -60,42 +60,53 @@ test("addItem validates digest", () => {
   assert.throws(() => b.addItem({ kind: ItemKind.Trace, uri: "t", digest: "bad" }));
 });
 
-test("body emits environment_digest null when unset", () => {
+test("body omits environment_digest when unset", () => {
   const b = new EvidenceBundle({
-    id: "bundle.6",
+    id: "bundle.e0006",
     runRef: "run.6",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
   });
-  assert.equal(b.body().environment_digest, null);
+  assert.equal("environment_digest" in b.body(), false);
+});
+
+test("body includes environment_digest when set", () => {
+  const b = new EvidenceBundle({
+    id: "bundle.e0006",
+    runRef: "run.6",
+    verificationContractRef: "checkout.atomicity@v1",
+    harnessVersionRef: "checkout.double_spend@v1",
+    environmentDigest: "sha256:" + "d".repeat(64),
+  });
+  assert.equal(b.body().environment_digest, "sha256:" + "d".repeat(64));
 });
 
 test("bundle digest matches Python reference when environmentDigest unset", () => {
   const b = new EvidenceBundle({
-    id: "bundle.1",
+    id: "bundle.e0001",
     runRef: "run.1",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
   });
   b.addItem({ kind: ItemKind.Trace, uri: "trace.1", digest: "sha256:" + "a".repeat(64) });
-  assert.equal(b.digest(), "sha256:8012d279ba54e66cae7f2f37d1ba0f308119d1c3396ff1b82c0e38df57740ef3");
+  assert.equal(b.digest(), "sha256:18b4223c8528f03c945964fe0a6590dafcefc77c377034a46bfc3374b4aee470");
 });
 
 test("bundle digest matches Python reference when environmentDigest set", () => {
   const b = new EvidenceBundle({
-    id: "bundle.1",
+    id: "bundle.e0001",
     runRef: "run.1",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
     environmentDigest: "sha256:" + "d".repeat(64),
   });
   b.addItem({ kind: ItemKind.Trace, uri: "trace.1", digest: "sha256:" + "a".repeat(64) });
-  assert.equal(b.digest(), "sha256:8d327fdb984043dd94cd9bc1b3bab92607193ee1af1a0e2703f447a2a1ac0d8a");
+  assert.equal(b.digest(), "sha256:88e88a573fe31224487abe800f920abf41b31527ba7d5045b86255d8e3fad6e6");
 });
 
 test("body is stable across seal", () => {
   const b = new EvidenceBundle({
-    id: "bundle.7",
+    id: "bundle.e0007",
     runRef: "run.7",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -109,7 +120,7 @@ test("body is stable across seal", () => {
 
 test("toJSON emits bundle_digest after seal and survives JSON round-trip", () => {
   const b = new EvidenceBundle({
-    id: "bundle.8",
+    id: "bundle.e0008",
     runRef: "run.8",
     verificationContractRef: "checkout.atomicity@v1",
     harnessVersionRef: "checkout.double_spend@v1",
@@ -118,7 +129,7 @@ test("toJSON emits bundle_digest after seal and survives JSON round-trip", () =>
   b.seal();
   const wire = JSON.parse(JSON.stringify(b));
   assert.equal(wire.bundle_digest, b.bundleDigest);
-  assert.equal(wire.environment_digest, null);
+  assert.equal("environment_digest" in wire, false);
   assert.equal(wire.kind, "EvidenceBundle");
   assert.equal("bundle_digest" in b.body(), false);
 });

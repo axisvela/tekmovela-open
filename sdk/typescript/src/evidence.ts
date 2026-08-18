@@ -63,17 +63,18 @@ export class EvidenceBundle {
   }
 
   body(): Record<string, unknown> {
-    return {
+    const body: Record<string, unknown> = {
       api_version: API_VERSION,
       kind: "EvidenceBundle",
       id: this.id,
       run_ref: this.runRef,
       verification_contract_ref: this.verificationContractRef,
       harness_version_ref: this.harnessVersionRef,
-      environment_digest: this.environmentDigest ?? null,
       scope: this.scope,
       items: this.items.map((i) => ({ kind: i.kind, uri: i.uri, digest: i.digest, ...(i.note ? { note: i.note } : {}) })),
     };
+    if (this.environmentDigest) body.environment_digest = this.environmentDigest;
+    return body;
   }
 
   toJSON(): Record<string, unknown> {
