@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Protocol
 
-from .contracts import digest_from_bytes
+from .contracts import digest_from_bytes, digest_of
 from .evidence import EFFECT, TRACE, EvidenceBundle, Item
 
 
@@ -52,14 +52,14 @@ class LocalRunner:
 
         bundle = EvidenceBundle(
             id=f"{run_id}.evidence",
-            run_ref=run_id,
+            run_ref=run_ref,
             verification_contract_ref=scenario.verification_contract_ref,
             harness_version_ref=scenario.harness_version_ref or "local@v1",
             scope={"intent_ref": scenario.id, "capability_ref": sut_ref},
         )
-        bundle.add_item(Item(kind=TRACE, uri="local://trace/exec.jsonl", digest=digest_from_bytes(f"{scenario.seed}|{run_id}".encode())))
+        bundle.add_item(Item(kind=TRACE, uri="local://trace/exec.jsonl", digest=digest_of(run_ref)))
         bundle.add_item(Item(kind=EFFECT, uri="local://trace/effects.jsonl", digest=digest_from_bytes(f"{len(effects)} effects".encode())))
         bundle.seal()
         bundle.verify()
 
-        return RunResult(run_id=run_id, status="passed", bundle=bundle, effects=effects)
+        return RunResult(run_id=run_ref, status="passed", bundle=bundle, effects=effects)

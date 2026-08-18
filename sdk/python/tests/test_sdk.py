@@ -71,6 +71,13 @@ class EvidenceTests(unittest.TestCase):
         b.add_missing("s3://authority.jsonl", DIGEST, "not captured")
         self.assertEqual(len(b.missing()), 1)
 
+    def test_golden_digests_match_other_sdks(self):
+        b = EvidenceBundle("bundle.e0001", "run.1", "checkout.atomicity@v1", "checkout.double_spend@v1")
+        b.add_item(Item(kind=TRACE, uri="trace.1", digest="sha256:" + "a" * 64))
+        self.assertEqual(b.digest(), "sha256:18b4223c8528f03c945964fe0a6590dafcefc77c377034a46bfc3374b4aee470")
+        b.environment_digest = "sha256:" + "d" * 64
+        self.assertEqual(b.digest(), "sha256:88e88a573fe31224487abe800f920abf41b31527ba7d5045b86255d8e3fad6e6")
+
 
 class HarnessTests(unittest.TestCase):
     def _sample(self, seed=None):
@@ -149,6 +156,14 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result.status, "passed")
         result.bundle.verify()
         self.assertEqual(len(result.effects), 1)
+
+    def test_execute_binds_run_ref_to_runtime_handle(self):
+        runner = LocalRunner(FakeRuntime())
+        scenario = Scenario(id="scenario.double_spend", version="v1", verification_contract_ref="checkout.atomicity", seed="s1")
+        result = runner.execute(scenario, sut_ref="cap/v2", run_id="run.e0001")
+        self.assertEqual(result.bundle.run_ref, "scenario.double_spend/run-s1")
+        self.assertNotEqual(result.bundle.run_ref, "run.e0001")
+        self.assertEqual(result.run_id, result.bundle.run_ref)
 
     def test_validate_contract_fixture(self):
         with tempfile.TemporaryDirectory() as tmp:
