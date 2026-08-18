@@ -19,13 +19,26 @@ export interface Item {
   note?: string;
 }
 
+export interface BundleScope {
+  intentRef?: string;
+  capabilityRef?: string;
+  timeWindow?: string;
+}
+
+const SCOPE_KEYS = ["intentRef", "capabilityRef", "timeWindow"] as const;
+const SCOPE_WIRE_KEYS: Record<(typeof SCOPE_KEYS)[number], string> = {
+  intentRef: "intent_ref",
+  capabilityRef: "capability_ref",
+  timeWindow: "time_window",
+};
+
 export interface EvidenceBundleInit {
   id: string;
   runRef: string;
   verificationContractRef: string;
   harnessVersionRef: string;
   items?: Item[];
-  scope?: Record<string, string>;
+  scope?: BundleScope;
   environmentDigest?: string;
 }
 
@@ -35,7 +48,7 @@ export class EvidenceBundle {
   verificationContractRef: string;
   harnessVersionRef: string;
   items: Item[];
-  scope: Record<string, string>;
+  scope: BundleScope;
   environmentDigest?: string;
   bundleDigest?: string;
 
@@ -45,7 +58,15 @@ export class EvidenceBundle {
     this.verificationContractRef = init.verificationContractRef;
     this.harnessVersionRef = init.harnessVersionRef;
     this.items = init.items ?? [];
-    this.scope = init.scope ?? {};
+    this.scope = {};
+    if (init.scope) {
+      for (const key of Object.keys(init.scope)) {
+        if (!SCOPE_KEYS.includes(key as (typeof SCOPE_KEYS)[number])) {
+          throw new ContractError(`unsupported scope key ${key}`);
+        }
+        this.scope[key as (typeof SCOPE_KEYS)[number]] = init.scope[key as (typeof SCOPE_KEYS)[number]];
+      }
+    }
     this.environmentDigest = init.environmentDigest;
   }
 
@@ -63,6 +84,11 @@ export class EvidenceBundle {
   }
 
   body(): Record<string, unknown> {
+    const scope: Record<string, string> = {};
+    for (const key of SCOPE_KEYS) {
+      const value = this.scope[key];
+      if (value !== undefined) scope[SCOPE_WIRE_KEYS[key]] = value;
+    }
     const body: Record<string, unknown> = {
       api_version: API_VERSION,
       kind: "EvidenceBundle",
@@ -70,7 +96,7 @@ export class EvidenceBundle {
       run_ref: this.runRef,
       verification_contract_ref: this.verificationContractRef,
       harness_version_ref: this.harnessVersionRef,
-      scope: this.scope,
+      scope,
       items: this.items.map((i) => ({ kind: i.kind, uri: i.uri, digest: i.digest, ...(i.note ? { note: i.note } : {}) })),
     };
     if (this.environmentDigest) body.environment_digest = this.environmentDigest;

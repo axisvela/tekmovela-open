@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { ContractError } from "../src/contracts.ts";
 import { EvidenceBundle, ItemKind } from "../src/evidence.ts";
 
 test("bundle seals and verifies", () => {
@@ -132,4 +133,44 @@ test("toJSON emits bundle_digest after seal and survives JSON round-trip", () =>
   assert.equal("environment_digest" in wire, false);
   assert.equal(wire.kind, "EvidenceBundle");
   assert.equal("bundle_digest" in b.body(), false);
+});
+
+test("bundle scope serializes camelCase keys to snake_case wire form", () => {
+  const b = new EvidenceBundle({
+    id: "bundle.e0009",
+    runRef: "run.9",
+    verificationContractRef: "checkout.atomicity@v1",
+    harnessVersionRef: "checkout.double_spend@v1",
+    scope: { intentRef: "intent.checkout", capabilityRef: "cap.checkout", timeWindow: "2026-08-15/2026-08-16" },
+  });
+  assert.deepEqual(b.body().scope, {
+    intent_ref: "intent.checkout",
+    capability_ref: "cap.checkout",
+    time_window: "2026-08-15/2026-08-16",
+  });
+});
+
+test("bundle scope omits unset keys from the wire body", () => {
+  const b = new EvidenceBundle({
+    id: "bundle.e0010",
+    runRef: "run.10",
+    verificationContractRef: "checkout.atomicity@v1",
+    harnessVersionRef: "checkout.double_spend@v1",
+    scope: { capabilityRef: "cap.checkout" },
+  });
+  assert.deepEqual(b.body().scope, { capability_ref: "cap.checkout" });
+});
+
+test("bundle scope rejects unknown keys at runtime", () => {
+  assert.throws(
+    () =>
+      new EvidenceBundle({
+        id: "bundle.e0011",
+        runRef: "run.11",
+        verificationContractRef: "checkout.atomicity@v1",
+        harnessVersionRef: "checkout.double_spend@v1",
+        scope: { intentRef: "intent.checkout", bogus: "x" } as Record<string, string>,
+      }),
+    ContractError
+  );
 });
