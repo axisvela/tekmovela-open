@@ -178,5 +178,34 @@ class RunnerTests(unittest.TestCase):
             validate_fixture(Schema(schema_doc), fixture_path)
 
 
+class SchemaConformanceTests(unittest.TestCase):
+    """Wire forms must satisfy the mirrored contract JSON Schemas under contracts/."""
+
+    _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
+    EVIDENCE_BUNDLE_SCHEMA = os.path.join(_REPO_ROOT, "contracts", "evidence", "tekmovela.evidence-bundle.v1alpha1.schema.json")
+    HARNESS_VERSION_SCHEMA = os.path.join(_REPO_ROOT, "contracts", "harness", "tekmovela.harness-version.v1alpha1.schema.json")
+
+    def _load_schema(self, path):
+        self.assertTrue(os.path.isfile(path), f"schema not found: {path}")
+        with open(path, "r", encoding="utf-8") as fh:
+            return Schema(json.load(fh))
+
+    def test_sealed_evidence_bundle_satisfies_schema(self):
+        b = EvidenceBundle("bundle.conformance", "run.conformance", "checkout.atomicity@v1", "checkout.double_spend@v1")
+        b.add_item(Item(kind=TRACE, uri="local://trace/exec.jsonl", digest=DIGEST))
+        b.add_item(Item(kind=EFFECT, uri="local://effects/ledger.jsonl", digest=DIGEST))
+        b.seal()
+        wire = {**b._body(), "bundle_digest": b.digest()}
+        schema = self._load_schema(self.EVIDENCE_BUNDLE_SCHEMA)
+        self.assertIn("bundle_digest", schema.required)
+        parse_digest(wire["bundle_digest"])
+        schema.validate(wire)
+
+    def test_harness_version_body_satisfies_schema(self):
+        hv = HarnessTests._sample(self)
+        schema = self._load_schema(self.HARNESS_VERSION_SCHEMA)
+        schema.validate(hv._body())
+
+
 if __name__ == "__main__":
     unittest.main()
