@@ -49,7 +49,7 @@ class ContractTests(unittest.TestCase):
 
 class EvidenceTests(unittest.TestCase):
     def test_seal_and_verify(self):
-        b = EvidenceBundle("b1", "run.001", "checkout.atomicity", "h@v1")
+        b = EvidenceBundle("bundle.e0001", "run.001", "checkout.atomicity", "h@v1")
         b.add_item(Item(kind=TRACE, uri="s3://t", digest=DIGEST))
         b.add_item(Item(kind=EFFECT, uri="s3://e", digest=DIGEST))
         b.seal()
@@ -57,7 +57,7 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(len(b.missing()), 0)
 
     def test_tamper_detected(self):
-        b = EvidenceBundle("b2", "run.001", "c", "h")
+        b = EvidenceBundle("bundle.e0002", "run.001", "c", "h")
         b.add_item(Item(kind=TRACE, uri="s3://t", digest=DIGEST))
         b.seal()
         b.items[0].uri = "s3://tampered"
@@ -65,7 +65,7 @@ class EvidenceTests(unittest.TestCase):
             b.verify()
 
     def test_missing_is_evidence(self):
-        b = EvidenceBundle("b3", "run.001", "c", "h")
+        b = EvidenceBundle("bundle.e0003", "run.001", "c", "h")
         b.add_item(Item(kind=TRACE, uri="s3://t", digest=DIGEST))
         b.add_missing("s3://authority.jsonl", DIGEST, "not captured")
         self.assertEqual(len(b.missing()), 1)
@@ -109,7 +109,7 @@ class RunnerTests(unittest.TestCase):
     def test_execute_emits_sealed_bundle(self):
         runner = LocalRunner(FakeRuntime())
         scenario = Scenario(id="scenario.double_spend", version="v1", verification_contract_ref="checkout.atomicity", seed="s1")
-        result = runner.execute(scenario, sut_ref="cap/v2", run_id="run.001")
+        result = runner.execute(scenario, sut_ref="cap/v2", run_id="run.e0001")
         self.assertEqual(result.status, "passed")
         result.bundle.verify()
         self.assertEqual(len(result.effects), 1)

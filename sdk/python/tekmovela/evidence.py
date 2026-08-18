@@ -57,17 +57,19 @@ class EvidenceBundle:
         return self.add_item(Item(kind=MISSING, uri=uri, digest=digest, note=note))
 
     def _body(self) -> Dict[str, Any]:
-        return {
+        body: Dict[str, Any] = {
             "api_version": "tekmovela.io/v1alpha1",
             "kind": "EvidenceBundle",
             "id": self.id,
             "run_ref": self.run_ref,
             "verification_contract_ref": self.verification_contract_ref,
             "harness_version_ref": self.harness_version_ref,
-            "environment_digest": self.environment_digest,
             "scope": self.scope,
             "items": [i.to_dict() for i in self.items],
         }
+        if self.environment_digest:
+            body["environment_digest"] = self.environment_digest
+        return body
 
     def digest(self) -> str:
         return digest_of(self._body())
