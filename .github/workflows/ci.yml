@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.23.x"
-      - name: Build and test reference SDK
+      - name: Build and test Go SDK
         working-directory: sdk/go
         run: |
           go build ./...
@@ -51,3 +51,20 @@ jobs:
       - name: Test
         working-directory: sdk/python
         run: python -m unittest discover -s tests -v
+
+  typescript-sdk:
+    name: TypeScript SDK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: sdk/typescript/package-lock.json
+      - name: Install and test
+        working-directory: sdk/typescript
+        run: |
+          npm ci
+          npm test
+          npm run test:types
