@@ -7,6 +7,7 @@
 package evidence
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/axisrobo/tekmovela-open/sdk/go/contracts"
@@ -42,14 +43,14 @@ var allowedScopeKeys = map[string]bool{
 
 // EvidenceBundle is a portable, digest-verifiable collection of evidence.
 type EvidenceBundle struct {
-	ID                      string
-	RunRef                  string
-	VerificationContractRef string
-	HarnessVersionRef       string
-	Items                   []Item
-	Scope                   map[string]string
-	EnvironmentDigest       string
-	BundleDigest            string
+	ID                      string            `json:"id"`
+	RunRef                  string            `json:"run_ref"`
+	VerificationContractRef string            `json:"verification_contract_ref"`
+	HarnessVersionRef       string            `json:"harness_version_ref"`
+	Items                   []Item            `json:"items"`
+	Scope                   map[string]string `json:"scope"`
+	EnvironmentDigest       string            `json:"environment_digest,omitempty"`
+	BundleDigest            string            `json:"bundle_digest,omitempty"`
 }
 
 // NewBundle builds an empty evidence bundle.
@@ -65,11 +66,15 @@ func NewBundle(id, runRef, verificationContractRef, harnessVersionRef string) *E
 }
 
 // SetScope replaces the scope, rejecting unknown keys (schema-constrained).
+// A nil scope normalizes to an empty map so the canonical form stays `{}`.
 func (b *EvidenceBundle) SetScope(scope map[string]string) error {
 	for k := range scope {
 		if !allowedScopeKeys[k] {
 			return fmt.Errorf("unknown scope key %q (allowed: intent_ref, capability_ref, time_window)", k)
 		}
+	}
+	if scope == nil {
+		scope = map[string]string{}
 	}
 	b.Scope = scope
 	return nil
@@ -77,8 +82,13 @@ func (b *EvidenceBundle) SetScope(scope map[string]string) error {
 
 // AddItem validates and appends an evidence item.
 func (b *EvidenceBundle) AddItem(item Item) error {
-	if item.Kind == "" || item.URI == "" {
-		return fmt.Errorf("item kind and uri are required")
+	switch item.Kind {
+	case ItemKindTrace, ItemKindEffect, ItemKindFailure, ItemKindAttribution, ItemKindExplanation, ItemKindAuthority, ItemKindMissing:
+	default:
+		return fmt.Errorf("unknown item kind %q", item.Kind)
+	}
+	if item.URI == "" {
+		return fmt.Errorf("item uri is required")
 	}
 	if _, err := contracts.ParseDigest(item.Digest); err != nil {
 		return err
@@ -93,8 +103,14 @@ func (b *EvidenceBundle) AddMissing(uri, digest, note string) error {
 }
 
 // Body returns the canonical form (without bundle_digest; environment_digest
-// omitted when unset). Used for digest computation.
+// omitted when unset). A nil scope normalizes to an empty map so the canonical
+// form stays `{}`, matching the Python and TypeScript SDKs. Used for digest
+// computation.
 func (b *EvidenceBundle) Body() map[string]any {
+	scope := b.Scope
+	if scope == nil {
+		scope = map[string]string{}
+	}
 	body := map[string]any{
 		"api_version":               contracts.API_VERSION,
 		"kind":                      "EvidenceBundle",
@@ -102,7 +118,7 @@ func (b *EvidenceBundle) Body() map[string]any {
 		"run_ref":                   b.RunRef,
 		"verification_contract_ref": b.VerificationContractRef,
 		"harness_version_ref":       b.HarnessVersionRef,
-		"scope":                     b.Scope,
+		"scope":                     scope,
 		"items":                     b.itemsJSON(),
 	}
 	if b.EnvironmentDigest != "" {
@@ -163,7 +179,7 @@ func (b *EvidenceBundle) Verify() error {
 
 // Missing returns the missing-evidence items.
 func (b *EvidenceBundle) Missing() []Item {
-	var out []Item
+	out := []Item{}
 	for _, i := range b.Items {
 		if i.Kind == ItemKindMissing {
 			out = append(out, i)
@@ -179,4 +195,10 @@ func (b *EvidenceBundle) ToJSON() map[string]any {
 		body["bundle_digest"] = b.BundleDigest
 	}
 	return body
+}
+
+// MarshalJSON emits the sealed wire form so direct json.Marshal calls produce
+// the schema-valid snake_case document.
+func (b *EvidenceBundle) MarshalJSON() ([]byte, error) {
+	return json.Marshal(b.ToJSON())
 }
