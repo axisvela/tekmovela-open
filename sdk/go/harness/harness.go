@@ -58,15 +58,24 @@ type HarnessVersion struct {
 }
 
 // NewHarnessVersion builds and validates a harness version.
-func NewHarnessVersion(id, version string, vcRef contracts.Reference, lock ComponentLock, evidenceSchema string) (*HarnessVersion, error) {
+func NewHarnessVersion(id, version string, vcRef contracts.Reference, lock ComponentLock, evidenceSchema string, determinismMode DeterminismMode, seed string) (*HarnessVersion, error) {
 	if id == "" || version == "" {
 		return nil, fmt.Errorf("id and version are required")
 	}
 	if err := vcRef.Validate(); err != nil {
 		return nil, err
 	}
+	switch determinismMode {
+	case DeterminismDeterministic, DeterminismStatistical, DeterminismHybrid:
+	default:
+		return nil, fmt.Errorf("unknown determinism mode %q", determinismMode)
+	}
+	lockCopy := make(ComponentLock, len(lock))
+	for kind, ref := range lock {
+		lockCopy[kind] = ref
+	}
 	for _, kind := range componentKinds {
-		ref, ok := lock[kind]
+		ref, ok := lockCopy[kind]
 		if !ok {
 			return nil, fmt.Errorf("component_lock.%s is required", kind)
 		}
@@ -81,9 +90,10 @@ func NewHarnessVersion(id, version string, vcRef contracts.Reference, lock Compo
 		ID:                      id,
 		Version:                 version,
 		VerificationContractRef: vcRef,
-		ComponentLock:           lock,
+		ComponentLock:           lockCopy,
 		EvidenceSchema:          evidenceSchema,
-		DeterminismMode:         DeterminismDeterministic,
+		DeterminismMode:         determinismMode,
+		Seed:                    seed,
 	}, nil
 }
 
@@ -258,11 +268,19 @@ func (lr *LocalRunner) Execute(scenario Scenario, sutRef, runID string) (*RunRes
 	if err != nil {
 		return nil, err
 	}
+	status, err := lr.runtime.Status(handle)
+	if err != nil {
+		return nil, err
+	}
 	b := evidence.NewBundle(runID+".evidence", handle.RunRef, scenario.VerificationContractRef, hvRef)
 	if err := b.SetScope(map[string]string{"intent_ref": scenario.ID, "capability_ref": sutRef}); err != nil {
 		return nil, err
 	}
-	if err := b.AddItem(evidence.Item{Kind: evidence.ItemKindTrace, URI: "local://trace/exec.jsonl", Digest: digestOf(handle.RunRef)}); err != nil {
+	traceDigest, err := digestOf(handle.RunRef)
+	if err != nil {
+		return nil, err
+	}
+	if err := b.AddItem(evidence.Item{Kind: evidence.ItemKindTrace, URI: "local://trace/exec.jsonl", Digest: traceDigest}); err != nil {
 		return nil, err
 	}
 	for _, e := range effects {
@@ -273,13 +291,9 @@ func (lr *LocalRunner) Execute(scenario Scenario, sutRef, runID string) (*RunRes
 	if err := b.Seal(); err != nil {
 		return nil, err
 	}
-	return &RunResult{RunID: handle.RunRef, Status: "passed", Bundle: b, Effects: effects}, nil
+	return &RunResult{RunID: handle.RunRef, Status: string(status), Bundle: b, Effects: effects}, nil
 }
 
-func digestOf(v any) string {
-	d, err := contracts.ComputeDigest(v)
-	if err != nil {
-		return ""
-	}
-	return d
+func digestOf(v any) (string, error) {
+	return contracts.ComputeDigest(v)
 }
