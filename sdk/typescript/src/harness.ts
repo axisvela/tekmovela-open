@@ -52,7 +52,11 @@ export interface RuntimeAdapter {
 export const COMPONENT_KINDS = ["runner", "adapter", "oracle", "reporter"] as const;
 export type ComponentKind = (typeof COMPONENT_KINDS)[number];
 
+export const DETERMINISM_MODES = ["deterministic", "statistical", "hybrid"] as const;
+export type DeterminismMode = (typeof DETERMINISM_MODES)[number];
+
 export interface ComponentRef {
+  kind: string;
   id: string;
   version: string;
   digest: string;
@@ -64,7 +68,7 @@ export interface HarnessVersionInit {
   verificationContractRef: string;
   componentLock: Record<ComponentKind, ComponentRef>;
   evidenceSchema: string;
-  determinismMode?: string;
+  determinismMode?: DeterminismMode;
   seed?: string;
 }
 
@@ -74,7 +78,7 @@ export class HarnessVersion {
   verificationContractRef: string;
   componentLock: Record<ComponentKind, ComponentRef>;
   evidenceSchema: string;
-  determinismMode: string;
+  determinismMode: DeterminismMode;
   seed?: string;
   digest?: string;
 
@@ -86,10 +90,16 @@ export class HarnessVersion {
     this.evidenceSchema = init.evidenceSchema;
     this.determinismMode = init.determinismMode ?? "deterministic";
     this.seed = init.seed;
+    if (!DETERMINISM_MODES.includes(this.determinismMode)) {
+      throw new ContractError(`determinism_mode ${this.determinismMode} is not supported`);
+    }
     for (const kind of COMPONENT_KINDS) {
       const ref = this.componentLock[kind];
       if (!ref) {
         throw new ContractError(`component_lock.${kind} is required`);
+      }
+      if (!ref.kind) {
+        throw new ContractError(`component_lock.${kind}.kind is required`);
       }
       parseDigest(ref.digest);
     }
@@ -105,6 +115,7 @@ export class HarnessVersion {
       component_lock: this.componentLock,
       evidence_schema: this.evidenceSchema,
       determinism_profile: { mode: this.determinismMode },
+      isolation_profile: {},
     };
   }
 
@@ -123,6 +134,7 @@ export interface Scenario {
   version: string;
   verificationContractRef: string;
   seed: string;
+  harnessVersionRef?: string;
 }
 
 export interface RunResult {
@@ -139,18 +151,19 @@ export class LocalRunner {
   }
 
   async execute(scenario: Scenario, sutRef: string, runId: string): Promise<RunResult> {
+    const harnessVersionRef = scenario.harnessVersionRef ?? "local@v1";
     const handle = await this.runtime.startRun({
       scenarioRef: scenario.id,
-      harnessVersionRef: scenario.verificationContractRef,
+      harnessVersionRef,
       sutRef,
       seed: scenario.seed,
     });
     const effects = await this.runtime.fetchEffects(handle);
     const bundle = new EvidenceBundle({
       id: `bundle.${runId}`,
-      runRef: runId,
+      runRef: handle.runRef,
       verificationContractRef: scenario.verificationContractRef,
-      harnessVersionRef: scenario.verificationContractRef,
+      harnessVersionRef,
     });
     for (const e of effects) {
       bundle.addItem({ kind: ItemKind.Effect, uri: `${e.action}/${e.resource}`, digest: e.argsDigest });
