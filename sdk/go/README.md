@@ -30,4 +30,4 @@ result, err := runner.Execute(harness.Scenario{
 go test ./...
 ```
 
-Version `0.16.0`, in lockstep with the `tekmovela` core release.
+Version `0.17.0`, in lockstep with the `tekmovela` core release.

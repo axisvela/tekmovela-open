@@ -49,4 +49,4 @@ npm run build
 ```
 
 The published `dist/` runs on Node >= 18. Running `npm test` against the
-TypeScript sources needs Node >= 23.6 (native type-stripping). Version `0.16.0`, in lockstep with the `tekmovela` core release.
+TypeScript sources needs Node >= 23.6 (native type-stripping). Version `0.17.0`, in lockstep with the `tekmovela` core release.
