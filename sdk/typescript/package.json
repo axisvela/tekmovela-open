@@ -3,7 +3,9 @@
   "version": "0.15.0",
   "description": "TEKMOVELA Open TypeScript SDK: Web/Node agent harness, UI SFE capture, trace adapter.",
   "license": "Apache-2.0",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -16,10 +18,11 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "npm run build && node --test test/",
+    "test": "npm run build && node --test",
     "test:types": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/node": "^24.13.3",
     "typescript": "^5.5.0"
   }
 }
