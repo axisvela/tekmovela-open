@@ -6,7 +6,7 @@ Public SDK references for consuming TEKMOVELA. All SDKs validate against the mir
 |---|---|---|
 | Go | [`go/`](go/) | Implemented: `reference` package (digest/reference rules) |
 | Python | [`python/`](python/) | Implemented: contracts, evidence bundle, harness authoring, local deterministic runner |
-| TypeScript | [`typescript/`](typescript/) | Skeleton; UI SFE capture + trace adapter planned |
+| TypeScript | [`typescript/`](typescript/) | Implemented: contracts, evidence, harness, UI-SFE capture, trace |
 
 ## Go
 
