@@ -70,7 +70,7 @@ jobs:
           npm run test:types
 
   sdk-parity:
-    name: Cross-SDK digest parity
+    name: Cross-SDK digest parity and version lockstep
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -88,5 +88,13 @@ jobs:
       - name: Build TypeScript SDK
         working-directory: sdk/typescript
         run: npm ci && npm run build
+      - name: Verify SDK versions are in lockstep
+        run: |
+          ROOT_VERSION=$(python3 -c "import json; print(json.load(open('version.json'))['version'])")
+          PY_VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('sdk/python/pyproject.toml','rb'))['project']['version'])")
+          TS_VERSION=$(node -e "console.log(require('./sdk/typescript/package.json').version)")
+          echo "root=$ROOT_VERSION python=$PY_VERSION typescript=$TS_VERSION"
+          [ "$ROOT_VERSION" = "$PY_VERSION" ] || { echo "version drift: root $ROOT_VERSION != python $PY_VERSION" >&2; exit 1; }
+          [ "$ROOT_VERSION" = "$TS_VERSION" ] || { echo "version drift: root $ROOT_VERSION != typescript $TS_VERSION" >&2; exit 1; }
       - name: Run cross-SDK parity check
         run: bash sdk/cross-sdk-parity.sh
