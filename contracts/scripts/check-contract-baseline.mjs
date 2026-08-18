@@ -26,9 +26,13 @@ function walk(dir) {
 
 const sep = process.platform === "win32" ? "\\" : "/";
 const current = {};
+function canonical(content) {
+  return content.replace(/\r\n/g, "\n");
+}
+
 for (const file of walk(root)) {
   if (file.includes(`${sep}node_modules${sep}`)) continue;
-  const content = readFileSync(file, "utf8");
+  const content = canonical(readFileSync(file, "utf8"));
   current[relative(root, file).replace(/\\/g, "/")] = createHash("sha256").update(content).digest("hex");
 }
 
