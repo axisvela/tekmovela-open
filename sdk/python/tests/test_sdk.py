@@ -13,6 +13,7 @@ from tekmovela.harness import HarnessVersion, component
 from tekmovela.runner import LocalRunner, Scenario
 
 DIGEST = "sha256:" + "a" * 64
+GOLDEN_DIGEST = "sha256:43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
 
 
 class ContractTests(unittest.TestCase):
@@ -21,6 +22,12 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             parse_digest("md5:abc")
         self.assertEqual(len(digest_of({"a": 1})), 7 + 64)
+
+    def test_golden_digest(self):
+        self.assertEqual(digest_of({"a": 1, "b": 2}), GOLDEN_DIGEST)
+
+    def test_canonical_digest_is_key_order_stable(self):
+        self.assertEqual(digest_of({"a": 1, "b": 2}), digest_of({"b": 2, "a": 1}))
 
     def test_reference(self):
         r = Reference("VerificationContract", "checkout.atomicity", "v1", DIGEST)

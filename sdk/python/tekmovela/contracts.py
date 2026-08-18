@@ -25,7 +25,7 @@ def parse_digest(digest: str) -> None:
 
 
 def canonical_json(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=False, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 
 def digest_of(value: Any) -> str:
