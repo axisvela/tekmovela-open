@@ -2,8 +2,24 @@
   "name": "@axisrobo/tekmovela",
   "version": "0.15.0",
   "description": "TEKMOVELA Open TypeScript SDK: Web/Node agent harness, UI SFE capture, trace adapter.",
-  "type": "module",
-  "main": "dist/index.js",
   "license": "Apache-2.0",
-  "files": ["dist"]
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test test/",
+    "test:types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
 }
