@@ -1,6 +1,6 @@
 {
   "name": "@axisrobo/tekmovela",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "TEKMOVELA Open TypeScript SDK: Web/Node agent harness, UI SFE capture, trace adapter.",
   "license": "Apache-2.0",
   "engines": {
