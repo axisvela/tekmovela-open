@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "PPEStepRef",
+  "id": "step.checkout.a001",
+  "step_index": -1,
+  "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+}

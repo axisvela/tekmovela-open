@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.fixture.v1.schema.json",
+  "title": "TEKMOVELA Fixture v1",
+  "description": "A frozen input fixture bound to a VerificationContract. Fixtures are content-addressed and drive reproducible deterministic tests.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "verification_contract_ref", "content_digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "Fixture" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "verification_contract_ref": { "type": "string", "minLength": 1 },
+    "content_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "profile_ref": { "type": "string" },
+    "frozen_at": { "type": "string", "format": "date-time" }
+  }
+}

@@ -55,29 +55,29 @@ function harnessVersion(): HarnessVersion {
       oracle: { kind: "HarnessComponent", id: "o.1", version: "v1", digest: "sha256:" + "e".repeat(64) },
       reporter: { kind: "HarnessComponent", id: "p.1", version: "v1", digest: "sha256:" + "f".repeat(64) },
     },
-    evidenceSchema: "tekmovela.evidence-bundle.v1alpha1.schema.json",
+    evidenceSchema: "tekmovela.evidence-bundle.v1.schema.json",
     seed: "s1",
   });
 }
 
 test("sealed EvidenceBundle.toJSON validates against the evidence-bundle schema", () => {
   const body = sealedBundle().toJSON();
-  validator(loadSchema("evidence/tekmovela.evidence-bundle.v1alpha1.schema.json"))(body);
+  validator(loadSchema("evidence/tekmovela.evidence-bundle.v1.schema.json"))(body);
 });
 
 test("UiRepairFailureEvidence.body validates against the failure-evidence schema", async () => {
   const cap = new StaticUICapture({ screenshot: new Uint8Array([1]), dom: "<html>", alert: "boom" });
   const fe = await UiRepairFailureEvidence.capture(cap, "failure.ui.e0001", "local://trace/run.jsonl");
-  validator(loadSchema("evidence/tekmovela.failure-evidence.v1alpha1.schema.json"))(fe.body());
+  validator(loadSchema("evidence/tekmovela.failure-evidence.v1.schema.json"))(fe.body());
 });
 
 test("TraceEnvelope.body validates against the trace-envelope schema", () => {
   const env = new TraceEnvelope("trace.e0001", "run.1", "tenant.1", "trace.1");
   env.addPerspective(TracePerspective.Execution, "local://trace/exec.jsonl", DIGEST);
   env.addPerspective(TracePerspective.Ppes, "local://trace/ppes.jsonl", "sha256:" + "b".repeat(64));
-  validator(loadSchema("evidence/tekmovela.trace-envelope.v1alpha1.schema.json"))(env.body());
+  validator(loadSchema("evidence/tekmovela.trace-envelope.v1.schema.json"))(env.body());
 });
 
 test("HarnessVersion.body validates against the harness-version schema", () => {
-  validator(loadSchema("harness/tekmovela.harness-version.v1alpha1.schema.json"))(harnessVersion().body());
+  validator(loadSchema("harness/tekmovela.harness-version.v1.schema.json"))(harnessVersion().body());
 });

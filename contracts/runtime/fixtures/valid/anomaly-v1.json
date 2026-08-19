@@ -1,0 +1,12 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "AnomalySignal",
+  "id": "signal.checkout.b001",
+  "signal_type": "bound_violation",
+  "subject_ref": "praxovela://capabilities/checkout/v2",
+  "behavioral_bound_ref": "bound.checkout@v1",
+  "trace_envelope_ref": "envelope.signal.checkout.b001",
+  "detected_at": "2026-08-19T12:00:00Z",
+  "evidence_ref": "ev.signal.checkout.b001",
+  "status": "new"
+}

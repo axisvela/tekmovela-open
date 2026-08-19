@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-export const API_VERSION = "tekmovela.io/v1alpha1";
+export const API_VERSION = "tekmovela.io/v1";
 
 const SHA256 = /^sha256:[0-9a-f]{64}$/;
 

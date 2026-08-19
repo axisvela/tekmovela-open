@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "TraceEnvelope",
+  "id": "trace.empty",
+  "run_ref": "run.001",
+  "perspectives": []
+}

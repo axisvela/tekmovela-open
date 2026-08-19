@@ -8,7 +8,7 @@ import { ItemKind } from "../src/evidence.ts";
 const D = "sha256:" + "a".repeat(64);
 const VCONTRACT = new Reference("VerificationContract", "checkout.atomicity", "v1", D);
 
-const GOLDEN_HARNESS_VERSION_DIGEST = "sha256:c20430a95d5d42570cdd2434bf25ac9bbc3a846d9e6ffa1307a8ade5164b0557";
+const GOLDEN_HARNESS_VERSION_DIGEST = "sha256:bc8520405b1d90daea66d17a62c415f0edee8ecb4a52b9ed1460bc6a5a9b0499";
 
 function componentLock(): Record<string, { kind: string; id: string; version: string; digest: string }> {
   return {
@@ -25,7 +25,7 @@ function sampleHarnessVersion(seed?: string): HarnessVersion {
     version: "v1",
     verificationContractRef: VCONTRACT,
     componentLock: componentLock(),
-    evidenceSchema: "tekmovela.evidence-bundle.v1alpha1.schema.json",
+    evidenceSchema: "tekmovela.evidence-bundle.v1.schema.json",
     ...(seed !== undefined ? { seed } : {}),
   });
 }

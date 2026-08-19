@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "RegressionCandidate",
+  "id": "regression.double_spend.a001",
+  "source_ref": "failure.double_spend",
+  "scenario_ref": "scenario.double_spend",
+  "target_contract_ref": "checkout.atomicity@v1",
+  "coverage_debt_ref": "debt.checkout.concurrency",
+  "status": "proposed"
+}

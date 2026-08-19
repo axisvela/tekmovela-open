@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.gate-decision.v1.schema.json",
+  "title": "TEKMOVELA GateDecision v1",
+  "description": "The decision of one release gate (G0..G5). Decisions are reproducible from locked inputs and locked policy.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "gate", "decision", "release_candidate_ref", "policy_version"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "GateDecision" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "gate": {
+      "type": "string",
+      "enum": ["G0_requirement", "G1_harness", "G2_test", "G3_authority", "G4_runtime_readiness", "G5_evidence"]
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["pass", "conditional", "waived", "block", "reverify"]
+    },
+    "release_candidate_ref": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "blocking_reasons": { "type": "array", "items": { "type": "string" } },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } }
+  }
+}

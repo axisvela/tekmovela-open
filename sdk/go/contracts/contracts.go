@@ -26,7 +26,7 @@ import (
 var sha256Hex = regexp.MustCompile(`^[0-9a-f]{64}$`)
 
 // API_VERSION is the TEKMOVELA API version carried by published objects.
-const API_VERSION = "tekmovela.io/v1alpha1"
+const API_VERSION = "tekmovela.io/v1"
 
 // Reference points to a published TEKMOVELA object.
 type Reference struct {

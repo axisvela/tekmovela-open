@@ -1,0 +1,11 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "TestBudget",
+  "id": "budget.checkout.release",
+  "version": "v1",
+  "runs": 100,
+  "max_duration_seconds": 3600,
+  "max_cost": 500.0,
+  "currency": "USD",
+  "status": "open"
+}

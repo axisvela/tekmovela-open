@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.reverification-request.v1.schema.json",
+  "title": "TEKMOVELA ReverificationRequest v1",
+  "description": "A targeted request to re-verify the minimal affected VerificationContract/Harness/Scenario scope after an anomaly, drift, or change. Fully linked to its trigger provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "trigger",
+    "affected_scope",
+    "status"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "ReverificationRequest" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["anomaly", "drift", "change", "scheduled"]
+        },
+        "ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "affected_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verification_contract_refs", "harness_version_refs", "scenario_refs"],
+      "properties": {
+        "verification_contract_refs": { "type": "array", "items": { "type": "string" } },
+        "harness_version_refs": { "type": "array", "items": { "type": "string" } },
+        "scenario_refs": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "reverifying", "resolved", "blocked"]
+    },
+    "evidence_refresh_ref": { "type": "string" },
+    "improvement_action_ref": { "type": "string" }
+  }
+}

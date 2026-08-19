@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekcollab.contributor",
+  "version": "v1",
+  "family": "TEK-COLLAB",
+  "requirement_refs": ["ir://requirements/checkout/external-contributors"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/collaboration/tekmovela.contributor-gate-decision.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "contributor-evidence",
+      "statement": "A contributor gate decision records complete identity, privilege, digest, contract, and audit evidence"
+    },
+    {
+      "id": "role-contract-binding",
+      "statement": "A development contract carries a stack level and bound verification contracts"
+    }
+  ],
+  "status": "frozen"
+}

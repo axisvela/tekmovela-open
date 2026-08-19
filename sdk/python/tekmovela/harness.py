@@ -9,7 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Mapping, Optional
 
-from .contracts import ContractError, digest_of, parse_digest
+from .contracts import API_VERSION, ContractError, digest_of, parse_digest
 
 COMPONENT_RUNNER = "runner"
 COMPONENT_ADAPTER = "adapter"
@@ -41,7 +41,7 @@ class HarnessVersion:
 
     def _body(self) -> Dict[str, Any]:
         body: Dict[str, Any] = {
-            "api_version": "tekmovela.io/v1alpha1",
+            "api_version": API_VERSION,
             "kind": "HarnessVersion",
             "id": self.id,
             "version": self.version,

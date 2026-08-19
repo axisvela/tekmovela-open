@@ -13,7 +13,7 @@ func TestGoldenHarnessVersionDigest(t *testing.T) {
 		"v1",
 		contracts.Reference{Kind: "VerificationContract", ID: "checkout.atomicity", Version: "v1", Digest: "sha256:" + repeat('a', 64)},
 		sampleLock(),
-		"tekmovela.evidence-bundle.v1alpha1.schema.json",
+		"tekmovela.evidence-bundle.v1.schema.json",
 		DeterminismDeterministic,
 		"",
 	)
@@ -24,7 +24,7 @@ func TestGoldenHarnessVersionDigest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d != "sha256:c20430a95d5d42570cdd2434bf25ac9bbc3a846d9e6ffa1307a8ade5164b0557" {
+	if d != "sha256:bc8520405b1d90daea66d17a62c415f0edee8ecb4a52b9ed1460bc6a5a9b0499" {
 		t.Fatalf("harness version digest %q != golden", d)
 	}
 }
@@ -35,7 +35,7 @@ func TestGoldenHarnessVersionDigestWithSeed(t *testing.T) {
 		"v1",
 		contracts.Reference{Kind: "VerificationContract", ID: "checkout.atomicity", Version: "v1", Digest: "sha256:" + repeat('a', 64)},
 		sampleLock(),
-		"tekmovela.evidence-bundle.v1alpha1.schema.json",
+		"tekmovela.evidence-bundle.v1.schema.json",
 		DeterminismDeterministic,
 		"s1",
 	)
@@ -53,7 +53,7 @@ func TestGoldenHarnessVersionDigestWithSeed(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d != "sha256:57549ad1b521775fef0d0ce3fea98b997068020bdccf341ead9051af96fd5762" {
+	if d != "sha256:ce4ba19c8f426de72786ca7b4206af833f487ee557e3444a056649023f110cd1" {
 		t.Fatalf("seed harness version digest %q != golden", d)
 	}
 }
@@ -64,7 +64,7 @@ func TestGoldenHarnessVersionDigestStatistical(t *testing.T) {
 		"v1",
 		contracts.Reference{Kind: "VerificationContract", ID: "checkout.atomicity", Version: "v1", Digest: "sha256:" + repeat('a', 64)},
 		sampleLock(),
-		"tekmovela.evidence-bundle.v1alpha1.schema.json",
+		"tekmovela.evidence-bundle.v1.schema.json",
 		DeterminismStatistical,
 		"",
 	)
@@ -75,7 +75,7 @@ func TestGoldenHarnessVersionDigestStatistical(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d != "sha256:f87f42af03ec9b455a69e9637a8df2528df2178e606ea0c9c0c4231a044c3496" {
+	if d != "sha256:ffc4b2e076bbb7588ac2923fcb6dc3f623016f022ab78daf0cc561e87046a519" {
 		t.Fatalf("statistical harness version digest %q != golden", d)
 	}
 }
@@ -86,7 +86,7 @@ func TestPublishBindsDigest(t *testing.T) {
 		"v1",
 		contracts.Reference{Kind: "VerificationContract", ID: "checkout.atomicity", Version: "v1", Digest: "sha256:" + repeat('a', 64)},
 		sampleLock(),
-		"tekmovela.evidence-bundle.v1alpha1.schema.json",
+		"tekmovela.evidence-bundle.v1.schema.json",
 		DeterminismDeterministic,
 		"",
 	)
@@ -111,7 +111,7 @@ func TestNewHarnessVersionRejectsInvalidDeterminismMode(t *testing.T) {
 		"v1",
 		contracts.Reference{Kind: "VerificationContract", ID: "checkout.atomicity", Version: "v1", Digest: "sha256:" + repeat('a', 64)},
 		sampleLock(),
-		"tekmovela.evidence-bundle.v1alpha1.schema.json",
+		"tekmovela.evidence-bundle.v1.schema.json",
 		DeterminismMode("random"),
 		"",
 	)

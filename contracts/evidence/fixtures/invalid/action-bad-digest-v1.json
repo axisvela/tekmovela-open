@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "Action",
+  "id": "action.debit.a001",
+  "args_digest": "sha256:bad",
+  "performed_at": "2026-08-15T10:00:01Z"
+}

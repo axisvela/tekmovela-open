@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekauth.revocation",
+  "version": "v1",
+  "family": "TEK-AUTH",
+  "requirement_refs": ["ir://requirements/checkout/authority"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.authority-ref.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "authority-current",
+      "statement": "A run carries a current, non-revoked authorization reference"
+    },
+    {
+      "id": "delegation-valid",
+      "statement": "Delegation does not amplify authority beyond the granted scope"
+    }
+  ],
+  "status": "frozen"
+}

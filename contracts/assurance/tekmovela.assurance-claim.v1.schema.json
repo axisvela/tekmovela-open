@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.assurance-claim.v1.schema.json",
+  "title": "TEKMOVELA AssuranceClaim v1",
+  "description": "A verifiable claim about a ReleaseCandidate/CapabilityVersion/Environment/IntentScope. Claims are scoped and expire; evidence and counterevidence attach to them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "subject", "statement", "intent_scope_refs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "AssuranceClaim" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["release_candidate", "capability_version", "environment", "agent", "workflow"]
+        },
+        "ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "statement": { "type": "string", "minLength": 1 },
+    "intent_scope_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "counterevidence_refs": { "type": "array", "items": { "type": "string" } },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "status": {
+      "type": "string",
+      "enum": ["open", "supported", "unsupported", "expired", "withdrawn"]
+    }
+  }
+}

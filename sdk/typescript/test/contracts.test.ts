@@ -2,8 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { parseDigest, digestOf, canonicalJSON, Reference, API_VERSION, digestFromBytes } from "../src/contracts.ts";
 
-test("API_VERSION is tekmovela.io/v1alpha1", () => {
-  assert.equal(API_VERSION, "tekmovela.io/v1alpha1");
+test("API_VERSION is tekmovela.io/v1", () => {
+  assert.equal(API_VERSION, "tekmovela.io/v1");
 });
 
 test("parseDigest accepts sha256:<64 hex>", () => {

@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "CoverageStatement",
+  "id": "coverage.checkout.v2",
+  "subject_ref": "release.checkout.v2",
+  "coverage_debt_refs": []
+}

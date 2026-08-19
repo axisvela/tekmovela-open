@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.intent-spec-ref.v1.schema.json",
+  "title": "TEKMOVELA IntentSpecRef v1",
+  "description": "An immutable reference to an external IntentSpec. TEKMOVELA records the neutral reference and digest and never rewrites the source intent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "source_ref", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "IntentSpecRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "goal_ref": { "type": "string" },
+    "specification_maturity": {
+      "type": "string",
+      "enum": ["draft", "agreed", "frozen"]
+    }
+  }
+}

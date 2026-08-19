@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.harness-version.v1.schema.json",
+  "title": "TEKMOVELA HarnessVersion v1",
+  "description": "An immutable, frozen composition of HarnessComponents bound to a VerificationContract. Includes determinism, isolation, and coverage profiles. Mirrors VESTA-P0/P1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "api_version",
+    "kind",
+    "id",
+    "version",
+    "verification_contract_ref",
+    "component_lock",
+    "determinism_profile",
+    "isolation_profile",
+    "evidence_schema"
+  ],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "HarnessVersion" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+$"
+    },
+    "verification_contract_ref": { "$ref": "#/$defs/reference" },
+    "component_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runner", "adapter", "oracle", "reporter"],
+      "properties": {
+        "runner": { "$ref": "#/$defs/reference" },
+        "adapter": { "$ref": "#/$defs/reference" },
+        "oracle": { "$ref": "#/$defs/reference" },
+        "reporter": { "$ref": "#/$defs/reference" }
+      }
+    },
+    "environment_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "seed": { "type": "string" },
+        "model_versions": { "type": "array", "items": { "type": "string" } },
+        "world_ref": { "type": "string" }
+      }
+    },
+    "determinism_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["deterministic", "statistical", "hybrid"]
+        },
+        "statistical_acceptance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "min_repetitions": { "type": "integer", "minimum": 1 },
+            "min_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "isolation_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tenant_isolation": { "type": "boolean" },
+        "data_isolation": { "type": "boolean" },
+        "context_isolation": { "type": "boolean" },
+        "network_isolation": { "type": "boolean" },
+        "world_state_isolation": { "type": "boolean" }
+      }
+    },
+    "coverage_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "capabilities": { "type": "array", "items": { "type": "string" } },
+        "failure_modes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "evidence_schema": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the evidence schema the harness must produce."
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["draft", "published", "superseded", "revoked"]
+    }
+  },
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "version", "digest"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

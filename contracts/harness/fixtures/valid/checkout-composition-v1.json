@@ -1,0 +1,19 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "HarnessComposition",
+  "id": "compose.checkout.pipeline",
+  "version": "v1",
+  "stages": [
+    {
+      "order": 0,
+      "harness_version_ref": "checkout.double_spend@v1",
+      "boundary_contract_ref": "contract.boundary.a"
+    },
+    {
+      "order": 1,
+      "harness_version_ref": "checkout.reconciliation@v1",
+      "boundary_contract_ref": "contract.boundary.b"
+    }
+  ],
+  "status": "validated"
+}

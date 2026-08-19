@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.authority-ref.v1.schema.json",
+  "title": "TEKMOVELA AuthorityRef v1",
+  "description": "A reference to an authorization/authority decision. AEGIVELA owns production authorization; TEKMOVELA records the reference and digest as verification evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "grant_ref", "policy_decision_ref", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "AuthorityRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "grant_ref": { "type": "string", "minLength": 1 },
+    "policy_decision_ref": { "type": "string", "minLength": 1 },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "delegation_ref": { "type": "string" },
+    "revocation_state": { "type": "string" }
+  }
+}

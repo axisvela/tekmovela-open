@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "ReleaseCandidate",
+  "id": "release.checkout.v2",
+  "capability_ref": "praxovela://capabilities/checkout/v2",
+  "version": "v2",
+  "artifact_digest": "sha256:invalid"
+}

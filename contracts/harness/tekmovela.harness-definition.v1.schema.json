@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.harness-definition.v1.schema.json",
+  "title": "TEKMOVELA HarnessDefinition v1",
+  "description": "The authored definition of a harness: intent, ownership, compatibility range, and lifecycle. HarnessVersion carries the frozen component lock.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "verification_contract_ref", "owner"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "HarnessDefinition" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "verification_contract_ref": { "type": "string", "minLength": 1 },
+    "owner": { "type": "string", "minLength": 1 },
+    "compatibility_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_sut_version": { "type": "string" },
+        "max_sut_version": { "type": "string" }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "deprecated", "migrating", "retired"]
+    },
+    "pattern_ref": { "type": "string" }
+  }
+}

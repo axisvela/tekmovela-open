@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.harness-composition.v1.schema.json",
+  "title": "TEKMOVELA HarnessComposition v1",
+  "description": "An ordered composition of local harnesses (multi-agent / workflow / robot pipelines) that preserves each stage's boundary contract. Mirrors VESTA-P1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "stages"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "HarnessComposition" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "stages": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "harness_version_ref", "boundary_contract_ref"],
+        "properties": {
+          "order": { "type": "integer", "minimum": 0 },
+          "harness_version_ref": { "type": "string", "minLength": 1 },
+          "boundary_contract_ref": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "validated", "published", "superseded", "revoked"]
+    }
+  }
+}

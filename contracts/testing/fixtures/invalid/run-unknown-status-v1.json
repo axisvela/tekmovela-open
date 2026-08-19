@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "TestRun",
+  "id": "run.checkout.double_spend",
+  "scenario_ref": "scenario.double_spend",
+  "harness_version_ref": "checkout.double_spend@v1",
+  "sut_ref": "praxovela://capabilities/checkout/v2",
+  "status": "running_forever"
+}

@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "EvaluationSet",
+  "id": "checkout.release_set",
+  "version": "v1",
+  "scenario_refs": ["scenario.double_spend.concurrent", "scenario.double_spend.repeat"],
+  "evaluator_refs": ["exact", "rule", "property"]
+}

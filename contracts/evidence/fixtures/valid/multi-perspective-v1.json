@@ -1,0 +1,25 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "TraceEnvelope",
+  "id": "trace.run_20260814",
+  "run_ref": "run.evidence_20260814",
+  "perspectives": [
+    {
+      "perspective_type": "execution",
+      "uri": "s3://traces/run_20260814/exec.jsonl",
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+      "perspective_type": "ppes",
+      "uri": "s3://traces/run_20260814/ppes.jsonl",
+      "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    {
+      "perspective_type": "effect",
+      "uri": "s3://traces/run_20260814/effects.jsonl",
+      "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+    }
+  ],
+  "tenant_id": "axisrobo-demo",
+  "trace_id": "trace-abc-123"
+}

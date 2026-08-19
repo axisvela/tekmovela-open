@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.waiver.v1.schema.json",
+  "title": "TEKMOVELA Waiver v1",
+  "description": "A recorded, scoped, expiring exception to a release gate. A waiver never removes the gate; it records the reason and the accountable decision.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "gate", "release_candidate_ref", "reason", "policy_version", "expires_at"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "Waiver" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "gate": {
+      "type": "string",
+      "enum": ["G0_requirement", "G1_harness", "G2_test", "G3_authority", "G4_runtime_readiness", "G5_evidence"]
+    },
+    "release_candidate_ref": { "type": "string", "minLength": 1 },
+    "reason": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "granted_by": { "type": "string" },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "approver_evidence_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the signed approver evidence that authorizes the exception."
+    },
+    "input_snapshot_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Immutable reference to the blocked gate input snapshot this waiver binds to."
+    },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "status": {
+      "type": "string",
+      "enum": ["active", "expired", "superseded", "revoked"]
+    },
+    "superseded_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ID of the replacement waiver when this waiver is superseded."
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Canonical digest of the published waiver, bound by publish. Never set by callers."
+    }
+  }
+}

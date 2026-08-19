@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.contributor-evidence.v1.schema.json",
+  "title": "TEKMOVELA ContributorEvidence v1",
+  "description": "The evidence set required before a contributor artifact may merge or release. Identity and minimal privilege are AEGIVELA facts; TEKMOVELA verifies presence and completeness.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "contributor_ref", "artifact_digest", "identity_verified", "minimal_privilege_held", "artifact_digest_valid", "required_contracts_satisfied", "audit_recorded"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "ContributorEvidence" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "contributor_ref": { "type": "string", "minLength": 1 },
+    "artifact_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "identity_verified": { "type": "boolean" },
+    "minimal_privilege_held": { "type": "boolean" },
+    "artifact_digest_valid": { "type": "boolean" },
+    "required_contracts_satisfied": { "type": "boolean" },
+    "audit_recorded": { "type": "boolean" },
+    "recorded_at": { "type": "string", "format": "date-time" }
+  }
+}

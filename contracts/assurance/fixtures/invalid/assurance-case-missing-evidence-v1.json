@@ -1,0 +1,18 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "AssuranceCase",
+  "id": "case.checkout.atomicity",
+  "release_candidate_ref": "release.checkout.v2",
+  "strategy": "safety_case",
+  "claims": [
+    {
+      "id": "claim.checkout.atomicity",
+      "statement": "checkout is atomic under concurrent double-spend probes",
+      "intent_scope_refs": ["checkout.reliability"],
+      "evidence_refs": [],
+      "argument": "no evidence was collected",
+      "status": "supported"
+    }
+  ],
+  "status": "supported"
+}

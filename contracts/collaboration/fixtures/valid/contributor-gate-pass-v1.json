@@ -1,0 +1,18 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "ContributorGateDecision",
+  "id": "decision.checkout.pass",
+  "contributor_ref": "aegivela://principals/alice",
+  "artifact_ref": "artifact.checkout@v1",
+  "evidence": {
+    "identity_verified": true,
+    "minimal_privilege_held": true,
+    "artifact_digest_valid": true,
+    "required_contracts_satisfied": true,
+    "audit_recorded": true
+  },
+  "pass": true,
+  "reasons": [],
+  "decided_at": "2026-08-15T10:00:00Z",
+  "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+}

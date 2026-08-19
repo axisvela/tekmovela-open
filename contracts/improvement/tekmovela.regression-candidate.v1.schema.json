@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.regression-candidate.v1.schema.json",
+  "title": "TEKMOVELA RegressionCandidate v1",
+  "description": "A candidate regression scenario derived from a failure or anomaly, to be added to a release evaluation set and tracked as coverage debt until closed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "source_ref", "scenario_ref", "target_contract_ref"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "RegressionCandidate" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "scenario_ref": { "type": "string", "minLength": 1 },
+    "target_contract_ref": { "type": "string", "minLength": 1 },
+    "coverage_debt_ref": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "adopted", "closed", "rejected"]
+    }
+  }
+}

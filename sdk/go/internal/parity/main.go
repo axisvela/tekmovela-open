@@ -69,7 +69,7 @@ func main() {
 				harness.ComponentOracle:   {Kind: "HarnessComponent", ID: "oracle.effect_ledger", Version: "v1", Digest: "sha256:" + repeat('e', 64)},
 				harness.ComponentReporter: {Kind: "HarnessComponent", ID: "reporter.evidence", Version: "v1", Digest: "sha256:" + repeat('f', 64)},
 			},
-			"tekmovela.evidence-bundle.v1alpha1.schema.json",
+			"tekmovela.evidence-bundle.v1.schema.json",
 			harness.DeterminismDeterministic, "",
 		)
 		if err != nil {

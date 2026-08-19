@@ -1,0 +1,6 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "AccountabilityRecordRef",
+  "id": "aar.run.checkout.a001.v1",
+  "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+}

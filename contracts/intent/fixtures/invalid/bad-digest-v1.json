@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "AcceptanceCriterion",
+  "id": "checkout.atomicity",
+  "source_ref": "iris://requirements/checkout/AC-42",
+  "digest": "md5:deadbeef",
+  "testable": true
+}

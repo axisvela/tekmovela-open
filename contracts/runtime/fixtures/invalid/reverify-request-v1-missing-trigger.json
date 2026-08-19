@@ -1,0 +1,5 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "ReverificationRequest",
+  "id": "reverify.checkout.v1"
+}

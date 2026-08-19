@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	evidenceBundleSchema = "evidence/tekmovela.evidence-bundle.v1alpha1.schema.json"
+	evidenceBundleSchema = "evidence/tekmovela.evidence-bundle.v1.schema.json"
 	harnessVersionSchema = "harness/tekmovela.harness-version.v1alpha1.schema.json"
 )
 
@@ -276,7 +276,7 @@ func TestHarnessVersionWireForm(t *testing.T) {
 			harness.ComponentOracle:   {Kind: "HarnessComponent", ID: "oracle.effect_ledger", Version: "v1", Digest: "sha256:" + strings.Repeat("d", 64)},
 			harness.ComponentReporter: {Kind: "HarnessComponent", ID: "reporter.evidence", Version: "v1", Digest: "sha256:" + strings.Repeat("e", 64)},
 		},
-		"tekmovela.evidence-bundle.v1alpha1.schema.json",
+		"tekmovela.evidence-bundle.v1.schema.json",
 		harness.DeterminismDeterministic,
 		"",
 	)

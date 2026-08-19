@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "FailureCluster",
+  "id": "cluster.double_spend",
+  "cluster_key": "effect_ledger.double_debit",
+  "failure_evidence_refs": ["failure.double_spend", "failure.double_spend.b"],
+  "causal_attribution_ref": "attr.double_spend",
+  "status": "investigating"
+}

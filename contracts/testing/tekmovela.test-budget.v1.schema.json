@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.test-budget.v1.schema.json",
+  "title": "TEKMOVELA TestBudget v1",
+  "description": "A standalone, versioned budget constraining a testing loop or evaluation set: runs, time, and cost. TestControlLoop embeds a budget inline; TestBudget is the reusable record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "runs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "TestBudget" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "runs": { "type": "integer", "minimum": 0 },
+    "max_duration_seconds": { "type": "integer", "minimum": 0 },
+    "max_cost": { "type": "number", "minimum": 0 },
+    "currency": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["open", "exhausted", "cancelled"]
+    }
+  }
+}

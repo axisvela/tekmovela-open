@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.evaluation-set.v1.schema.json",
+  "title": "TEKMOVELA EvaluationSet v1",
+  "description": "A versioned, frozen collection of Scenarios and evaluators used as a repeatable regression or release evaluation unit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "scenario_refs", "evaluator_refs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "EvaluationSet" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "scenario_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "evaluator_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["exact", "rule", "property", "statistical", "llm", "human"]
+      },
+      "minItems": 1
+    }
+  }
+}

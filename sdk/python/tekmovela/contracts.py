@@ -11,7 +11,7 @@ import json
 import re
 from typing import Any, Dict, Mapping, Optional
 
-API_VERSION = "tekmovela.io/v1alpha1"
+API_VERSION = "tekmovela.io/v1"
 _SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
 
 

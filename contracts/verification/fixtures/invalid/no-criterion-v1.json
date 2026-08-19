@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "VerificationContract",
+  "id": "checkout.atomicity",
+  "version": "v1",
+  "acceptance_criterion_refs": [],
+  "harness_requirement": "must be observed",
+  "required_harness_components": ["runner"]
+}

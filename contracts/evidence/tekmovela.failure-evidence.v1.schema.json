@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.failure-evidence.v1.schema.json",
+  "title": "TEKMOVELA StructuredFailureEvidence v1",
+  "description": "Failure evidence collected against a FailureEvidenceProfile. The generic core carries symptom and trace context; domain profiles (e.g. ui-repair) extend the evidence shape.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "profile", "symptom", "trace_slice_ref"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "FailureEvidence" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "profile": {
+      "type": "string",
+      "description": "FailureEvidenceProfile, e.g. 'ui-repair/v1' (screenshot + DOM + alert) or 'generic/v1'."
+    },
+    "symptom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["alert", "exception", "unexpected_effect"]
+        },
+        "message": { "type": "string" }
+      }
+    },
+    "trace_slice_ref": { "type": "string", "minLength": 1 },
+    "profile_evidence": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Profile-specific evidence as free-form fields. Typed profiles such as ui-repair/v1 SHOULD use the typed ui_repair shape instead."
+    },
+    "ui_repair": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Typed ui-repair/v1 evidence: screenshot, DOM, and alert artifacts. Additive optional property; absent for generic profiles.",
+      "required": ["screenshot", "dom", "alert"],
+      "properties": {
+        "screenshot": { "$ref": "#/definitions/UIRepairArtifact" },
+        "dom": { "$ref": "#/definitions/UIRepairArtifact" },
+        "alert": { "$ref": "#/definitions/UIRepairArtifact" }
+      }
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Missing evidence is itself evidence."
+    },
+    "causal_attribution_ref": { "type": "string" },
+    "decision_explanation_ref": { "type": "string" }
+  },
+  "definitions": {
+    "UIRepairArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A captured UI artifact referenced by URI and content digest. TEKMOVELA records the reference and digest; capture execution belongs to the runtime (PRAXOVELA/PEIRAVELA).",
+      "required": ["ref", "digest", "captured_at", "redaction"],
+      "properties": {
+        "ref": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "captured_at": { "type": "string", "format": "date-time" },
+        "redaction": {
+          "type": "string",
+          "enum": ["none", "partial", "full"]
+        }
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@ from tekmovela.runner import LocalRunner, Scenario
 
 DIGEST = "sha256:" + "a" * 64
 GOLDEN_DIGEST = "sha256:43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
-GOLDEN_HARNESS_VERSION_DIGEST = "sha256:c20430a95d5d42570cdd2434bf25ac9bbc3a846d9e6ffa1307a8ade5164b0557"
+GOLDEN_HARNESS_VERSION_DIGEST = "sha256:bc8520405b1d90daea66d17a62c415f0edee8ecb4a52b9ed1460bc6a5a9b0499"
 
 
 class ContractTests(unittest.TestCase):
@@ -39,13 +39,13 @@ class ContractTests(unittest.TestCase):
     def test_schema_kind_mismatch(self):
         schema = Schema({
             "properties": {
-                "api_version": {"const": "tekmovela.io/v1alpha1"},
+                "api_version": {"const": "tekmovela.io/v1"},
                 "kind": {"const": "AcceptanceCriterion"},
             },
             "required": ["id", "digest", "testable"],
         })
         with self.assertRaises(ContractError):
-            schema.validate({"api_version": "tekmovela.io/v1alpha1", "kind": "Other", "id": "x"})
+            schema.validate({"api_version": "tekmovela.io/v1", "kind": "Other", "id": "x"})
 
 
 class EvidenceTests(unittest.TestCase):
@@ -74,9 +74,9 @@ class EvidenceTests(unittest.TestCase):
     def test_golden_digests_match_other_sdks(self):
         b = EvidenceBundle("bundle.e0001", "run.1", "checkout.atomicity@v1", "checkout.double_spend@v1")
         b.add_item(Item(kind=TRACE, uri="trace.1", digest="sha256:" + "a" * 64))
-        self.assertEqual(b.digest(), "sha256:18b4223c8528f03c945964fe0a6590dafcefc77c377034a46bfc3374b4aee470")
+        self.assertEqual(b.digest(), "sha256:a8ca24195e5dba0cc990b696dd54259243c0c1bab095eab66ea5865b766537ca")
         b.environment_digest = "sha256:" + "d" * 64
-        self.assertEqual(b.digest(), "sha256:88e88a573fe31224487abe800f920abf41b31527ba7d5045b86255d8e3fad6e6")
+        self.assertEqual(b.digest(), "sha256:20e7916b6b50cb2d81489db84eb5331255de068e2e3551538f908760676162d0")
 
 
 class HarnessTests(unittest.TestCase):
@@ -91,7 +91,7 @@ class HarnessTests(unittest.TestCase):
                 "oracle": component("oracle", "oracle.effect_ledger", "v1", "sha256:" + "e" * 64),
                 "reporter": component("reporter", "reporter.evidence", "v1", "sha256:" + "f" * 64),
             },
-            evidence_schema="tekmovela.evidence-bundle.v1alpha1.schema.json",
+            evidence_schema="tekmovela.evidence-bundle.v1.schema.json",
             seed=seed,
         )
 
@@ -170,9 +170,9 @@ class RunnerTests(unittest.TestCase):
             schema_path = os.path.join(tmp, "schema.json")
             fixture_path = os.path.join(tmp, "fixture.json")
             with open(schema_path, "w", encoding="utf-8") as fh:
-                json.dump({"properties": {"kind": {"const": "AcceptanceCriterion"}, "api_version": {"const": "tekmovela.io/v1alpha1"}}, "required": ["kind", "id"]}, fh)
+                json.dump({"properties": {"kind": {"const": "AcceptanceCriterion"}, "api_version": {"const": "tekmovela.io/v1"}}, "required": ["kind", "id"]}, fh)
             with open(fixture_path, "w", encoding="utf-8") as fh:
-                json.dump({"kind": "AcceptanceCriterion", "api_version": "tekmovela.io/v1alpha1", "id": "checkout.atomicity"}, fh)
+                json.dump({"kind": "AcceptanceCriterion", "api_version": "tekmovela.io/v1", "id": "checkout.atomicity"}, fh)
             with open(schema_path, "r", encoding="utf-8") as fh:
                 schema_doc = json.load(fh)
             validate_fixture(Schema(schema_doc), fixture_path)
@@ -182,8 +182,8 @@ class SchemaConformanceTests(unittest.TestCase):
     """Wire forms must satisfy the mirrored contract JSON Schemas under contracts/."""
 
     _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
-    EVIDENCE_BUNDLE_SCHEMA = os.path.join(_REPO_ROOT, "contracts", "evidence", "tekmovela.evidence-bundle.v1alpha1.schema.json")
-    HARNESS_VERSION_SCHEMA = os.path.join(_REPO_ROOT, "contracts", "harness", "tekmovela.harness-version.v1alpha1.schema.json")
+    EVIDENCE_BUNDLE_SCHEMA = os.path.join(_REPO_ROOT, "contracts", "evidence", "tekmovela.evidence-bundle.v1.schema.json")
+    HARNESS_VERSION_SCHEMA = os.path.join(_REPO_ROOT, "contracts", "harness", "tekmovela.harness-version.v1.schema.json")
 
     def _load_schema(self, path):
         self.assertTrue(os.path.isfile(path), f"schema not found: {path}")

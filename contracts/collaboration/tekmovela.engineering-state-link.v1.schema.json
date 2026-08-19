@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.engineering-state-link.v1.schema.json",
+  "title": "TEKMOVELA EngineeringStateLink v1",
+  "description": "A BPSM-compatible project-state synchronization link between an external PM/issue/CI system and agent execution state, recording state-convergence evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "source_ref", "state_convergence"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "EngineeringStateLink" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "state_convergence": { "type": "boolean" },
+    "last_synced_at": { "type": "string", "format": "date-time" },
+    "state_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "sync_adapter": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["synced", "diverged", "stale"]
+    }
+  }
+}

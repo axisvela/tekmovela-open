@@ -1,0 +1,22 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "BenchmarkDefinition",
+  "id": "bench.tekaar.integrity",
+  "version": "v1",
+  "family": "TEK-AAR",
+  "requirement_refs": ["ir://requirements/checkout/accountability"],
+  "verification_contract_refs": ["checkout.atomicity@v1"],
+  "harness_version_refs": ["checkout.double_spend@v1"],
+  "evidence_schema_refs": ["contracts/evidence/tekmovela.accountability-record.v1alpha1.schema.json"],
+  "acceptance_criteria": [
+    {
+      "id": "aar-provenance",
+      "statement": "An accountability record binds trace, attribution, explanation, and authorization provenance"
+    },
+    {
+      "id": "aar-tamper-evident",
+      "statement": "A tampered accountability record fails digest verification"
+    }
+  ],
+  "status": "frozen"
+}

@@ -59,7 +59,7 @@ func TestGoldenDigests(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d != "sha256:18b4223c8528f03c945964fe0a6590dafcefc77c377034a46bfc3374b4aee470" {
+	if d != "sha256:a8ca24195e5dba0cc990b696dd54259243c0c1bab095eab66ea5865b766537ca" {
 		t.Fatalf("unset-env digest %q != golden", d)
 	}
 	b.EnvironmentDigest = "sha256:" + repeat('d', 64)
@@ -67,7 +67,7 @@ func TestGoldenDigests(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d != "sha256:88e88a573fe31224487abe800f920abf41b31527ba7d5045b86255d8e3fad6e6" {
+	if d != "sha256:20e7916b6b50cb2d81489db84eb5331255de068e2e3551538f908760676162d0" {
 		t.Fatalf("set-env digest %q != golden", d)
 	}
 }
@@ -117,7 +117,7 @@ func TestNilScopeCanonicalParity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	const want = "sha256:18b4223c8528f03c945964fe0a6590dafcefc77c377034a46bfc3374b4aee470"
+	const want = "sha256:a8ca24195e5dba0cc990b696dd54259243c0c1bab095eab66ea5865b766537ca"
 	if d != want {
 		t.Fatalf("nil-scope digest %q != golden %q", d, want)
 	}

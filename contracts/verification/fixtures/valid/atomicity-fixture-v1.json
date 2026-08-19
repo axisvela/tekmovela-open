@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "Fixture",
+  "id": "fixture.checkout.atomicity",
+  "version": "v1",
+  "verification_contract_ref": "checkout.atomicity@v1",
+  "content_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "profile_ref": "generic/v1",
+  "frozen_at": "2026-08-15T10:00:00Z"
+}

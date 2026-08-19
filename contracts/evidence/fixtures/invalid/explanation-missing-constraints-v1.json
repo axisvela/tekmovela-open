@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "DecisionExplanation",
+  "id": "explain.checkout.001",
+  "action_ref": "action.debit.001",
+  "knowledge_basis": "ledger state shows a single debit outstanding"
+}

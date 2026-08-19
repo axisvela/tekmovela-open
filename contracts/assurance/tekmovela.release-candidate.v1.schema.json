@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.release-candidate.v1.schema.json",
+  "title": "TEKMOVELA ReleaseCandidate v1",
+  "description": "The subject of assurance: a versioned artifact whose release eligibility is decided through the gate chain.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "capability_ref", "version", "artifact_digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "ReleaseCandidate" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "capability_ref": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^v[0-9]+(\\.[0-9]+)*$" },
+    "artifact_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "intent_scope_refs": { "type": "array", "items": { "type": "string" } },
+    "gate_decisions": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.failure-cluster.v1.schema.json",
+  "title": "TEKMOVELA FailureCluster v1",
+  "description": "A group of related StructuredFailureEvidence records sharing a root-cause family. Clusters drive triage and regression coverage.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "cluster_key", "failure_evidence_refs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "FailureCluster" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "cluster_key": { "type": "string", "minLength": 1 },
+    "failure_evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "causal_attribution_ref": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["open", "investigating", "resolved", "dismissed"]
+    }
+  }
+}

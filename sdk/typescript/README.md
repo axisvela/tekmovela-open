@@ -35,7 +35,7 @@ const version = new HarnessVersion({
     oracle: { kind: "HarnessComponent", id: "oracle.effect_ledger", version: "v1", digest: "sha256:" + "e".repeat(64) },
     reporter: { kind: "HarnessComponent", id: "reporter.evidence", version: "v1", digest: "sha256:" + "f".repeat(64) },
   },
-  evidenceSchema: "tekmovela.evidence-bundle.v1alpha1.schema.json",
+  evidenceSchema: "tekmovela.evidence-bundle.v1.schema.json",
 });
 version.publish();
 ```

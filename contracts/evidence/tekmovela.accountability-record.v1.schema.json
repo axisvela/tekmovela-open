@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.accountability-record.v1.schema.json",
+  "title": "TEKMOVELA AccountabilityRecord v1",
+  "description": "A tamper-evident per-run Accountability Record (AAR): trace, attribution, explanation, and authorization provenance bound together and sealed with a canonical digest. Source is LENS/AEGIVELA/TEKMOVELA.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "run_ref", "recorded_at", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "AccountabilityRecord" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "run_ref": { "type": "string", "minLength": 1 },
+    "trace_envelope_ref": { "type": "string" },
+    "attribution_ref": { "type": "string" },
+    "explanation_ref": { "type": "string" },
+    "authorization_ref": { "type": "string" },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

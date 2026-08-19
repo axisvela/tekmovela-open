@@ -1,0 +1,53 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "GatePolicy",
+  "id": "policy.release.checkout",
+  "version": "v1",
+  "gates": {
+    "G0_requirement": {
+      "required_evidence_kinds": ["verification_contract"],
+      "dependencies": [],
+      "waiver_eligible": false,
+      "thresholds": {
+        "requirement_coverage": 1.0
+      }
+    },
+    "G1_harness": {
+      "required_evidence_kinds": ["harness_version", "harness_composition"],
+      "dependencies": ["G0_requirement"],
+      "waiver_eligible": true,
+      "thresholds": {
+        "evidence_complete": true
+      }
+    },
+    "G2_test": {
+      "required_evidence_kinds": ["test_run", "evaluation_result"],
+      "dependencies": ["G0_requirement", "G1_harness"],
+      "waiver_eligible": true,
+      "thresholds": {
+        "min_confidence": 0.95
+      }
+    },
+    "G3_authority": {
+      "required_evidence_kinds": ["authority_ref"],
+      "dependencies": ["G2_test"],
+      "waiver_eligible": false
+    },
+    "G4_runtime_readiness": {
+      "required_evidence_kinds": ["behavioral_bound", "anomaly_signal"],
+      "dependencies": ["G2_test"],
+      "waiver_eligible": true,
+      "thresholds": {
+        "runtime_ready": true
+      }
+    },
+    "G5_evidence": {
+      "required_evidence_kinds": ["trace_envelope", "assurance_evidence"],
+      "dependencies": ["G2_test", "G4_runtime_readiness"],
+      "waiver_eligible": true,
+      "thresholds": {
+        "evidence_complete": true
+      }
+    }
+  }
+}

@@ -25,11 +25,12 @@ function walk(dir) {
 }
 
 const sep = process.platform === "win32" ? "\\" : "/";
-const current = {};
+
 function canonical(content) {
   return content.replace(/\r\n/g, "\n");
 }
 
+const current = {};
 for (const file of walk(root)) {
   if (file.includes(`${sep}node_modules${sep}`)) continue;
   const content = canonical(readFileSync(file, "utf8"));

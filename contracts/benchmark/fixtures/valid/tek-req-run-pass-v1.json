@@ -1,0 +1,16 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "BenchmarkRun",
+  "id": "benchrun.tekreq.traceability.v1",
+  "benchmark_definition_ref": "BenchmarkDefinition:bench.tekreq.traceability@v1:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "test_run_ref": "run.checkout.atomicity.1",
+  "criterion_verdicts": [
+    {
+      "criterion_id": "trace-complete",
+      "verdict": "pass",
+      "message": "every criterion maps to a contract"
+    }
+  ],
+  "score": 1.0,
+  "status": "recorded"
+}

@@ -80,13 +80,13 @@ hv = HarnessVersion(
         'oracle': component('oracle', 'oracle.effect_ledger', 'v1', 'sha256:' + 'e'*64),
         'reporter': component('reporter', 'reporter.evidence', 'v1', 'sha256:' + 'f'*64),
     },
-    evidence_schema='tekmovela.evidence-bundle.v1alpha1.schema.json',
+    evidence_schema='tekmovela.evidence-bundle.v1.schema.json',
 )
 print(hv.canonical_digest())
 ")"
 HARN_TS="$(cd "$SDK/typescript" && node -e "
 const {HarnessVersion,Reference}=require('./dist/index.js');
-const hv=new HarnessVersion({id:'checkout.double_spend',version:'v1',verificationContractRef:new Reference('VerificationContract','checkout.atomicity','v1','sha256:'+'a'.repeat(64)),componentLock:{runner:{kind:'HarnessComponent',id:'runner.deterministic',version:'v1',digest:'sha256:'+'c'.repeat(64)},adapter:{kind:'HarnessComponent',id:'adapter.praxovela',version:'v1',digest:'sha256:'+'d'.repeat(64)},oracle:{kind:'HarnessComponent',id:'oracle.effect_ledger',version:'v1',digest:'sha256:'+'e'.repeat(64)},reporter:{kind:'HarnessComponent',id:'reporter.evidence',version:'v1',digest:'sha256:'+'f'.repeat(64)}},evidenceSchema:'tekmovela.evidence-bundle.v1alpha1.schema.json'});
+const hv=new HarnessVersion({id:'checkout.double_spend',version:'v1',verificationContractRef:new Reference('VerificationContract','checkout.atomicity','v1','sha256:'+'a'.repeat(64)),componentLock:{runner:{kind:'HarnessComponent',id:'runner.deterministic',version:'v1',digest:'sha256:'+'c'.repeat(64)},adapter:{kind:'HarnessComponent',id:'adapter.praxovela',version:'v1',digest:'sha256:'+'d'.repeat(64)},oracle:{kind:'HarnessComponent',id:'oracle.effect_ledger',version:'v1',digest:'sha256:'+'e'.repeat(64)},reporter:{kind:'HarnessComponent',id:'reporter.evidence',version:'v1',digest:'sha256:'+'f'.repeat(64)}},evidenceSchema:'tekmovela.evidence-bundle.v1.schema.json'});
 console.log(hv.canonicalDigest());
 ")"
 [ "$HARN_GO" = "$HARN_PY" ] || fail "harness Go=$HARN_GO != Python=$HARN_PY"

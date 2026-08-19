@@ -1,0 +1,14 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "Waiver",
+  "id": "waiver.checkout.v2",
+  "gate": "G5_evidence",
+  "release_candidate_ref": "release.checkout.v2",
+  "reason": "authority evidence archived on alternate ledger; verified against stored digest",
+  "policy_version": "policy/v1",
+  "granted_by": "principal.release_manager",
+  "evidence_refs": ["ev.checkout.atomicity.a001"],
+  "issued_at": "2026-08-15T10:00:00Z",
+  "expires_at": "2026-09-15T10:00:00Z",
+  "status": "active"
+}

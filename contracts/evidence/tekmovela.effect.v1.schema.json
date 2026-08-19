@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.effect.v1.schema.json",
+  "title": "TEKMOVELA Effect v1",
+  "description": "An external effect of an action: capability/tool, resource, state delta, recovery. Sources from runtime + Harmovela + ONTOVELA; TEKMOVELA normalizes for evaluation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "action_ref", "resource", "state_delta"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "Effect" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "action_ref": { "type": "string", "minLength": 1 },
+    "resource": { "type": "string", "minLength": 1 },
+    "state_delta": { "type": "string" },
+    "external_effect": { "type": "boolean" },
+    "recovery_ref": { "type": "string" }
+  }
+}

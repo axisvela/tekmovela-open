@@ -1,0 +1,37 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "EvidenceBundle",
+  "id": "run.evidence_20260814",
+  "run_ref": "run.evidence_20260814",
+  "verification_contract_ref": "checkout.atomicity@v1",
+  "harness_version_ref": "checkout.double-spend@v1",
+  "environment_digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+  "scope": {
+    "intent_ref": "checkout.reliability",
+    "capability_ref": "praxovela://capabilities/checkout/v2",
+    "time_window": "2026-08-14T00:00:00Z/2026-08-14T00:01:00Z"
+  },
+  "bundle_digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+  "items": [
+    {
+      "kind": "trace",
+      "uri": "s3://evidence/run.2026-08-14.01/trace.jsonl",
+      "digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    {
+      "kind": "effect",
+      "uri": "s3://evidence/run.2026-08-14.01/effects.jsonl",
+      "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+    },
+    {
+      "kind": "missing",
+      "uri": "s3://evidence/run.2026-08-14.01/authority.jsonl",
+      "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+      "note": "authority perspective not captured; missing evidence is itself evidence"
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "value": "sig-placeholder"
+  }
+}

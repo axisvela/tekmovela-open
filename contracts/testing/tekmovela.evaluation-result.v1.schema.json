@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.evaluation-result.v1.schema.json",
+  "title": "TEKMOVELA EvaluationResult v1",
+  "description": "The verdict of one evaluator over a TestRun. It links a run's trace to an AssuranceClaim via evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "run_ref", "evaluator_kind", "verdict"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "EvaluationResult" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "run_ref": { "type": "string", "minLength": 1 },
+    "evaluator_kind": {
+      "type": "string",
+      "enum": ["exact", "rule", "property", "statistical", "llm", "human"]
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["pass", "fail", "inconclusive"]
+    },
+    "message": { "type": "string" },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

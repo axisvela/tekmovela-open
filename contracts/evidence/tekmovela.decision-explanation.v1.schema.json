@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.decision-explanation.v1.schema.json",
+  "title": "TEKMOVELA DecisionExplanation v1",
+  "description": "An auditable explanation of a decision: knowledge basis, control constraints, and intent alignment. Mirrors LENS DIKCA Decision Explanation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "action_ref", "knowledge_basis", "control_constraints", "intent_alignment"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "DecisionExplanation" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "action_ref": { "type": "string", "minLength": 1 },
+    "knowledge_basis": { "type": "string", "description": "What knowledge grounded the decision." },
+    "control_constraints": { "type": "string", "description": "What control constraints bounded the decision." },
+    "intent_alignment": { "type": "string", "description": "How the decision aligns with the intent." },
+    "trace_slice_ref": { "type": "string" }
+  }
+}

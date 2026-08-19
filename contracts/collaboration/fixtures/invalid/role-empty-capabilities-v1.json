@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "DevelopmentRoleProfileRef",
+  "id": "role.qa.lead",
+  "role": "qa_lead",
+  "capability_set": [],
+  "authority_scope": "checkout.reliability"
+}

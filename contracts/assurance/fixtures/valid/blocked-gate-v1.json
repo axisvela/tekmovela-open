@@ -1,0 +1,14 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "GateDecision",
+  "id": "gate.checkout.release_20260814",
+  "gate": "G2_test",
+  "decision": "block",
+  "release_candidate_ref": "release.checkout.2026-08-14",
+  "policy_version": "release-policy/v3",
+  "blocking_reasons": [
+    "critical scenario double_spend/concurrent-2 failed",
+    "statistical confidence below acceptance bound"
+  ],
+  "evidence_refs": ["run.2026-08-14.01.evidence"]
+}

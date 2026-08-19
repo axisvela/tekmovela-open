@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "EvaluationResult",
+  "id": "eval.atomicity.e001",
+  "run_ref": "run.evidence_20260814",
+  "evaluator_kind": "property",
+  "verdict": "pass",
+  "message": "no double-spend effect observed",
+  "confidence": 1.0
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.behavioral-bound.v1.schema.json",
+  "title": "TEKMOVELA BehavioralBound v1",
+  "description": "The allowed behavior/output space of an agent or capability, consistent with its current IntentSpec. Violations and drift produce AnomalySignals that trigger re-verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "intent_scope_ref", "bounds"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "BehavioralBound" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": { "type": "string", "pattern": "^v[0-9]+$" },
+    "intent_scope_ref": { "type": "string", "minLength": 1 },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_output_space"],
+      "properties": {
+        "allowed_output_space": { "type": "string", "minLength": 1 },
+        "forbidden_output_space": { "type": "string" },
+        "effect_constraints": { "type": "string" }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "superseded", "revoked"]
+    }
+  }
+}

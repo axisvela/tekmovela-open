@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "AnomalySignal",
+  "id": "signal.checkout.b002",
+  "signal_type": "not_a_real_signal",
+  "subject_ref": "praxovela://capabilities/checkout/v2",
+  "detected_at": "2026-08-19T12:00:00Z"
+}

@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "ImprovementAction",
+  "id": "action.add_scenario.double_spend",
+  "action_type": "scenario_add",
+  "source_ref": "regression.double_spend.a001",
+  "owner": "principal.qa.lead",
+  "issue_ref": "issue://incidents/checkout-003",
+  "status": "in_progress"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.causal-attribution.v1.schema.json",
+  "title": "TEKMOVELA CausalAttribution v1",
+  "description": "An ordered set of causal contributions explaining a failure. Mirrors LENS causal attribution (LAP); MVP uses intervention comparison, SCM later.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "failure_evidence_ref", "contributions"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "CausalAttribution" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "failure_evidence_ref": { "type": "string", "minLength": 1 },
+    "method": {
+      "type": "string",
+      "enum": ["intervention_comparison", "scm", "ablation", "other"]
+    },
+    "contributions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["factor", "direction", "confidence"],
+        "properties": {
+          "factor": {
+            "type": "string",
+            "enum": ["prompt", "model", "context", "tool", "other"]
+          },
+          "direction": {
+            "type": "string",
+            "enum": ["causal", "non_causal"]
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    }
+  }
+}

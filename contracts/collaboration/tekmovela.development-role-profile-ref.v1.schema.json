@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.development-role-profile-ref.v1.schema.json",
+  "title": "TEKMOVELA DevelopmentRoleProfileRef v1",
+  "description": "An immutable reference to a development role profile (MACD DRP shape). The role/authority source can be external; TEKMOVELA uses it for routing and evidence responsibility.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "role", "capability_set", "authority_scope"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "DevelopmentRoleProfileRef" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "role": { "type": "string", "minLength": 1 },
+    "capability_set": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "authority_scope": { "type": "string", "minLength": 1 },
+    "communication_protocol": { "type": "string" },
+    "output_format": { "type": "string" },
+    "source_ref": { "type": "string" },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "CIResult",
+  "id": "ci.run.double_spend",
+  "run_ref": "run.double_spend",
+  "gate_decision": "block",
+  "blocking_reasons": [
+    "critical scenario failures: [failure.double_spend]",
+    "statistical confidence below acceptance bound"
+  ],
+  "evidence_refs": [
+    "bundle.run.double_spend",
+    "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  ],
+  "failure_summary": {
+    "count": 1,
+    "failure_refs": ["failure.double_spend"]
+  },
+  "exit_semantics": "block"
+}

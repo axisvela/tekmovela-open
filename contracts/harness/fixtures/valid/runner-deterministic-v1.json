@@ -1,0 +1,8 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "HarnessComponent",
+  "id": "runner.deterministic",
+  "component_type": "runner",
+  "version": "v1",
+  "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+}

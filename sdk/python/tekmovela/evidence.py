@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from .contracts import ContractError, digest_of, parse_digest
+from .contracts import API_VERSION, ContractError, digest_of, parse_digest
 
 TRACE = "trace"
 EFFECT = "effect"
@@ -58,7 +58,7 @@ class EvidenceBundle:
 
     def _body(self) -> Dict[str, Any]:
         body: Dict[str, Any] = {
-            "api_version": "tekmovela.io/v1alpha1",
+            "api_version": API_VERSION,
             "kind": "EvidenceBundle",
             "id": self.id,
             "run_ref": self.run_ref,

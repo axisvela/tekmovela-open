@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "CoverageStatement",
+  "id": "coverage.checkout.v2",
+  "subject_ref": "release.checkout.v2",
+  "covered_criteria": ["checkout.atomicity", "checkout.concurrency"],
+  "excluded_criteria": ["checkout.regulatory"],
+  "coverage_debt_refs": ["debt.checkout.concurrency"],
+  "environment_scope": "staging-1"
+}

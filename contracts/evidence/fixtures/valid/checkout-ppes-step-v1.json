@@ -1,0 +1,9 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "PPEStepRef",
+  "id": "step.checkout.a001",
+  "cognitive_trace_ref": "trace.ppes.checkout.a001",
+  "step_index": 0,
+  "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "profile_ref": "ppes/v1"
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.coverage-debt.v1.schema.json",
+  "title": "TEKMOVELA CoverageDebt v1",
+  "description": "Debt accumulated when the system changes but the VerificationContract, Harness, Oracle, Scenario, Environment, or Evidence has not kept pace. A critical CoverageDebt can block a release.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "debt_type", "severity", "impacted_ref"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "CoverageDebt" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "debt_type": {
+      "type": "string",
+      "enum": [
+        "requirement_debt",
+        "harness_debt",
+        "oracle_debt",
+        "scenario_debt",
+        "environment_debt",
+        "evidence_debt"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "impacted_ref": { "type": "string", "minLength": 1 },
+    "trigger_ref": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["open", "in_progress", "resolved", "waived"]
+    }
+  }
+}

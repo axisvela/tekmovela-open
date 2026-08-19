@@ -90,7 +90,7 @@ test("bundle digest matches Python reference when environmentDigest unset", () =
     harnessVersionRef: "checkout.double_spend@v1",
   });
   b.addItem({ kind: ItemKind.Trace, uri: "trace.1", digest: "sha256:" + "a".repeat(64) });
-  assert.equal(b.digest(), "sha256:18b4223c8528f03c945964fe0a6590dafcefc77c377034a46bfc3374b4aee470");
+  assert.equal(b.digest(), "sha256:a8ca24195e5dba0cc990b696dd54259243c0c1bab095eab66ea5865b766537ca");
 });
 
 test("bundle digest matches Python reference when environmentDigest set", () => {
@@ -102,7 +102,7 @@ test("bundle digest matches Python reference when environmentDigest set", () => 
     environmentDigest: "sha256:" + "d".repeat(64),
   });
   b.addItem({ kind: ItemKind.Trace, uri: "trace.1", digest: "sha256:" + "a".repeat(64) });
-  assert.equal(b.digest(), "sha256:88e88a573fe31224487abe800f920abf41b31527ba7d5045b86255d8e3fad6e6");
+  assert.equal(b.digest(), "sha256:20e7916b6b50cb2d81489db84eb5331255de068e2e3551538f908760676162d0");
 });
 
 test("body is stable across seal", () => {

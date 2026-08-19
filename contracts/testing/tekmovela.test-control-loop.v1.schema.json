@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.test-control-loop.v1.schema.json",
+  "title": "TEKMOVELA TestControlLoop v1",
+  "description": "A bounded, evidence-linked closed-loop test controller with explicit action and terminal reporting.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "run_ref", "policy_ref", "state", "budget", "action_records", "evidence_refs"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "TestControlLoop" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "run_ref": { "type": "string", "minLength": 1 },
+    "policy_ref": { "type": "string", "minLength": 1 },
+    "state": {
+      "type": "string",
+      "enum": ["observe", "evaluate", "act", "constrain", "interrupted", "terminated"]
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_steps"],
+      "properties": {
+        "max_steps": { "type": "integer", "minimum": 1 },
+        "max_duration_seconds": { "type": "integer", "minimum": 1 },
+        "max_runs": { "type": "integer", "minimum": 1 },
+        "max_cost": { "type": "number", "minimum": 0 },
+        "currency": { "type": "string" },
+        "allowed_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "action_records": {
+      "type": "array",
+      "description": "Action sequences must strictly increase. This cross-item ordering invariant is enforced by the TEKMOVELA Go control model because JSON Schema cannot express it.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sequence", "action", "observation_ref", "evaluation_ref", "evidence_ref", "recorded_at"],
+        "properties": {
+          "sequence": { "type": "integer", "minimum": 0 },
+          "action": {
+            "type": "string",
+            "enum": ["probe", "retry", "branch", "repair_request", "stop", "handoff"]
+          },
+          "observation_ref": { "type": "string", "minLength": 1 },
+          "evaluation_ref": { "type": "string", "minLength": 1 },
+          "evidence_ref": { "type": "string", "minLength": 1 },
+          "recorded_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "terminal_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["termination_reason", "evidence_bundle_ref", "completed_at"],
+      "properties": {
+        "termination_reason": {
+          "type": "string",
+          "enum": ["accepted", "budget_exhausted", "unrecoverable", "policy_stop", "interrupted"]
+        },
+        "evidence_bundle_ref": { "type": "string", "minLength": 1 },
+        "completed_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "interrupt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested"],
+      "properties": {
+        "requested": { "type": "boolean" },
+        "reason": {
+          "type": "string",
+          "enum": ["human", "policy", "system"]
+        },
+        "requested_by_ref": { "type": "string" },
+        "checkpoint_ref": { "type": "string" },
+        "evidence_preserved": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "requested": { "const": true } },
+            "required": ["requested"]
+          },
+          "then": {
+            "required": ["reason", "requested_by_ref", "checkpoint_ref", "evidence_preserved"],
+            "properties": { "evidence_preserved": { "const": true } }
+          }
+        }
+      ]
+    },
+    "ownership_transfer_ref": { "type": "string", "minLength": 1 },
+    "resumed": { "type": "boolean" },
+    "resume_checkpoint_ref": { "type": "string", "minLength": 1 },
+    "resumed_at": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": { "const": "terminated" }
+        },
+        "required": ["state"]
+      },
+      "then": {
+        "required": ["terminal_report"]
+      },
+      "else": {
+        "not": {
+          "required": ["terminal_report"]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "state": { "const": "interrupted" } },
+        "required": ["state"]
+      },
+      "then": {
+        "required": ["interrupt"],
+        "properties": {
+          "interrupt": {
+            "properties": { "requested": { "const": true } },
+            "required": ["requested"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": { "const": "terminated" },
+          "terminal_report": {
+            "properties": { "termination_reason": { "const": "interrupted" } },
+            "required": ["termination_reason"]
+          }
+        },
+        "required": ["state", "terminal_report"]
+      },
+      "then": {
+        "required": ["interrupt"],
+        "properties": {
+          "interrupt": {
+            "properties": { "requested": { "const": true } },
+            "required": ["requested"]
+          }
+        }
+      }
+    },
+    {
+      "description": "A requested interruption durably binds its checkpoint evidence: checkpoint_ref must identify sealed/preserved evidence present in evidence_refs. The cross-field membership invariant is enforced by the TEKMOVELA Go control model because JSON Schema cannot express it; this clause requires evidence_refs to carry at least that bound evidence.",
+      "if": {
+        "properties": {
+          "interrupt": {
+            "properties": { "requested": { "const": true } },
+            "required": ["requested"]
+          }
+        },
+        "required": ["interrupt"]
+      },
+      "then": {
+        "properties": {
+          "evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": { "state": { "const": "interrupted" } },
+            "required": ["state"]
+          },
+          {
+            "properties": {
+              "state": { "const": "terminated" },
+              "terminal_report": {
+                "properties": { "termination_reason": { "const": "interrupted" } },
+                "required": ["termination_reason"]
+              }
+            },
+            "required": ["state", "terminal_report"]
+          },
+          {
+            "properties": { "resumed": { "const": true } },
+            "required": ["resumed"]
+          }
+        ]
+      },
+      "else": {
+        "not": {
+          "properties": {
+            "interrupt": {
+              "properties": { "requested": { "const": true } },
+              "required": ["requested"]
+            }
+          },
+          "required": ["interrupt"]
+        }
+      }
+    },
+    {
+      "description": "A resumed loop is an interrupted loop governed back to a running state; it must retain the requested interrupt provenance and its own resume provenance (checkpoint ref and timestamp) for audit.",
+      "if": {
+        "properties": { "resumed": { "const": true } },
+        "required": ["resumed"]
+      },
+      "then": {
+        "required": ["interrupt", "resume_checkpoint_ref", "resumed_at"],
+        "properties": {
+          "interrupt": {
+            "properties": { "requested": { "const": true } },
+            "required": ["requested"]
+          }
+        }
+      }
+    }
+  ]
+}

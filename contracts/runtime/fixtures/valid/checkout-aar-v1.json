@@ -1,0 +1,12 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "AccountabilityRecordRef",
+  "id": "aar.run.checkout.a001.v1",
+  "run_ref": "run.checkout.double_spend",
+  "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "trace_envelope_ref": "envelope.run.checkout.double_spend",
+  "attribution_ref": "attr.double_spend",
+  "explanation_ref": "explain.checkout.a001",
+  "authorization_ref": "auth.debit.a001",
+  "recorded_at": "2026-08-15T10:00:06Z"
+}

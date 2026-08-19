@@ -1,0 +1,18 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "RequirementTraceLink",
+  "id": "trace.checkout.atomicity",
+  "criterion_ref": {
+    "kind": "AcceptanceCriterion",
+    "id": "checkout.atomicity",
+    "version": "v1",
+    "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "verification_contract_ref": {
+    "kind": "VerificationContract",
+    "id": "checkout.atomicity",
+    "version": "v1",
+    "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "link_type": "acceptance"
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.gate-policy.v1.schema.json",
+  "title": "TEKMOVELA GatePolicy v1",
+  "description": "A versioned, immutable policy that locks the release gate chain G0..G5: per-gate required evidence kinds, dependency order, waiver eligibility, and acceptance thresholds. Gate decisions are reproducible from locked policy and locked inputs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "version", "gates"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "GatePolicy" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+$"
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["draft", "published", "superseded", "revoked"],
+      "default": "draft",
+      "description": "Lifecycle state of the policy. Published policies are immutable; only published policies transition to superseded or revoked."
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Canonical digest of this exact policy version, bound by publish. Never set by callers."
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["G0_requirement", "G1_harness", "G2_test", "G3_authority", "G4_runtime_readiness", "G5_evidence"],
+      "description": "Policy rules for every release gate in the chain.",
+      "properties": {
+        "G0_requirement": {
+          "description": "G0 requirement gate: every acceptance criterion and constraint must be testable and covered by a published VerificationContract.",
+          "$ref": "#/$defs/gateRule"
+        },
+        "G1_harness": {
+          "description": "G1 harness gate: the harness version must be published, deterministic, isolated, and free of critical coverage debt.",
+          "$ref": "#/$defs/gateRule"
+        },
+        "G2_test": {
+          "description": "G2 test gate: no critical scenario failures and statistical confidence above the acceptance bound.",
+          "$ref": "#/$defs/gateRule"
+        },
+        "G3_authority": {
+          "description": "G3 authority gate: no authority or delegation violations; not waiver eligible.",
+          "$ref": "#/$defs/gateRule"
+        },
+        "G4_runtime_readiness": {
+          "description": "G4 runtime readiness gate: runtime readiness signals must be complete before release.",
+          "$ref": "#/$defs/gateRule"
+        },
+        "G5_evidence": {
+          "description": "G5 evidence gate: evidence complete and verifiable with no unresolved counterevidence.",
+          "$ref": "#/$defs/gateRule"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gateRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_evidence_kinds", "dependencies", "waiver_eligible"],
+      "properties": {
+        "required_evidence_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Evidence kinds the gate must observe before it can pass."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["G0_requirement", "G1_harness", "G2_test", "G3_authority", "G4_runtime_readiness", "G5_evidence"]
+          },
+          "description": "Gate keys that must have passed before this gate may evaluate."
+        },
+        "waiver_eligible": {
+          "type": "boolean",
+          "description": "Whether a waiver can convert a block into a waived decision for this gate."
+        },
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional acceptance thresholds for the gate.",
+          "properties": {
+            "requirement_coverage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Minimum requirement coverage fraction required by G0."
+            },
+            "min_confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Minimum statistical confidence required by G2."
+            },
+            "evidence_complete": {
+              "type": "boolean",
+              "description": "Whether G5 requires evidence completeness."
+            },
+            "runtime_ready": {
+              "type": "boolean",
+              "description": "Whether G4 requires runtime readiness signals complete."
+            }
+          }
+        }
+      }
+    }
+  }
+}

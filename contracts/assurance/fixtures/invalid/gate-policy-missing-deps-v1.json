@@ -1,0 +1,37 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "GatePolicy",
+  "id": "policy.release.checkout",
+  "version": "v1",
+  "gates": {
+    "G0_requirement": {
+      "required_evidence_kinds": ["verification_contract"],
+      "dependencies": [],
+      "waiver_eligible": false
+    },
+    "G1_harness": {
+      "required_evidence_kinds": ["harness_version"],
+      "waiver_eligible": true
+    },
+    "G2_test": {
+      "required_evidence_kinds": ["test_run"],
+      "dependencies": ["G0_requirement", "G1_harness"],
+      "waiver_eligible": true
+    },
+    "G3_authority": {
+      "required_evidence_kinds": ["authority_ref"],
+      "dependencies": ["G2_test"],
+      "waiver_eligible": false
+    },
+    "G4_runtime_readiness": {
+      "required_evidence_kinds": ["behavioral_bound"],
+      "dependencies": ["G2_test"],
+      "waiver_eligible": true
+    },
+    "G5_evidence": {
+      "required_evidence_kinds": ["trace_envelope"],
+      "dependencies": ["G2_test", "G4_runtime_readiness"],
+      "waiver_eligible": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "DevelopmentRoleProfileRef",
+  "id": "role.qa.lead",
+  "role": "qa_lead",
+  "capability_set": ["run_scenario", "review_evidence", "grant_waiver"],
+  "authority_scope": "checkout.reliability",
+  "communication_protocol": "internal",
+  "output_format": "markdown",
+  "source_ref": "aegivela://roles/qa-lead",
+  "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

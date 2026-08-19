@@ -1,0 +1,18 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "Waiver",
+  "id": "waiver.checkout.superseded",
+  "gate": "G2_test",
+  "release_candidate_ref": "release.checkout.v2",
+  "reason": "confidence bound not met; waived pending re-measurement",
+  "policy_version": "v1",
+  "granted_by": "principal.release_manager",
+  "evidence_refs": ["ev.checkout.atomicity.a001"],
+  "approver_evidence_ref": "ev.approver.g2.001",
+  "input_snapshot_ref": "snap.g2.checkout.001",
+  "issued_at": "2026-08-15T10:00:00Z",
+  "expires_at": "2026-09-15T10:00:00Z",
+  "status": "superseded",
+  "superseded_by": "waiver.checkout.published",
+  "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}

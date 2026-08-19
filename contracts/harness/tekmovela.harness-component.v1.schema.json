@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.axisrobo.com/tekmovela.harness-component.v1.schema.json",
+  "title": "TEKMOVELA HarnessComponent v1",
+  "description": "A versioned Runner, Adapter, Oracle, or Reporter component. Each component is independently versioned and digest-locked. Mirrors VESTA-P0.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["api_version", "kind", "id", "component_type", "version", "digest"],
+  "properties": {
+    "api_version": { "const": "tekmovela.io/v1" },
+    "kind": { "const": "HarnessComponent" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "component_type": {
+      "type": "string",
+      "enum": ["runner", "adapter", "oracle", "reporter"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+(\\.[0-9]+)*$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sut_contract_ref": { "type": "string" },
+    "environment_contract_ref": { "type": "string" }
+  }
+}

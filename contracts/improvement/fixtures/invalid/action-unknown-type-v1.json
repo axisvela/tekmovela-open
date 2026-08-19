@@ -1,0 +1,7 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "ImprovementAction",
+  "id": "action.add_scenario.double_spend",
+  "action_type": "unknown_action",
+  "source_ref": "regression.double_spend.a001"
+}

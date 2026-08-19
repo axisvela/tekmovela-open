@@ -1,0 +1,15 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "ReverificationRequest",
+  "id": "reverify.checkout.v1",
+  "trigger": {
+    "kind": "anomaly",
+    "ref": "anomaly.2026-08-14.checkout.003"
+  },
+  "affected_scope": {
+    "verification_contract_refs": ["checkout.atomicity@v1"],
+    "harness_version_refs": ["checkout.double-spend@v1"],
+    "scenario_refs": ["scenario.double-spend.concurrent@v1"]
+  },
+  "status": "reverifying"
+}

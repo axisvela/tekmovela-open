@@ -1,0 +1,10 @@
+{
+  "api_version": "tekmovela.io/v1",
+  "kind": "DecisionExplanation",
+  "id": "explain.checkout.a001",
+  "action_ref": "action.debit.001",
+  "knowledge_basis": "ledger state shows a single debit outstanding",
+  "control_constraints": "no debit without prior authorization",
+  "intent_alignment": "consistent with checkout.reliability intent scope",
+  "trace_slice_ref": "envelope.run.checkout.double_spend"
+}
