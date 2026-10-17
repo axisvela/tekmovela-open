@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/axisvela/tekmovela-open/sdk/go/contracts"
-	"github.com/axisvela/tekmovela-open/sdk/go/evidence"
-	"github.com/axisvela/tekmovela-open/sdk/go/harness"
+	"github.com/axisvela/tekmovela-open/sdk/go/v3/contracts"
+	"github.com/axisvela/tekmovela-open/sdk/go/v3/evidence"
+	"github.com/axisvela/tekmovela-open/sdk/go/v3/harness"
 )
 
 func main() {

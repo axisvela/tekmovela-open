@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/axisvela/tekmovela-open/sdk/go/contracts"
+	"github.com/axisvela/tekmovela-open/sdk/go/v3/contracts"
 )
 
 func TestGoldenHarnessVersionDigest(t *testing.T) {
