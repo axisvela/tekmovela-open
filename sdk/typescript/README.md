@@ -15,7 +15,7 @@ emission. Apache-2.0, version-locked to the `tekmovela` core release.
 ## Usage
 
 ```ts
-import { LocalRunner, Reference } from "@axisrobo/tekmovela";
+import { LocalRunner, Reference } from "@axisvela/tekmovela";
 
 const runner = new LocalRunner(runtime);
 const result = await runner.execute(

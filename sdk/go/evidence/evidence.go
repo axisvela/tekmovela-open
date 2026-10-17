@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/axisrobo/tekmovela-open/sdk/go/contracts"
+	"github.com/axisvela/tekmovela-open/sdk/go/contracts"
 )
 
 // ItemKind is the kind of evidence item.

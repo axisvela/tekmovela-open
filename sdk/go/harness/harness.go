@@ -9,8 +9,8 @@ package harness
 import (
 	"fmt"
 
-	"github.com/axisrobo/tekmovela-open/sdk/go/contracts"
-	"github.com/axisrobo/tekmovela-open/sdk/go/evidence"
+	"github.com/axisvela/tekmovela-open/sdk/go/contracts"
+	"github.com/axisvela/tekmovela-open/sdk/go/evidence"
 )
 
 // ComponentKind is a harness component role.

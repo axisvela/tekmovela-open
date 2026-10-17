@@ -15,7 +15,7 @@ sealed in any SDK verifies in the others.
 ## Usage
 
 ```go
-import "github.com/axisrobo/tekmovela-open/sdk/go/harness"
+import "github.com/axisvela/tekmovela-open/sdk/go/harness"
 
 runner := harness.NewLocalRunner(rt)
 result, err := runner.Execute(harness.Scenario{

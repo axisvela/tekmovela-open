@@ -1,5 +1,5 @@
 {
-  "name": "@axisrobo/tekmovela",
+  "name": "@axisvela/tekmovela",
   "version": "1.0.0",
   "description": "TEKMOVELA Open TypeScript SDK: Web/Node agent harness, UI SFE capture, trace adapter.",
   "license": "Apache-2.0",

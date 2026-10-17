@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/axisrobo/tekmovela-open/sdk/go/contracts"
-	"github.com/axisrobo/tekmovela-open/sdk/go/evidence"
+	"github.com/axisvela/tekmovela-open/sdk/go/contracts"
+	"github.com/axisvela/tekmovela-open/sdk/go/evidence"
 )
 
 type fixtureItem struct {
