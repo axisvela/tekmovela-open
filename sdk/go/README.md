@@ -7,6 +7,7 @@ sealed in any SDK verifies in the others.
 
 ## Modules
 
+- `control` - typed client for gate decisions and release candidates.
 - `contracts` — canonical-JSON digests, `ParseDigest`, `Reference`.
 - `evidence` — digest-sealed `EvidenceBundle`; missing evidence is evidence.
 - `harness` — `HarnessVersion` authoring + a deterministic `LocalRunner` over a `RuntimeAdapter`.
