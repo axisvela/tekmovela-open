@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.evaluation-set.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.evaluation-set.v1alpha1.schema.json",
   "title": "TEKMOVELA EvaluationSet v1alpha1",
   "description": "A versioned, frozen collection of Scenarios and evaluators used as a repeatable regression or release evaluation unit.",
   "type": "object",

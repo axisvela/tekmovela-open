@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.failure-evidence.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.failure-evidence.v1alpha1.schema.json",
   "title": "TEKMOVELA StructuredFailureEvidence v1alpha1",
   "description": "Failure evidence collected against a FailureEvidenceProfile. The generic core carries symptom and trace context; domain profiles (e.g. ui-repair) extend the evidence shape.",
   "type": "object",

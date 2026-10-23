@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.scenario.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.scenario.v1.schema.json",
   "title": "TEKMOVELA Scenario v1",
   "description": "A test scenario bound to a VerificationContract and HarnessVersion. Scenarios are the executable unit of the Agentic Test Lab.",
   "type": "object",

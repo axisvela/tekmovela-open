@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.engineering-state-link.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.engineering-state-link.v1alpha1.schema.json",
   "title": "TEKMOVELA EngineeringStateLink v1alpha1",
   "description": "A BPSM-compatible project-state synchronization link between an external PM/issue/CI system and agent execution state, recording state-convergence evidence.",
   "type": "object",

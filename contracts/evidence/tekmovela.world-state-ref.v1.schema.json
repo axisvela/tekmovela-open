@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.world-state-ref.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.world-state-ref.v1.schema.json",
   "title": "TEKMOVELA WorldStateRef v1",
   "description": "A reference to a world/simulation state. The world authority lives in PEIRAVELA or ONTOVELA; TEKMOVELA records the reference and digest.",
   "type": "object",

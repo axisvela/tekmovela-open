@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.contributor-evidence.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.contributor-evidence.v1.schema.json",
   "title": "TEKMOVELA ContributorEvidence v1",
   "description": "The evidence set required before a contributor artifact may merge or release. Identity and minimal privilege are AEGIVELA facts; TEKMOVELA verifies presence and completeness.",
   "type": "object",

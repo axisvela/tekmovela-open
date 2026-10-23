@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.assurance-evidence.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.assurance-evidence.v1.schema.json",
   "title": "TEKMOVELA AssuranceEvidence v1",
   "description": "An append-only, digest-verifiable evidence record bound to a claim. Only records bound to versions, sources, digests, scope, and claims become AssuranceEvidence.",
   "type": "object",

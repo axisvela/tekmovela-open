@@ -1,6 +1,6 @@
 # TEKMOVELA Open Architecture Overview
 
-TEKMOVELA is the AxisRobo **Autonomous-System Engineering Assurance Control Plane**. This is the public, high-level architecture for integrators; the authoritative architecture, product plan, and internal design live in the private core and EE repositories.
+TEKMOVELA is the AxisVela **Autonomous-System Engineering Assurance Control Plane**. This is the public, high-level architecture for integrators; the authoritative architecture, product plan, and internal design live in the private core and EE repositories.
 
 ## Main data chain
 
@@ -15,7 +15,7 @@ Intent -> VerificationContract -> HarnessVersion -> Scenario/TestRun
 1. **Assurance Specification** — Intent Bridge, Requirement Trace, Acceptance Criteria (IRIS)
 2. **Verification Substrate** — Verification Contract, Harness Registry, Component Catalog, Coverage Debt (VESTA)
 3. **Agentic Testing** — Scenario, TestControlLoop, Run Coordinator, OTP profile (ATLAS)
-4. **Telemetry & Evidence** — Trace Ingest, PPES Adapter, Evidence Store (LENS + AxisRobo runtimes)
+4. **Telemetry & Evidence** — Trace Ingest, PPES Adapter, Evidence Store (LENS + AxisVela runtimes)
 5. **Evaluation & Diagnosis** — Oracle/Evaluator Registry, StructuredFailureEvidence, attribution (ATLAS + LENS)
 6. **Assurance & Release** — Claims, Coverage, Gate Engine, Waiver, Attestation, Reverification (Core)
 7. **Engineering Collaboration** — Role/Contract references, contributor gate, PM sync (MACD)

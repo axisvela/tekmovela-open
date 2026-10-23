@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.development-role-profile-ref.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.development-role-profile-ref.v1.schema.json",
   "title": "TEKMOVELA DevelopmentRoleProfileRef v1",
   "description": "An immutable reference to a development role profile (MACD DRP shape). The role/authority source can be external; TEKMOVELA uses it for routing and evidence responsibility.",
   "type": "object",

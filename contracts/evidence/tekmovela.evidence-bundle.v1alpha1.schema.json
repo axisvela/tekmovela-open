@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.evidence-bundle.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.evidence-bundle.v1alpha1.schema.json",
   "title": "TEKMOVELA EvidenceBundle v1alpha1",
   "description": "A portable, digest-verifiable bundle of evidence from a run. Raw telemetry becomes evidence only when bound to versions, sources, digests, scope, and claims.",
   "type": "object",

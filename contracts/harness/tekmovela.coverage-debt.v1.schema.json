@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.coverage-debt.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.coverage-debt.v1.schema.json",
   "title": "TEKMOVELA CoverageDebt v1",
   "description": "Debt accumulated when the system changes but the VerificationContract, Harness, Oracle, Scenario, Environment, or Evidence has not kept pace. A critical CoverageDebt can block a release.",
   "type": "object",

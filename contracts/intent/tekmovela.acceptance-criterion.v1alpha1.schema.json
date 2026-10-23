@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.acceptance-criterion.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.acceptance-criterion.v1alpha1.schema.json",
   "title": "TEKMOVELA AcceptanceCriterion v1alpha1",
   "description": "An externally sourced AcceptanceCriterion reference with a digest and a testability assertion. TEKMOVELA records the immutable reference and digest; it does not own the source requirements lifecycle.",
   "type": "object",
@@ -19,7 +19,7 @@
     "id": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*)+$",
-      "description": "Dotted hierarchical identifier matching AxisRobo reference naming."
+      "description": "Dotted hierarchical identifier matching AxisVela reference naming."
     },
     "source_ref": {
       "type": "string",

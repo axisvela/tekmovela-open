@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.action.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.action.v1.schema.json",
   "title": "TEKMOVELA Action v1",
   "description": "An action taken by an agent or workflow against a capability or tool, with its argument digest. Sources from runtime + Harmovela + ONTOVELA; TEKMOVELA normalizes.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.anomaly-signal.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.anomaly-signal.v1.schema.json",
   "title": "TEKMOVELA AnomalySignal v1",
   "description": "A production behavioral signal (bound violation, drift, anomaly) that triggers triage, post-hoc diagnosis, and targeted re-verification. Signals do not judge truth; they trigger verification.",
   "type": "object",

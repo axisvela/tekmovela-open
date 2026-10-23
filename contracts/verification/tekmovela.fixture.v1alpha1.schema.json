@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.fixture.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.fixture.v1alpha1.schema.json",
   "title": "TEKMOVELA Fixture v1alpha1",
   "description": "A frozen input fixture bound to a VerificationContract. Fixtures are content-addressed and drive reproducible deterministic tests.",
   "type": "object",

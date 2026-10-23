@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.assurance-case.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.assurance-case.v1.schema.json",
   "title": "TEKMOVELA AssuranceCase v1",
   "description": "A structured, strategy-driven assurance case: a set of claim nodes over a ReleaseCandidate, each carrying an argument, evidence, and optional counterevidence.",
   "type": "object",

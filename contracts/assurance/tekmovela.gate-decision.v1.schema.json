@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.gate-decision.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.gate-decision.v1.schema.json",
   "title": "TEKMOVELA GateDecision v1",
   "description": "The decision of one release gate (G0..G5). Decisions are reproducible from locked inputs and locked policy.",
   "type": "object",

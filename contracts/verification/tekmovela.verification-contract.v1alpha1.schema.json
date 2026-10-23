@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.verification-contract.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.verification-contract.v1alpha1.schema.json",
   "title": "TEKMOVELA VerificationContract v1alpha1",
   "description": "The contract that binds an AcceptanceCriterion to a harness requirement. Published versions are immutable; evidence, harnesses, and gates bind to the version digest. Mirrors VESTA-P0.",
   "type": "object",

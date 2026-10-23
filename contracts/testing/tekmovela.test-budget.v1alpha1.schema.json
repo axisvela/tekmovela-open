@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.test-budget.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.test-budget.v1alpha1.schema.json",
   "title": "TEKMOVELA TestBudget v1alpha1",
   "description": "A standalone, versioned budget constraining a testing loop or evaluation set: runs, time, and cost. TestControlLoop embeds a budget inline; TestBudget is the reusable record.",
   "type": "object",

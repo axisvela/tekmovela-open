@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.reverification-request.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.reverification-request.v1alpha1.schema.json",
   "title": "TEKMOVELA ReverificationRequest v1alpha1",
   "description": "A targeted request to re-verify the minimal affected VerificationContract/Harness/Scenario scope after an anomaly, drift, or change. Fully linked to its trigger provenance.",
   "type": "object",

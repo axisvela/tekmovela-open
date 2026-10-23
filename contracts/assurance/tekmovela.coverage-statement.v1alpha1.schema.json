@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.coverage-statement.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.coverage-statement.v1alpha1.schema.json",
   "title": "TEKMOVELA CoverageStatement v1alpha1",
   "description": "A statement of requirement, harness, and assurance coverage with explicit exclusions and known coverage debt.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.test-run.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.test-run.v1.schema.json",
   "title": "TEKMOVELA TestRun v1",
   "description": "A single execution of a Scenario on a frozen HarnessVersion against a SUT. TestRun links to TraceEnvelope and EvaluationResult and is the unit that becomes evidence.",
   "type": "object",

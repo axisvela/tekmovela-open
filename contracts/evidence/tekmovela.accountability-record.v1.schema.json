@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.accountability-record.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.accountability-record.v1.schema.json",
   "title": "TEKMOVELA AccountabilityRecord v1",
   "description": "A tamper-evident per-run Accountability Record (AAR): trace, attribution, explanation, and authorization provenance bound together and sealed with a canonical digest. Source is LENS/AEGIVELA/TEKMOVELA.",
   "type": "object",

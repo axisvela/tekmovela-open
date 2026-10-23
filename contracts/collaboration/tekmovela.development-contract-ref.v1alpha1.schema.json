@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.development-contract-ref.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.development-contract-ref.v1alpha1.schema.json",
   "title": "TEKMOVELA DevelopmentContractRef v1alpha1",
   "description": "A reference to one layer of the MACD contract stack (program/sprint/task/artifact). TEKMOVELA verifies contract breach/completion evidence; it is not a PM repository.",
   "type": "object",

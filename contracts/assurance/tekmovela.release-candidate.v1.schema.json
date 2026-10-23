@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.release-candidate.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.release-candidate.v1.schema.json",
   "title": "TEKMOVELA ReleaseCandidate v1",
   "description": "The subject of assurance: a versioned artifact whose release eligibility is decided through the gate chain.",
   "type": "object",

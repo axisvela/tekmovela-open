@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.test-control-loop.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.test-control-loop.v1alpha1.schema.json",
   "title": "TEKMOVELA TestControlLoop v1alpha1",
   "description": "A closed-loop test controller with Observe/Evaluate/Act/Constrain/Interrupt/Terminate semantics. Interruptions never lose evidence. Mirrors ATLAS closed-loop testing.",
   "type": "object",

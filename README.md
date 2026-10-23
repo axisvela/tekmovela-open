@@ -1,6 +1,6 @@
 # TEKMOVELA â€?Autonomous-System Engineering Assurance Control Plane
 
-**TEKMOVELA** is the **AxisRobo engineering assurance control plane for autonomous systems**. It turns intent and acceptance criteria into verification contracts and governed harnesses, executes reproducible closed-loop testing of autonomous systems, diagnoses failures with trace-linked evidence, gates releases, and continuously triggers re-verification from production behavior.
+**TEKMOVELA** is the **AxisVela engineering assurance control plane for autonomous systems**. It turns intent and acceptance criteria into verification contracts and governed harnesses, executes reproducible closed-loop testing of autonomous systems, diagnoses failures with trace-linked evidence, gates releases, and continuously triggers re-verification from production behavior.
 
 > **Read this page in [ä¸­æ–‡ï¼ˆç®€ä½“ï¼‰](docs/zh-CN/README.md) Â· English is the primary documentation language.**
 
@@ -29,7 +29,7 @@ Autonomous systems fail in ways that are hard to prove absent. TEKMOVELA makes a
 - **Assurance Control Plane** â€?assurance cases, gate policies (G0â€“G5), gate orchestration, waivers, digest-verifiable append-only records, a tenant-aware HTTP control plane.
 - **Runtime Assurance** â€?behavioral bounds, anomaly lifecycle, minimal reverification sets, per-run accountability records (AAR).
 - **Evidence-authoritative** â€?raw telemetry is never evidence; only records bound to versions, sources, digests, scope, and claims become assurance evidence. Never a score or projection over a signed contract.
-- **Cross-product adapters** â€?stable contracts with PRAXOVELA, PEIRAVELA, AEGIVELA, MODUREGIS, LENS, and other AxisRobo products.
+- **Cross-product adapters** â€?stable contracts with PRAXOVELA, PEIRAVELA, AEGIVELA, MODUREGIS, LENS, and other AxisVela products.
 
 ---
 
