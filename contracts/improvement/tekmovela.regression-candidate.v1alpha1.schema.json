@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.regression-candidate.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.regression-candidate.v1alpha1.schema.json",
   "title": "TEKMOVELA RegressionCandidate v1alpha1",
   "description": "A candidate regression scenario derived from a failure or anomaly, to be added to a release evaluation set and tracked as coverage debt until closed.",
   "type": "object",

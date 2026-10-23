@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.ppes-step-ref.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.ppes-step-ref.v1.schema.json",
   "title": "TEKMOVELA PPEStepRef v1",
   "description": "A reference to a single PPES cognitive-state step (prompt, history/context, output space) from a LENS PPES trace perspective.",
   "type": "object",

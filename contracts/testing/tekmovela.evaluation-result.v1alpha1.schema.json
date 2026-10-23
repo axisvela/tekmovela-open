@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.evaluation-result.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.evaluation-result.v1alpha1.schema.json",
   "title": "TEKMOVELA EvaluationResult v1alpha1",
   "description": "The verdict of one evaluator over a TestRun. It links a run's trace to an AssuranceClaim via evidence.",
   "type": "object",

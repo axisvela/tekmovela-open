@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.authority-ref.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.authority-ref.v1.schema.json",
   "title": "TEKMOVELA AuthorityRef v1",
   "description": "A reference to an authorization/authority decision. AEGIVELA owns production authorization; TEKMOVELA records the reference and digest as verification evidence.",
   "type": "object",

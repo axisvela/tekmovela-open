@@ -1,6 +1,6 @@
 # TEKMOVELA Go SDK
 
-Go SDK for TEKMOVELA consumers and AxisRobo runtime integration. Provides
+Go SDK for TEKMOVELA consumers and AxisVela runtime integration. Provides
 canonical-JSON digests, digest-sealed EvidenceBundle, and harness authoring
 with a local runner. Digests match the Python and TypeScript SDKs so evidence
 sealed in any SDK verifies in the others.

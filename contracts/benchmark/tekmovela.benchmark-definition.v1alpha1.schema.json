@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.benchmark-definition.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.benchmark-definition.v1alpha1.schema.json",
   "title": "TEKMOVELA BenchmarkDefinition v1alpha1",
   "description": "A frozen, versioned TEK-Bench benchmark definition: the family, the requirement/contract/harness spine it measures, the evidence schema it requires, and the acceptance criteria that make a run's score comparable. Benchmark definitions are immutable once published; only a new version supersedes one.",
   "type": "object",

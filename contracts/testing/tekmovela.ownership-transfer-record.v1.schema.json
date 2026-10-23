@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.ownership-transfer-record.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.ownership-transfer-record.v1.schema.json",
   "title": "TEKMOVELA OwnershipTransferRecord v1",
   "description": "A record of engineering/testing ownership transfer (ATLAS OTP profile). Used for testing-agent or SDLC ownership handoff; not production delegation.",
   "type": "object",

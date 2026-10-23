@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.test-control-loop.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.test-control-loop.v1.schema.json",
   "title": "TEKMOVELA TestControlLoop v1",
   "description": "A bounded, evidence-linked closed-loop test controller with explicit action and terminal reporting.",
   "type": "object",

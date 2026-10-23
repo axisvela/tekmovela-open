@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.benchmark-run.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.benchmark-run.v1alpha1.schema.json",
   "title": "TEKMOVELA BenchmarkRun v1alpha1",
   "description": "A run of a frozen BenchmarkDefinition: the immutable definition reference it was scored against, the test-run evidence that produced the score, and per-acceptance-criterion verdicts. Binding to the definition digest makes scores comparable across runs.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.cognitive-trace.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.cognitive-trace.v1alpha1.schema.json",
   "title": "TEKMOVELA CognitiveTrace v1alpha1",
   "description": "A PPES cognitive-state trace perspective <P, H_t, Ω_t>: the prompt/profile, the history/context state, and the available output space. It is orthogonal to substrate event traces and must not be flattened into a universal trace schema.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.ci-result.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.ci-result.v1alpha1.schema.json",
   "title": "TEKMOVELA CIResult v1alpha1",
   "description": "The machine-readable output of `tek test --ci-output`: the run ref, the G2 gate decision, blocking reasons, sealed evidence bundle references, a failure summary, and the exit semantics a CI pipeline should apply. A CI pipeline gates on this artifact without re-parsing the human summary.",
   "type": "object",

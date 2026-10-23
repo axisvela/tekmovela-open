@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.incident-ref.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.incident-ref.v1alpha1.schema.json",
   "title": "TEKMOVELA IncidentRef v1alpha1",
   "description": "A reference to an external incident or issue record that triggered failure evidence, regression candidates, or coverage debt.",
   "type": "object",

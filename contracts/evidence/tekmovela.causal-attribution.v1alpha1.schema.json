@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.causal-attribution.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.causal-attribution.v1alpha1.schema.json",
   "title": "TEKMOVELA CausalAttribution v1alpha1",
   "description": "An ordered set of causal contributions explaining a failure. Mirrors LENS causal attribution (LAP); MVP uses intervention comparison, SCM later.",
   "type": "object",

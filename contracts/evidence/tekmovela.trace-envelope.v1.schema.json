@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.trace-envelope.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.trace-envelope.v1.schema.json",
   "title": "TEKMOVELA TraceEnvelope v1",
   "description": "A multi-perspective trace envelope. PPES cognitive-state traces and substrate event traces are orthogonal perspectives; the envelope correlates them without flattening semantics.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.harness-definition.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.harness-definition.v1alpha1.schema.json",
   "title": "TEKMOVELA HarnessDefinition v1alpha1",
   "description": "The authored definition of a harness: intent, ownership, compatibility range, and lifecycle. HarnessVersion carries the frozen component lock.",
   "type": "object",

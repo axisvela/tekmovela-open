@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.failure-cluster.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.failure-cluster.v1.schema.json",
   "title": "TEKMOVELA FailureCluster v1",
   "description": "A group of related StructuredFailureEvidence records sharing a root-cause family. Clusters drive triage and regression coverage.",
   "type": "object",

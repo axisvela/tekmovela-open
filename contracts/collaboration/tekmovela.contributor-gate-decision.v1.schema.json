@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.contributor-gate-decision.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.contributor-gate-decision.v1.schema.json",
   "title": "TEKMOVELA ContributorGateDecision v1",
   "description": "A digest-verifiable record of a contributor gate evaluation: the evidence snapshot that produced the decision. Identity and privilege truth stay with AEGIVELA; TEKMOVELA records the decision as verification evidence.",
   "type": "object",

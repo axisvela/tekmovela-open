@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.harness-component.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.harness-component.v1.schema.json",
   "title": "TEKMOVELA HarnessComponent v1",
   "description": "A versioned Runner, Adapter, Oracle, or Reporter component. Each component is independently versioned and digest-locked. Mirrors VESTA-P0.",
   "type": "object",

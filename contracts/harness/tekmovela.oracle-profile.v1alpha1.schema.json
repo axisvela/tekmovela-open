@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.oracle-profile.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.oracle-profile.v1alpha1.schema.json",
   "title": "TEKMOVELA OracleProfile v1alpha1",
   "description": "The required behavior of an Oracle component: evaluator kind, determinism, and the properties it must verify.",
   "type": "object",

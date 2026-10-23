@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.waiver.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.waiver.v1.schema.json",
   "title": "TEKMOVELA Waiver v1",
   "description": "A recorded, scoped, expiring exception to a release gate. A waiver never removes the gate; it records the reason and the accountable decision.",
   "type": "object",

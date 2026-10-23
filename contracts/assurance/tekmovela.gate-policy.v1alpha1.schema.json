@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.gate-policy.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.gate-policy.v1alpha1.schema.json",
   "title": "TEKMOVELA GatePolicy v1alpha1",
   "description": "A versioned, immutable policy that locks the release gate chain G0..G5: per-gate required evidence kinds, dependency order, waiver eligibility, and acceptance thresholds. Gate decisions are reproducible from locked policy and locked inputs.",
   "type": "object",

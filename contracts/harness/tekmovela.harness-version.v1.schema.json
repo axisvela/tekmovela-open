@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.harness-version.v1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.harness-version.v1.schema.json",
   "title": "TEKMOVELA HarnessVersion v1",
   "description": "An immutable, frozen composition of HarnessComponents bound to a VerificationContract. Includes determinism, isolation, and coverage profiles. Mirrors VESTA-P0/P1.",
   "type": "object",

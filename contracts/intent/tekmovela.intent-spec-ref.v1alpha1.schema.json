@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.axisrobo.com/tekmovela.intent-spec-ref.v1alpha1.schema.json",
+  "$id": "https://schemas.axisvela.com/tekmovela.intent-spec-ref.v1alpha1.schema.json",
   "title": "TEKMOVELA IntentSpecRef v1alpha1",
   "description": "An immutable reference to an external IntentSpec. TEKMOVELA records the neutral reference and digest and never rewrites the source intent.",
   "type": "object",
