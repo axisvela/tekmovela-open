@@ -20,6 +20,23 @@ Autonomous systems fail in ways that are hard to prove absent. TEKMOVELA makes a
 | Production drift is invisible | **Runtime Assurance** â€?behavioral bounds, anomaly signals, and minimal re-verification sets triggered from production behavior. |
 | Engineering scale is chaotic | **Engineering Collaboration** â€?role/contract references, state links, and a zero-trust contributor gate. |
 
+## Edge and Learning Boundaries
+
+TEKMOVELA owns independent assurance and may execute governed test workloads
+through harnesses; it does not own production execution. AKROVELA receipts and
+DIDACTOVELA training metrics are producer inputs, never independent pass verdicts.
+DIDACTOVELA owns dataset/label/training/candidate lineage; NOETIVELA owns production
+models, endpoints, routing and activation. Importing a candidate neither activates
+an endpoint nor satisfies independent assurance.
+
+AKROVELA and DIDACTOVELA are unreleased `0.1.0` bootstrap products only, with no
+implemented domain integrations. Future adapters need reviewed, versioned public
+contracts before dependent implementation, artifact/claim versions and digests,
+tenant/episode bindings and applicable identity/node epochs. Negative tests must
+cover stale epochs, forged receipts, cross-tenant/episode substitution,
+train/evaluation leakage and producer self-issued passes. No working integration
+or new API is implied.
+
 ## Product features
 
 - **Contract-first** â€?versioned JSON Schema for Intent / Verification / Harness / Testing / Evidence / Assurance / Runtime object families, with positive/negative fixtures and a compatibility policy. Published contracts are immutable.
